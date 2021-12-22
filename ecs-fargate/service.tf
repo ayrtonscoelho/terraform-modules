@@ -1,5 +1,5 @@
 /*========================
-    **    ECS Fargate  **
+    **    ECS Service - Fargate  **
           ======================*/
 
 resource "aws_ecs_service" "this" {
@@ -8,7 +8,7 @@ resource "aws_ecs_service" "this" {
   desired_count    = var.desired_count
   platform_version = var.platform_version
 
-  health_check_grace_period_seconds  = var.enable_alb == true ? var.healthcheck_grace_period : null
+  health_check_grace_period_seconds  = var.enable_lb == true ? var.healthcheck_grace_period : null
   deployment_maximum_percent         = var.deployment_settings.maximum_percent
   deployment_minimum_healthy_percent = var.deployment_settings.minimum_percent
 
@@ -21,7 +21,7 @@ resource "aws_ecs_service" "this" {
 
   #Configuração necessária de rede para o serviço
   dynamic "network_configuration" {
-    for_each = (var.target_group_protocol == "TCP") ? [] : [{}]
+    for_each = (var.health_check_settings.protocol != "TCP") ? [{}] : [] 
     content {
       security_groups  = var.network_settings.security_groups[*]
       subnets          = var.network_settings.subnet_ids
@@ -34,7 +34,7 @@ resource "aws_ecs_service" "this" {
 
   #Associção dos principais Load balancer e target group 
   dynamic "load_balancer" {
-    for_each = var.enable_alb == true ? [{}] : []
+    for_each = var.enable_lb == true ? [{}] : []
     content{
       target_group_arn = aws_lb_target_group.this.0.arn
       container_name   = var.service_name
@@ -42,7 +42,7 @@ resource "aws_ecs_service" "this" {
     }
   }
 
-  #Associação dinâmicas para target groups extras
+  #Associação dinâmica para target groups extras
   dynamic "load_balancer" {
     for_each = var.custom_tgs != [] ? var.custom_tgs : []
     content {
@@ -52,8 +52,9 @@ resource "aws_ecs_service" "this" {
     }
   }
 
+  #Associação dinâmica do CloudMap
   dynamic "service_registries" {
-    for_each = (var.target_group_protocol == "TCP" || var.enable_sd == false) ? [] : [{}]
+    for_each = (var.health_check_settings.protocol != "TCP" || var.enable_sd == true) ? [{}] : [] 
     content {
       registry_arn = aws_service_discovery_service.this.0.arn
       port 				 = var.service_port
