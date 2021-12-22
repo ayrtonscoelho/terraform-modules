@@ -12,7 +12,7 @@ resource "aws_appautoscaling_target" "this" {
 
 resource "aws_appautoscaling_policy" "this" {
   count = length(var.autoscaling_settings) 
-  name  = "ECS_${var.autoscaling_settings[count.index].target}"
+  name  = "ECS_${var.autoscaling_settings[count.index].metric_type}_${var.autoscaling_settings[count.index].target}"
 
   policy_type = "TargetTrackingScaling"
   resource_id = aws_appautoscaling_target.this[count.index].resource_id
