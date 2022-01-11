@@ -8,6 +8,7 @@ data "template_file" "this" {
     #Configurações do serviço.
     SERVICE_NAME        = var.service_name
     SERVICE_MEMORY      = var.service_memory
+    SERVICE_PORT        = var.service_port
     SERVICE_CPU         = var.service_cpu
     SERVICE_MOUNTPOINTS = jsonencode(var.service_mountpoints)
     SERVICE_ULIMITS     = jsonencode(var.service_ulimits)
@@ -27,7 +28,6 @@ data "template_file" "this" {
     #Configurações de rede do serviço.
     AWS_REGION   = data.aws_region.this.name
     NETWORK_MODE = var.network_mode
-    PORT_MAP     = replace(jsonencode(local.port_mappings), "/\"([0-9]+\\.?[0-9]*)\"/", "$1",)
   }
 }
 
@@ -39,10 +39,7 @@ resource "aws_ecs_task_definition" "this" {
   memory                   = var.service_memory
   execution_role_arn       = var.iam_role
   task_role_arn            = var.iam_role
-
-  container_definitions = data.template_file.this.rendered
-
-  depends_on = [aws_lb_target_group.this]
+  container_definitions    = data.template_file.this.rendered
 }
 
 data "aws_ecs_task_definition" "this" {
@@ -50,7 +47,6 @@ data "aws_ecs_task_definition" "this" {
 
   depends_on = [
     aws_ecs_task_definition.this, 
-    aws_ecr_repository.this
   ]
 }
 
@@ -64,23 +60,6 @@ locals {
     interval = var.service_health_check.interval
     retries  = var.service_health_check.retries
   }
-
-  #Merge de portas que o serviço responde.
-  port_mappings = [
-    {
-      containerPort = element(
-        compact(concat(
-        var.service_extra_ports, [var.service_port]
-      )), 0 )
-
-      hostPort = var.health_check_settings.protocol == "TCP" ? 0 : element(
-        compact(concat(
-        var.service_extra_ports, [var.service_port]
-      )), 0 )
-
-      protocol = "tcp"
-    }
-  ]
 
   #Verifica qual imagem o serviço deve utilizar.
   ecr_url = var.ecr_url == null ? aws_ecr_repository.this[0].repository_url : var.ecr_url
