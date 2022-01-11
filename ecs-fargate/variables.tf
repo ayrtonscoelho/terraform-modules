@@ -245,3 +245,11 @@ variable "service_health_check" {
     retries  = 3
   }
 }
+
+
+
+##SECURITY GROUP VARS
+variable "sg_rules" {
+  type    = list(any)
+  default = []
+}

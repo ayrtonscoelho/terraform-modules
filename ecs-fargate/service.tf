@@ -5,7 +5,7 @@
 resource "aws_ecs_service" "this" {
   name             = var.service_name
   cluster          = var.cluster_name
-  desired_count    = var.desired_count
+  desired_count    = try(var.autoscaling_settings.min_tasks, var.desired_count)
   platform_version = var.platform_version
 
   health_check_grace_period_seconds  = var.enable_lb == true ? var.healthcheck_grace_period : null
@@ -23,7 +23,7 @@ resource "aws_ecs_service" "this" {
   dynamic "network_configuration" {
     for_each = (var.health_check_settings.protocol != "TCP") ? [{}] : [] 
     content {
-      security_groups  = var.network_settings.security_groups[*]
+      security_groups  = concat(var.network_settings.security_groups[*], aws_security_group.this.id[*])
       subnets          = var.network_settings.subnet_ids
       assign_public_ip = try(
         var.network_settings.public_ip, 
