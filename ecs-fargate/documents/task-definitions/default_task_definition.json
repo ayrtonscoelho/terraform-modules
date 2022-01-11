@@ -1,0 +1,36 @@
+[
+  {
+    "name": "${SERVICE_NAME}",
+    "image": "${ECR_URL}",
+    "networkMode": "${NETWORK_MODE}",
+    "portMappings": "${PORT_MAP}",
+    "memory": "${SERVICE_MEMORY}",
+    "cpu": "${SERVICE_CPU}",
+    "memoryReservation": "${SERVICE_MEMORY}",
+    "essential": true,
+    "mountPoints": "${SERVICE_MOUNTPOINTS}",
+    "ulimits": "${SERVICE_ULIMITS}",
+    "entryPoint": "${SERVICE_ENTRYPOINT}",
+    "command": "${SERVICE_COMMAND}",
+    "environment": "${SERVICE_ENVIRONMENT}",
+    "healthCheck": {
+      "command": [
+        "CMD-SHELL",
+        "${HEALTHCHECK_COMMAND}"
+      ],
+      "timeout": "${HEALTHCHECK_TIMEOUT}",
+      "interval": "${HEALTHCHECK_INTERVAL}",
+      "retries": "${HEALTHCHECK_RETRIES}",
+      "startPeriod": "${HEALTHCHECK_START}"
+    },
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "/ecs/${SERVICE_NAME}",
+        "awslogs-region": "${AWS_REGION}",
+        "awslogs-stream-prefix": "${SERVICE_NAME}"
+      }
+    },
+    "secrets": "${SERVICE_SECRETS}"
+  }
+]
