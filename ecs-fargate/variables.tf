@@ -144,14 +144,16 @@ variable "log_retention" { default = 7 }
 
 #Optional
 variable "autoscaling_settings" {
-  type = list(object({
+  type = object({
     min_tasks   = number
     max_tasks   = number
-    target      = number
-    metric_type = string
-  }))
+    rules = list(object({
+      target      = number
+      metric_type = string
+    }))
+  })
 
-  default = []
+  default = null
 }
 
 variable "metric_types" {
