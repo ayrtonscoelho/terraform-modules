@@ -7,7 +7,6 @@ resource "aws_lb_target_group" "this" {
 	protocol 		= var.health_check_settings.protocol
 	vpc_id      = var.network_settings.vpc_id
 	target_type = var.health_check_settings.protocol == "TCP" ? "instance" : "ip"
-  deregistration_delay = var.deregistration_delay
 
 	dynamic "health_check" {
     for_each = local.health_check_settings[*]

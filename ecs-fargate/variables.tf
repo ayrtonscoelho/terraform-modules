@@ -1,6 +1,3 @@
-##REVER
-variable "deregistration_delay" { default = 300 }
-
 ##SERVICE VARS
 
 #Required
