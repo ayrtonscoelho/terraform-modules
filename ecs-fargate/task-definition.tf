@@ -1,10 +1,6 @@
 data "aws_caller_identity" "this" {}
 data "aws_region" "this" {}
 
-locals {
-  
-}
-
 resource "aws_ecs_task_definition" "this" {
   family                   = var.service_name
   requires_compatibilities = ["FARGATE"]
@@ -15,6 +11,7 @@ resource "aws_ecs_task_definition" "this" {
   task_role_arn            = var.iam_role
 
   container_definitions = templatefile("${path.module}/documents/task-definitions/default_task_definition.json", {
+    #Configurações do serviço.
     SERVICE_NAME        = var.service_name
     SERVICE_MEMORY      = var.service_memory
     SERVICE_CPU         = var.service_cpu
@@ -24,65 +21,20 @@ resource "aws_ecs_task_definition" "this" {
     SERVICE_COMMAND     = jsonencode(var.service_command)
     SERVICE_ENVIRONMENT = jsonencode(var.service_environment)
     SERVICE_SECRETS     = jsonencode(var.service_secrets)
+    ECR_URL             = local.ecr_url
 
-    #REVER
+    #Configurações de health check do serviço.
     HEALTHCHECK_COMMAND  = local.service_health_check.command
     HEALTHCHECK_TIMEOUT  = local.service_health_check.timeout
     HEALTHCHECK_INTERVAL = local.service_health_check.interval
     HEALTHCHECK_RETRIES  = local.service_health_check.retries
     HEALTHCHECK_START    = local.service_health_check.start
 
-
+    #Configurações de rede do serviço.
     AWS_REGION    = data.aws_region.this.name
-    ECR_URL       = local.ecr_url
     NETWORK_MODE  = var.network_mode
     PORT_MAP      = replace(jsonencode(local.port_mappings), "/\"([0-9]+\\.?[0-9]*)\"/", "$1",)
   })
-
-
-
-#   container_definitions = <<CONTAINER
-#   [
-#     {
-#       "name": "${var.service_name}",
-#       "image": "${var.ecr_url == null ? aws_ecr_repository.this[0].repository_url : var.ecr_url}",
-#       "networkMode": "${var.network_mode}",
-#       "portMappings": ${replace(
-#         jsonencode(local.port_mappings),
-#         "/\"([0-9]+\\.?[0-9]*)\"/",
-#         "$1",
-#       )},
-#       "memory": ${var.service_memory},
-#       "cpu": ${var.service_cpu},
-#       "memoryReservation": ${var.service_memory},
-#       "essential": true,
-#       "mountPoints": ${jsonencode(var.container_mountpoints)},
-#       "ulimits": ${jsonencode(var.container_ulimits)},
-#       "entryPoint": ${jsonencode(var.container_entrypoint)},
-#       "command": ${jsonencode(var.container_command)},
-#       "environment": ${jsonencode(var.container_environment)},
-#       "healthCheck": {
-#         "command": [
-#           "CMD-SHELL",
-#           "${var.healthcheck_cmd}"
-#         ],
-#         "timeout": ${var.healthcheck_task_timeout != null ? var.healthcheck_task_timeout : var.healthcheck_timeout},
-#         "interval": ${var.healthcheck_interval},
-#         "retries": ${var.healthcheck_retries},
-#         "startPeriod": ${var.healthcheck_start_period}
-#       },
-#       "logConfiguration": {
-#         "logDriver": "awslogs",
-#         "options": {
-#           "awslogs-group": "/ecs/${var.service_name}",
-#           "awslogs-region": "${var.region != null ? var.region : data.aws_region.this.name}",
-#           "awslogs-stream-prefix": "${var.service_name}"
-#         }
-#       },
-#       "secrets": ${jsonencode(var.container_secrets)}
-#     }
-#   ]
-# CONTAINER
 
   depends_on = [aws_lb_target_group.this]
 }
