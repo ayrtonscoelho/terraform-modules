@@ -20,7 +20,7 @@ resource "aws_appautoscaling_policy" "this" {
 
   target_tracking_scaling_policy_configuration {
     predefined_metric_specification {
-      predefined_metric_type = var.metric_types[var.autoscaling_settings.rules[count.index].metric_type]
+      predefined_metric_type = local.metric_types[var.autoscaling_settings.rules[count.index].metric_type]
     }
 
     target_value       = var.autoscaling_settings.rules[count.index].target
@@ -30,4 +30,11 @@ resource "aws_appautoscaling_policy" "this" {
   }
 
   depends_on = [aws_appautoscaling_target.this]
+}
+
+locals {
+  metric_types = {
+    CPU = "ECSServiceAverageCPUUtilization"
+    RAM = "ECSServiceAverageMemoryUtilization"
+  }
 }

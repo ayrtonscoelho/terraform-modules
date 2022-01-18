@@ -137,7 +137,7 @@ variable "health_check_settings" {
 variable "custom_tg_name" { 
   default = null 
   validation {
-    condition     = can(regex("[[:alpha:]]", var.custom_tg_name)) == true
+    condition     = var.custom_tg_name == null || can(regex("[[:alpha:]]", var.custom_tg_name)) == true
     error_message = "[ERROR]::: A variável 'custom_tg_name' deve ser do tipo String."
   }
 }
@@ -145,7 +145,7 @@ variable "custom_tg_name" {
 variable "custom_tg_port" { 
   default = null 
   validation {
-    condition     = can(regex("[[:digit:]]", var.custom_tg_port)) == true
+    condition     = var.custom_tg_port == null || can(regex("[[:digit:]]", var.custom_tg_port)) == true
     error_message = "[ERROR]::: A variável 'custom_tg_port' deve ser do tipo Number."
   }
  }
@@ -187,7 +187,7 @@ variable "nlb_rules" {
 variable "ecr_url" { 
   default = null 
   validation {
-    condition     = can(regex("[[:alpha:]]", var.ecr_url)) == true
+    condition     = var.ecr_url == null || can(regex("[[:alpha:]]", var.ecr_url)) == true 
     error_message = "[ERROR]::: A variável 'ecr_url' deve ser do tipo String."
   }
 }
@@ -223,19 +223,6 @@ variable "autoscaling_settings" {
   default = null
 }
 
-variable "metric_types" {
-  default = {
-    CPU = "ECSServiceAverageCPUUtilization"
-    RAM = "ECSServiceAverageMemoryUtilization"
-  }
-
-  validation {
-    condition     = var.metric_types.0 == "CPU" || var.metric_types.0 == "RAM"
-    error_message = "[ERROR]::: O valor da variável 'metric_types' deve ser 'CPU' ou 'RAM'."
-  }
-}
-
-
 
 ##NAMESPACE VARS
 
@@ -269,8 +256,8 @@ variable "service_cpu" {
 
 variable "iam_role" {
   validation {
-    condition     = var.iam_role == null || can(regex("arn:aws:iam:([0-9]{12}):role/([a-z,A-Z,_,-,0-9]{1,256})", var.iam_role))
-    error_message = "O valor da variável 'iam_role' precisar ser um ARN válidl. Exemplo: 'arn:aws:iam:<account-id>:role/<role-name>'."
+    condition     = var.iam_role == null || can(regex("arn:aws:iam::([0-9]{12}):role/([a-z,A-Z,_,-,0-9]{1,256})", var.iam_role))
+    error_message = "O valor da variável 'iam_role' precisar ser um ARN válido. Exemplo: 'arn:aws:iam:<account-id>:role/<role-name>'."
   }
 }
 
@@ -278,7 +265,7 @@ variable "iam_role" {
 variable "network_mode" { 
   default = "awsvpc"
   validation {
-    condition     = network_mode == "awsvpc" || network_mode == "bridge"
+    condition     = var.network_mode == "awsvpc" || var.network_mode == "bridge"
     error_message = "[ERROR]::: O valor da variável 'network_mode' deve ser 'awsvpc' ou 'bridge'."
   }
 }
@@ -333,7 +320,7 @@ variable "service_secrets" {
 variable "healthcheck_task_timeout" { 
   default = null
   validation {
-    condition     = can(regex("[[:digit:]]", var.healthcheck_task_timeout)) == true
+    condition     = var.healthcheck_task_timeout == null || can(regex("[[:digit:]]", var.healthcheck_task_timeout)) == true
     error_message = "[ERROR]::: A variável 'healthcheck_task_timeout' deve ser do tipo Number."
   }
 }
