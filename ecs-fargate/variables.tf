@@ -187,7 +187,7 @@ variable "nlb_rules" {
 variable "ecr_url" { 
   default = null 
   validation {
-    condition     = var.ecr_url == null || can(regex("[[:alpha:]]", var.ecr_url)) == true 
+    condition     = var.ecr_url == null || can(regex("([0-9]{12}).dkr.ecr.((us|sa|af|ap|ca|eu|me|)-east-(1|2|3)).amazonaws.com/([a-z,A-Z,_,-,0-9]{1,256})", var.ecr_url))
     error_message = "[ERROR]::: A variável 'ecr_url' deve ser do tipo String."
   }
 }
