@@ -49,21 +49,21 @@ variable "platform_version" {
 }
 
 variable "enable_lb" {
+  default = true 
   validation {
     condition     = can(tobool(var.enable_lb)) == true
     error_message = "[ERROR]::: A variável 'enable_lb' deve ser do tipo Boolean(true or false)."
   }
 
-  default = true 
 }
 
 variable "enable_sd" { 
+  default = true 
   validation {
     condition     = can(tobool(var.enable_sd)) == true
     error_message = "[ERROR]::: A variável 'enable_sd' deve ser do tipo Boolean(true or false)."
   }
 
-  default = true 
 }
 
 variable "healthcheck_grace_period" { 
@@ -134,8 +134,21 @@ variable "health_check_settings" {
 }
 
 #Optional
-variable "custom_tg_name" { default = null }
-variable "custom_tg_port" { default = null }
+variable "custom_tg_name" { 
+  default = null 
+  validation {
+    condition     = can(regex("[[:alpha:]]", var.custom_tg_name)) == true
+    error_message = "[ERROR]::: A variável 'custom_tg_name' deve ser do tipo String."
+  }
+}
+
+variable "custom_tg_port" { 
+  default = null 
+  validation {
+    condition     = can(regex("[[:digit:]]", var.custom_tg_port)) == true
+    error_message = "[ERROR]::: A variável 'custom_tg_port' deve ser do tipo Number."
+  }
+ }
 
 
 
@@ -171,14 +184,26 @@ variable "nlb_rules" {
 ##ECR VARS
 
 #Optional
-variable "ecr_url" { default = null }
+variable "ecr_url" { 
+  default = null 
+  validation {
+    condition     = can(regex("[[:alpha:]]", var.ecr_url)) == true
+    error_message = "[ERROR]::: A variável 'ecr_url' deve ser do tipo String."
+  }
+}
 
 
 
 ##CLOUDWATCH VARS
 
 #Optional
-variable "log_retention" { default = 7 }
+variable "log_retention" { 
+  default = 7 
+  validation {
+    condition     = can(regex("[[:digit:]]", var.log_retention)) == true
+    error_message = "[ERROR]::: A variável 'log_retention' deve ser do tipo Number."
+  }
+}
 
 
 
@@ -203,6 +228,11 @@ variable "metric_types" {
     CPU = "ECSServiceAverageCPUUtilization"
     RAM = "ECSServiceAverageMemoryUtilization"
   }
+
+  validation {
+    condition     = var.metric_types.0 == "CPU" || var.metric_types.0 == "RAM"
+    error_message = "[ERROR]::: O valor da variável 'metric_types' deve ser 'CPU' ou 'RAM'."
+  }
 }
 
 
@@ -224,20 +254,51 @@ variable "namespace_settings" {
 ##TASK DEFINITION VARS
 
 #Required
-variable "service_memory" {}
-variable "service_cpu" {}
-variable "iam_role" {}
+variable "service_memory" {
+  validation {
+    condition     = can(regex("[[:digit:]]", var.service_memory)) == true
+    error_message = "[ERROR]::: A variável 'service_memory' deve ser do tipo Number."
+  }
+}
+variable "service_cpu" {
+  validation {
+    condition     = can(regex("[[:digit:]]", var.service_cpu)) == true
+    error_message = "[ERROR]::: A variável 'service_cpu' deve ser do tipo Number."
+  }
+}
+
+variable "iam_role" {
+  validation {
+    condition     = var.iam_role == null || can(regex("arn:aws:iam:([0-9]{12}):role/([a-z,A-Z,_,-,0-9]{1,256})", var.iam_role))
+    error_message = "O valor da variável 'iam_role' precisar ser um ARN válidl. Exemplo: 'arn:aws:iam:<account-id>:role/<role-name>'."
+  }
+}
 
 #Optional
-variable "network_mode" { default = "awsvpc" }
+variable "network_mode" { 
+  default = "awsvpc"
+  validation {
+    condition     = network_mode == "awsvpc" || network_mode == "bridge"
+    error_message = "[ERROR]::: O valor da variável 'network_mode' deve ser 'awsvpc' ou 'bridge'."
+  }
+}
 
 variable "service_mountpoints" {
-  type        = list(any)
+  type = list(object({
+    containerPath = string
+    sourceVolume  = string
+  }))
+
   default     = []
 }
 
 variable "service_ulimits" {
-  type        = list(any)
+  type = list(object({
+    name      = string
+    softLimit = number
+    hardLimit = number
+  }))
+
   default     = []
 }
 
@@ -252,23 +313,30 @@ variable "service_command" {
 }
 
 variable "service_environment" {
-  type        = list(any)
-  default     = []
-}
+  type = list(object({
+    name  = string
+    value = string
+  }))
 
-variable "service_extra_ports" {
-  type        = list(any)
-  default  = []
+  default = []
 }
 
 variable "service_secrets" {
-  type        = list(any)
-  default     = []
+  type = list(object({
+    name      = string
+    valueFrom = string
+  }))
+
+  default = []
 }
 
-variable "healthcheck_task_timeout" { default = null }
-
-variable "region" { default = null }
+variable "healthcheck_task_timeout" { 
+  default = null
+  validation {
+    condition     = can(regex("[[:digit:]]", var.healthcheck_task_timeout)) == true
+    error_message = "[ERROR]::: A variável 'healthcheck_task_timeout' deve ser do tipo Number."
+  }
+}
 
 variable "service_health_check" {
   type = object({
