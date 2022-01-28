@@ -50,7 +50,7 @@ O bloco de código abaixo é um exemplo completo atendendo todos as *features* d
 
 ```
 module "demo_service" {
-  source = "/home/ayrton.coelho/Desktop/projetos/pessoal/terraform-modules/ecs-fargate"
+  source = "github.com/ayrtonscoelho/terraform-modules//ecs-fargate"
 
   #Service settings
   service_name   = "demo-service"
@@ -75,6 +75,20 @@ module "demo_service" {
     healthy_threshold   = 2
     unhealthy_threshold = 3
   }
+
+  service_environment = [
+    {
+      name  = "NEW_RELIC_APP_NAME"
+      value = "demo-service"
+    }
+  ]
+
+  service_secrets = [
+    {
+      name      = "NEW_RELIC_LICENSE_KEY"
+      valueFrom = module.parameter_nr_license.arn
+    }
+  ]
 
   namespace_settings = {
     namespace_id = module.service_discovery_namespace.id
