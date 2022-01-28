@@ -201,4 +201,16 @@ module "demo_service" {
 
 | Name        | Description |
 | ----------- | ----------- |
-| aws_ecs_service.this | Resource|
+| service_name | Nome do serviço ECS|
+| service_arn | ARN do serviço ECS|
+| service_cluster | Cluster ECS em que o serviço está contido|
+| service_iam | ARN da IAM Role do serviço ECS|
+| task_arn | ARN da task definition do serviço ECS|
+| task_revision | Revisão da task definition do serviço ECS|
+| ecr_arn | ARN do repositório ECR que contém a imagem que o serviço ECS executa |
+| ecr_id | ID do repositório ECR que contém a imagem que o serviço ECS executa |
+| ecr_uri | URI do repositório ECR que contém a imagem que o serviço ECS executa |
+| target_group_arn | ARN do target group associado ao serviço ECS |
+| target_group_arn_suffix | ARN Suffix do target group associado ao serviço ECS |
+| target_group_name | Nome do target group associado ao serviço ECS |
+| log_arn | ARN do log group do serviço ECS |
