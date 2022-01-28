@@ -2,6 +2,7 @@
 
 #Required
 variable "service_name" {
+  type = string
   validation {
     condition     = can(regex("[[:alpha:]]", var.service_name)) == true
     error_message = "[ERROR]::: A variável 'service_name' deve ser do tipo String."
@@ -9,6 +10,7 @@ variable "service_name" {
 }
 
 variable "service_port" {
+  type = number
   validation {
     condition     = can(regex("[[:digit:]]", var.service_port)) == true
     error_message = "[ERROR]::: A variável 'service_port' deve ser do tipo Number."
@@ -16,6 +18,7 @@ variable "service_port" {
 }
 
 variable "cluster_name" {
+  type = string
   validation {
     condition     = can(regex("[[:alpha:]]", var.cluster_name)) == true
     error_message = "[ERROR]::: A variável 'cluster_name' deve ser do tipo String."
@@ -198,7 +201,7 @@ variable "ecr_url" {
 
 #Optional
 variable "log_retention" { 
-  default = 7 
+  default = 30
   validation {
     condition     = can(regex("[[:digit:]]", var.log_retention)) == true
     error_message = "[ERROR]::: A variável 'log_retention' deve ser do tipo Number."
