@@ -239,13 +239,11 @@ proxy:
 
   annotations:
     "kubernetes.io/ingress.class": "kong"
-    "konghq.com/host-aliases": "argocd-sre-test.owill.com.br"
     "service.beta.kubernetes.io/aws-load-balancer-name": "kong-ingress-controller"
     "service.beta.kubernetes.io/aws-load-balancer-internal": "true"
     "service.beta.kubernetes.io/aws-load-balancer-backend-protocol": "ssl"
     "service.beta.kubernetes.io/aws-load-balancer-ssl-cert": "arn:aws:acm:us-east-1:876897421480:certificate/2877ad41-1874-435f-b7f6-e1f79edbb411"
     "service.beta.kubernetes.io/aws-load-balancer-ssl-ports": "kong-proxy-tls"
-    "service.beta.kubernetes.io/aws-load-balancer-ssl-ports": "443"
     "service.beta.kubernetes.io/aws-load-balancer-target-group-attributes": "preserve_client_ip.enabled=true"
     "service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags": "Management=Managed by ArgoCD"
     "service.beta.kubernetes.io/security-groups": "sg-0679154f13474c0b6, sg-06fd62bfb12fa2667, sg-081632a7b5e3145bb, sg-08e7d9973ec9ed401"
