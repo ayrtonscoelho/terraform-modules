@@ -244,9 +244,9 @@ proxy:
     "service.beta.kubernetes.io/aws-load-balancer-backend-protocol": "ssl"
     "service.beta.kubernetes.io/aws-load-balancer-ssl-cert": "arn:aws:acm:us-east-1:876897421480:certificate/2877ad41-1874-435f-b7f6-e1f79edbb411"
     "service.beta.kubernetes.io/aws-load-balancer-ssl-ports": "kong-proxy-tls"
-    "service.beta.kubernetes.io/aws-load-balancer-ssl-ports": "443"
-    "service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags": "Management=Managed by ArgoCD"
+    # "service.beta.kubernetes.io/aws-load-balancer-ssl-ports": "443"
     "service.beta.kubernetes.io/aws-load-balancer-target-group-attributes": "preserve_client_ip.enabled=true"
+    "service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags": "Management=Managed by ArgoCD"
     "service.beta.kubernetes.io/aws-load-balancer-extra-security-groups": "inbound-cloudflare-secure-sg, inbound-offices-http-sg, inbound-offices-https-sg, outbound-vpc-k8s-sg"
     # service.beta.kubernetes.io/aws-load-balancer-attributes: access_logs.s3.enabled=true,access_logs.s3.bucket=my-access-log-bucket,access_logs.s3.prefix=my-app
     # service.beta.kubernetes.io/aws-load-balancer-subnets: "A DEFINIR"
