@@ -234,7 +234,7 @@ cluster:
 
 # Specify Kong proxy service configuration
 proxy:
-  enabled: false
+  enabled: true
   type: LoadBalancer
 
   annotations: 
