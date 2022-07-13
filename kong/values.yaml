@@ -237,8 +237,9 @@ proxy:
   enabled: true
   type: LoadBalancer
 
-  annotations: 
+  annotations:
     "kubernetes.io/ingress.class": "kong"
+    "konghq.com/host-aliases": "argocd-sre-test.owill.com.br"
     "service.beta.kubernetes.io/aws-load-balancer-name": "kong-ingress-controller"
     "service.beta.kubernetes.io/aws-load-balancer-internal": "true"
     "service.beta.kubernetes.io/aws-load-balancer-backend-protocol": "ssl"
