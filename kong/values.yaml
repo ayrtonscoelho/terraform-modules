@@ -238,6 +238,7 @@ proxy:
   type: LoadBalancer
 
   annotations: 
+    "kubernetes.io/ingress.class": "kong"
     "service.beta.kubernetes.io/aws-load-balancer-name": "kong-ingress-controller"
     "service.beta.kubernetes.io/aws-load-balancer-internal": "true"
     "service.beta.kubernetes.io/aws-load-balancer-backend-protocol": "ssl"
