@@ -258,7 +258,7 @@ proxy:
 
   http:
     # Enable plaintext HTTP listen for the proxy
-    enabled: false
+    enabled: true
     servicePort: 80
     containerPort: 8000
     # Set a nodePort which is available if service type is NodePort
@@ -277,7 +277,7 @@ proxy:
     # nodePort: 32443
     # Additional listen parameters, e.g. "reuseport", "backlog=16384"
     parameters:
-    - http2
+    - ssl
 
   # Define stream (TCP) listen
   # To enable, remove "[]", uncomment the section below, and select your desired
