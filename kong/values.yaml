@@ -245,12 +245,12 @@ proxy:
     "service.beta.kubernetes.io/aws-load-balancer-ssl-ports": "kong-proxy-tls"
     "service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags": "Management=Managed by ArgoCD"
     "service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled": "true"
-    "service.beta.kubernetes.io/aws-load-balancer-target-group-attributes": "preserve_client_ip.enabled=true"
 
     #ANNOTATIONS TO DO
     #Security group
     #Logs S3
     #Subnets
+    #Preserve IP
 
 
   labels:
