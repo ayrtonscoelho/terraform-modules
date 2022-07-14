@@ -247,7 +247,7 @@ proxy:
     "service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled": "true"
     # "service.beta.kubernetes.io/security-groups": "sg-0679154f13474c0b6, sg-06fd62bfb12fa2667, sg-081632a7b5e3145bb, sg-08e7d9973ec9ed401"
     # "service.beta.kubernetes.io/aws-load-balancer-target-group-attributes": "preserve_client_ip.enabled=true"
-    "service.beta.kubernetes.io/aws-load-balancer-attributes": "access_logs.s3.enabled=true,access_logs.s3.bucket=will-access-logs-dev,access_logs.s3.prefix=alb"
+    "service.beta.kubernetes.io/aws-load-balancer-attributes": "access_logs.s3.enabled=true,access_logs.s3.bucket=will-access-logs-dev,access_logs.s3.prefix=elb"
     # service.beta.kubernetes.io/aws-load-balancer-subnets: "A DEFINIR"
 
   labels:
