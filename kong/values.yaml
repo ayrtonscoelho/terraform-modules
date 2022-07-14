@@ -258,7 +258,7 @@ proxy:
 
   http:
     # Enable plaintext HTTP listen for the proxy
-    enabled: false
+    enabled: true
     servicePort: 80
     containerPort: 8000
     # Set a nodePort which is available if service type is NodePort
