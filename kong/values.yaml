@@ -242,16 +242,17 @@ proxy:
     "service.beta.kubernetes.io/aws-load-balancer-type": "elb"
     "service.beta.kubernetes.io/aws-load-balancer-backend-protocol": "ssl"
     "service.beta.kubernetes.io/aws-load-balancer-ssl-cert": "arn:aws:acm:us-east-1:876897421480:certificate/2877ad41-1874-435f-b7f6-e1f79edbb411"
-    "service.beta.kubernetes.io/aws-load-balancer-ssl-ports": "kong-proxy-tls"
+    # "service.beta.kubernetes.io/aws-load-balancer-ssl-ports": "kong-proxy-tls"
     "service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags": "Management=Managed by ArgoCD"
     "service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled": "true"
 
     #ANNOTATIONS TO DO
-    #Security group
-    #Logs S3
-    #Subnets
-    #Preserve IP
+    # Security Group
+    # Logs S3
+    # Preserve IP
+    # Subnets
 
+    # "service.beta.kubernetes.io/aws-load-balancer-target-group-attributes": "preserve_client_ip.enabled=true"
 
   labels:
     enable-metrics: "true"
