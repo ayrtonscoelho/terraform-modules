@@ -244,7 +244,6 @@ proxy:
     "service.beta.kubernetes.io/aws-load-balancer-ssl-cert": "arn:aws:acm:us-east-1:876897421480:certificate/2877ad41-1874-435f-b7f6-e1f79edbb411"
     "service.beta.kubernetes.io/aws-load-balancer-ssl-ports": "kong-proxy-tls"
     "service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags": "Management=Managed by ArgoCD"
-    # "service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled": "true"
 
     #ANNOTATIONS TO DO
     # Security Group
@@ -259,7 +258,7 @@ proxy:
 
   http:
     # Enable plaintext HTTP listen for the proxy
-    enabled: false
+    enabled: true
     servicePort: 80
     containerPort: 8000
     # Set a nodePort which is available if service type is NodePort
