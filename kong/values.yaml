@@ -400,15 +400,13 @@ migrations:
   jobAnnotations: {}
   # Optionally set a backoffLimit. If none is set, Jobs will use the cluster default
   backoffLimit:
-  resources: {}
-  # Example reasonable setting for "resources":
-  # resources:
-  #   limits:
-  #     cpu: 100m
-  #     memory: 256Mi
-  #   requests:
-  #     cpu: 50m
-  #     memory: 128Mi
+  resources:
+    limits:
+      cpu: 500m
+      memory: 300Mi
+    requests:
+      cpu: 50m
+      memory: 128Mi
   ## Optionally specify any extra sidecar containers to be included in the deployment
   ## See https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core
   ## Keep in mind these containers should be terminated along with the main
@@ -537,15 +535,13 @@ ingressController:
     periodSeconds: 10
     successThreshold: 1
     failureThreshold: 3
-  resources: {}
-  # Example reasonable setting for "resources":
-  # resources:
-  #   limits:
-  #     cpu: 100m
-  #     memory: 256Mi
-  #   requests:
-  #     cpu: 50m
-  #     memory: 128Mi
+  resources:
+    limits:
+      cpu: 500m
+      memory: 300Mi
+    requests:
+      cpu: 50m
+      memory: 128Mi
 
 # -----------------------------------------------------------------------------
 # Postgres sub-chart parameters
@@ -685,7 +681,7 @@ podLabels: {}
 
 # Kong pod count.
 # It has no effect when autoscaling.enabled is set to true
-replicaCount: 1
+replicaCount: 2
 
 # Annotations to be added to Kong deployment
 deploymentAnnotations: {}
@@ -694,9 +690,9 @@ deploymentAnnotations: {}
 # When configuring an HPA, you must set resource requests on all containers via
 # "resources" and, if using the controller, "ingressController.resources" in values.yaml
 autoscaling:
-  enabled: false
+  enabled: true
   minReplicas: 2
-  maxReplicas: 5
+  maxReplicas: 3
   behavior: {}
   ## targetCPUUtilizationPercentage only used if the cluster doesn't support autoscaling/v2beta
   targetCPUUtilizationPercentage:
