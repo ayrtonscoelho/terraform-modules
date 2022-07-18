@@ -607,13 +607,13 @@ updateStrategy: {}
 
 # If you want to specify resources, uncomment the following
 # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-resources: {}
-  # limits:
-  #  cpu: 1
-  #  memory: 1G
-  # requests:
-  #  cpu: 1
-  #  memory: 1G
+resources:
+  limits:
+    cpu: 500m
+    memory: 300Mi
+  requests:
+    cpu: 50m
+    memory: 128Mi
 
 # readinessProbe for Kong pods
 readinessProbe:
