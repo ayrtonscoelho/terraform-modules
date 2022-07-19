@@ -107,15 +107,15 @@ triggerLoopOnEvent: false
 sources:
   - ingress
 
-policy: upsert-only
+policy: sync
 
-registry: txt
+registry: noop
 txtOwnerId: "external-dns"
 txtPrefix: ""
 txtSuffix: ""
 
 domainFilters: 
-  - "owill.com.br"
+  - "vcarrazzone.com.br"
 
 provider: cloudflare
 
