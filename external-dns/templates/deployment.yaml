@@ -55,7 +55,7 @@ spec:
           {{- with .Values.env }}
           envFrom:
           - secretRef:
-              name: {{ .Chart.Name }}-secret
+              name: {{ include "external-dns.fullname" . }}-secret
           {{- end }}
           args:
             - --log-level={{ .Values.logLevel }}
