@@ -98,7 +98,7 @@ affinity: {}
 
 topologySpreadConstraints: []
 
-logLevel: info
+logLevel: debug
 logFormat: text
 
 interval: 1m
@@ -113,6 +113,7 @@ registry: txt
 txtOwnerId: "external-dns"
 txtPrefix: ""
 txtSuffix: ""
+
 
 domainFilters: 
   - "vcarrazzone.com.br"
