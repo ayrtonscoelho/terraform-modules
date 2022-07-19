@@ -53,7 +53,7 @@ spec:
           image: {{ include "external-dns.image" . }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{- with .Values.env }}
-          env:
+          envFrom:
             {{- toYaml . | nindent 12 }}
           {{- end }}
           args:
