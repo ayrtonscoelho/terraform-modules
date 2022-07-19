@@ -59,7 +59,10 @@ serviceMonitor:
   interval: 1m
   scrapeTimeout: 10s
 
-env: []
+env: 
+  - secretRef:
+     name: external-dns
+
 
 livenessProbe:
   httpGet:
@@ -106,18 +109,17 @@ interval: 1m
 triggerLoopOnEvent: false
 
 sources:
-  - service
   - ingress
 
 policy: upsert-only
 
 registry: txt
-txtOwnerId: ""
+txtOwnerId: "external-dns"
 txtPrefix: ""
 txtSuffix: ""
 
-domainFilters: []
+domainFilters: owill.com.br
 
-provider: aws
+provider: cloudflare
 
 extraArgs: []
