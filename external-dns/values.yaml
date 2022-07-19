@@ -118,7 +118,7 @@ txtOwnerId: "external-dns"
 txtPrefix: ""
 txtSuffix: ""
 
-domainFilters: owill.com.br
+domainFilters: "owill.com.br"
 
 provider: cloudflare
 
