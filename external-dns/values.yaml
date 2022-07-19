@@ -107,7 +107,7 @@ triggerLoopOnEvent: false
 sources:
   - ingress
 
-policy: upsert-only
+policy: sync
 
 registry: txt
 txtOwnerId: "external-dns"
