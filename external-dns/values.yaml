@@ -59,10 +59,6 @@ serviceMonitor:
   interval: 1m
   scrapeTimeout: 10s
 
-envFrom: 
-- secretRef:
-    name: external-dns
-
 
 livenessProbe:
   httpGet:

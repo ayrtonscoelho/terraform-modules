@@ -54,7 +54,8 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{- with .Values.env }}
           envFrom:
-            {{- toYaml . | nindent 12 }}
+          - secretRef:
+              name: {{ .Chart.Name }}-secret
           {{- end }}
           args:
             - --log-level={{ .Values.logLevel }}
