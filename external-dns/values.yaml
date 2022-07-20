@@ -120,7 +120,5 @@ domainFilters:
 
 provider: cloudflare
 
-extraArgs: []
-
-cloudflare:
-  proxied: false
+extraArgs:
+  - "--proxied=false"
