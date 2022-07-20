@@ -109,7 +109,7 @@ sources:
 
 policy: create-only
 
-#registry: "txt"
+registry: txt
 #txtOwnerId: "external-dns"
 #txtPrefix: ""
 #txtSuffix: ""
