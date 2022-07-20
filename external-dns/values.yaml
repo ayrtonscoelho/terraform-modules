@@ -98,8 +98,8 @@ affinity: {}
 
 topologySpreadConstraints: []
 
-logLevel: debug
-logFormat: text
+#logLevel: debug
+#logFormat: text
 
 interval: 1m
 triggerLoopOnEvent: false
@@ -107,12 +107,12 @@ triggerLoopOnEvent: false
 sources:
   - ingress
 
-policy: upsert-only
+#policy: upsert-only
 
-registry: "txt"
-txtOwnerId: "external-dns"
-txtPrefix: ""
-txtSuffix: ""
+#registry: "txt"
+#txtOwnerId: "external-dns"
+#txtPrefix: ""
+#txtSuffix: ""
 
 
 domainFilters: 
@@ -120,5 +120,3 @@ domainFilters:
 
 provider: cloudflare
 
-extraArgs:
-  - "--proxied=false"
