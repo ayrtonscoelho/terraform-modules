@@ -98,8 +98,8 @@ affinity: {}
 
 topologySpreadConstraints: []
 
-#logLevel: debug
-#logFormat: text
+logLevel: debug
+logFormat: text
 
 interval: 1m
 triggerLoopOnEvent: false
