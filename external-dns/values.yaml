@@ -105,9 +105,10 @@ interval: 1m
 triggerLoopOnEvent: false
 
 sources:
-  - ingress
+ # - ingress
+  - service
 
-policy: create-only
+policy: upsert-only
 
 registry: txt
 #txtOwnerId: "external-dns"
