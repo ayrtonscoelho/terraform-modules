@@ -109,7 +109,7 @@ sources:
 
 policy: upsert-only
 
-registry: "txt"
+registry: "noop"
 txtOwnerId: "external-dns"
 txtPrefix: ""
 txtSuffix: ""
