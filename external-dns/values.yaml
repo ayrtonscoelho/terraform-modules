@@ -116,7 +116,7 @@ registry: txt
 
 
 domainFilters: 
-  - "owill.com.br"
+  - "vcarrazzone.com.br"
 
 provider: cloudflare
 
