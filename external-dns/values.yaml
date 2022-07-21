@@ -105,7 +105,7 @@ interval: 1m
 triggerLoopOnEvent: false
 
 sources:
-  - service
+  - ingress
 
 policy: upsert-only
 
