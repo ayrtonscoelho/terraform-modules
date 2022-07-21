@@ -1,0 +1,95 @@
+site_name: External Secrets Operator
+repo_url: https://github.com/external-secrets/external-secrets
+repo_name: External Secrets Operator
+site_dir: ../../site
+docs_dir: ../../docs
+remote_branch: gh-pages
+theme:
+  name: material
+  custom_dir: ../../overrides
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - admonition
+  - pymdownx.snippets:
+      base_path: docs
+plugins:
+  - search:
+      lang: en
+  - macros:
+      include_dir: docs/snippets
+extra:
+  version:
+    provider: mike
+  analytics:
+    provider: google
+    property: G-QP38TD8K7V
+nav:
+  - Introduction: index.md
+  - Overview: api-overview.md
+  - API Types:
+      ExternalSecret: api-externalsecret.md
+      SecretStore: api-secretstore.md
+      ClusterSecretStore: api-clustersecretstore.md
+      ClusterExternalSecret: api-clusterexternalsecret.md
+  - Guides:
+    - Introduction: guides-introduction.md
+    - Getting started: guides-getting-started.md
+    - Advanced Templating:
+        v2: guides-templating.md
+        v1: guides-templating-v1.md
+    - All keys, One secret: guides-all-keys-one-secret.md
+    - Common K8S Secret Types: guides-common-k8s-secret-types.md
+    - Controller Classes: guides-controller-class.md
+    - "Lifecycle: ownership & deletion": guides-ownership-deletion-policy.md
+    - Decoding Strategies: guides-decoding-strategy.md
+    - Getting Multiple Secrets: guides-getallsecrets.md
+    - Multi Tenancy: guides-multi-tenancy.md
+    - Metrics: guides-metrics.md
+    - Upgrading to v1beta1: guides-v1beta1.md
+    - Using Latest Image: guides-using-latest-image.md
+  - Provider:
+    - AWS:
+      - Secrets Manager: provider-aws-secrets-manager.md
+      - Parameter Store: provider-aws-parameter-store.md
+    - Azure:
+      - Key Vault: provider-azure-key-vault.md
+    - Google:
+      - Secret Manager: provider-google-secrets-manager.md
+    - IBM:
+      - Secrets Manager: provider-ibm-secrets-manager.md
+    - Akeyless: provider-akeyless.md
+    - HashiCorp Vault: provider-hashicorp-vault.md
+    - Yandex:
+        - Certificate Manager: provider-yandex-certificate-manager.md
+        - Lockbox: provider-yandex-lockbox.md
+    - Gitlab:
+      - Gitlab Project Variables: provider-gitlab-project-variables.md
+    - Oracle:
+      - Oracle Vault: provider-oracle-vault.md
+    - 1Password:
+      - Secrets Automation: provider-1password-automation.md
+    - Webhook: provider-webhook.md
+    - Fake: provider-fake.md
+    - Kubernetes: provider-kubernetes.md
+    - senhasegura:
+      - DevOps Secrets Management (DSM): provider-senhasegura-dsm.md
+  - Examples:
+    - FluxCD: examples-gitops-using-fluxcd.md
+    - Anchore Engine: examples-anchore-engine-credentials.md
+    - Jenkins: examples-jenkins-kubernetes-credentials.md
+  - External Resources:
+    - Talks: eso-talks.md
+    - Demos: eso-demos.md
+    - Blogs: eso-blogs.md
+  - References:
+    - API specification: spec.md
+  - Contributing:
+    - Developer guide: contributing-devguide.md
+    - Contributing Process: contributing-process.md
+    - Release Process: contributing-release.md
+    - Code of Conduct: contributing-coc.md
+  - Roadmap: roadmap.md
+  - FAQ: faq.md
+  - Stability and Support: stability-support.md
+  - Deprecation Policy: deprecation-policy.md
