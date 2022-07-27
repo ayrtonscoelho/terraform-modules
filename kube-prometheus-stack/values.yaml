@@ -2528,9 +2528,6 @@ prometheus:
     ##
       volumeClaimTemplate:
         spec:
-          selector:
-            matchLabels: 
-              prometheus: kube-prometheus-stack-prometheus 
           storageClassName: gp3
           accessModes: ["ReadWriteOnce"]
           resources:
@@ -2543,8 +2540,11 @@ prometheus:
     #    medium: Memory
 
     # Additional volumes on the output StatefulSet definition.
-    volumes: []
-
+    volumes: 
+      - persistentVolumeClaim:
+          claimName:
+            - prometheus-kube-prometheus-stack-prometheus-db-prometheus-kube-prometheus-stack-prometheus-0
+            
     # Additional VolumeMounts on the output StatefulSet definition.
     volumeMounts: []
 
