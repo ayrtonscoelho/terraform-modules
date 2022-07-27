@@ -340,6 +340,6 @@ certController:
       #   memory: 32Mi
 
 clusterSecretStore:
-  name: AwsClusterSecretStore
+  name: aws-cluster-secret-store
   awsRegion: us-east-1
   awsAuth: {}
