@@ -2610,7 +2610,7 @@ prometheus:
     ## Expected values are the secret name and key
     ## Cannot be used with additionalScrapeConfigs
     additionalScrapeConfigsSecret:
-      enabled: true
+      enabled: false #TODO: REMOVER
       key: prometheus-additional.yaml
       name: additional-scrape-configs
       # enabled: false
