@@ -2526,8 +2526,8 @@ prometheus:
     storageSpec:
     ## Using PersistentVolumeClaim
     ##
-     volumeClaimTemplate:
-       spec:
+      volumeClaimTemplate:
+        spec:
           accessModes:
           - ReadWriteOnce
           resources:
