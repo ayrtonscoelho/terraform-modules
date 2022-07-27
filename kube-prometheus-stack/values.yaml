@@ -2530,7 +2530,7 @@ prometheus:
         spec:
           selector:
             matchLabels: 
-              type: kube-prometheus-stack 
+              prometheus: kube-prometheus-stack-prometheus 
           storageClassName: gp3
           accessModes: ["ReadWriteOnce"]
           resources:
