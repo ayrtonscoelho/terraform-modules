@@ -2528,15 +2528,14 @@ prometheus:
     ##
       volumeClaimTemplate:
         spec:
-          accessModes:
-          - ReadWriteOnce
-          resources:
-            requests:
-              storage: 50Gi
-          storageClassName: gp3
           selector:
             matchLabels: 
-              type: kube-prometheus-stack
+              type: kube-prometheus-stack 
+          storageClassName: gp3
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 10Gi
 
     ## Using tmpfs volume
     ##
