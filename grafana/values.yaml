@@ -345,7 +345,7 @@ initChownData:
 
 # Administrator credentials when not using an existing secret (see below)
 adminUser: admin
-# adminPassword: strongpassword
+adminPassword: prom_operator_will
 
 # Use an existing secret for the admin user.
 admin:
