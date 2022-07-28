@@ -162,3 +162,29 @@ spec:
 ### External DNS
 
 Blocked (To Do)
+
+
+
+### GRAFANA INGRESS
+
+1. Alterar o **values.yaml** do grafana
+```
+ingress:
+  enabled: true
+  annotations:
+    konghq.com/https-redirect-status-code: '302'
+    konghq.com/protocols: https
+    konghq.com/strip-path: 'true'
+    kubernetes.io/ingress.class: kong
+  labels:
+    app.kubernetes.io/service-name: grafana
+  path: /
+  pathType: Prefix
+
+  hosts:
+    - <HOST>
+  extraPaths: []
+
+  tls: []
+ ```
+
