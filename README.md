@@ -165,7 +165,7 @@ Blocked (To Do)
 
 
 
-### GRAFANA INGRESS
+### Grafana Ingress
 
 1. Alterar o **values.yaml** do grafana
 ```
@@ -188,3 +188,11 @@ ingress:
   tls: []
  ```
 
+
+### Calico addon (Network Policy)
+
+Seguir passo a passo do teste realizado neste documento oficial da AWS.
+
+```
+https://docs.aws.amazon.com/pt_br/eks/latest/userguide/calico.html
+  ```
