@@ -30,6 +30,7 @@ tolerations:
   operator: Exists
 
 # NodeSelector for the tigera/operator pod.
+#
 nodeSelector:
   kubernetes.io/os: linux
 
