@@ -2,6 +2,7 @@ global:
   cluster: will-dev-sre-poc-v7
   lowDataMode: true
   customSecretName: newrelic-license-key
+  customSecretLicenseKey: new-relic-secret-test-sre
 
 newrelic-infrastructure:
   privileged: true
