@@ -2,7 +2,8 @@ apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
   annotations:
-  name: es-api-key
+    "helm.sh/hook": "pre-install"
+  name: es-newrelic-api-key
   namespace: newrelic
 spec:
   dataFrom:
