@@ -1,6 +1,6 @@
 global:
   licenseKey: 13386b5ec2f6f690ade4896648d25eb79b02NRAL
-  cluster: will-dev-sre-poc-v2
+  cluster: will-dev-sre-poc-v7
   lowDataMode: true
   customSecretLicenseKey: newrelic-license-key
 
