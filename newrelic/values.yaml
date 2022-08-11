@@ -1,10 +1,8 @@
 global:
-  cluster: will-dev-sre-poc-v8
+  cluster: will-dev-sre-poc-v7
   lowDataMode: true
   customSecretName: newrelic-license-key
   customSecretLicenseKey: licenseKey
-
-
 
 newrelic-infrastructure:
   privileged: true
@@ -22,4 +20,4 @@ newrelic-pixie:
 pixie-chart:
   enabled: false
   deployKey: px-dep-99ad86c1-1a04-42b1-9806-eff14b139d8b
-  clusterName: will-dev-sre-poc-v8
+  clusterName: will-dev-sre-poc-v7
