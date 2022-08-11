@@ -3,7 +3,7 @@ kind: ExternalSecret
 metadata:
   annotations:
     "helm.sh/hook": "pre-install"
-  name: es-api-key
+  name: es-newrelic-api-key
   namespace: newrelic
 spec:
   dataFrom:

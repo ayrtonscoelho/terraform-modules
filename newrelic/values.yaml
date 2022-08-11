@@ -1,9 +1,6 @@
-
 global:
-  # licenseKey: 13386b5ec2f6f690ade4896648d25eb79b02NRAL
   cluster: will-dev-sre-poc-v7
   lowDataMode: true
-  # customSecretLicenseKey: newrelic-license-key
   customSecretName: newrelic-license-key
   customSecretLicenseKey: licenseKey
 
@@ -15,12 +12,3 @@ ksm:
   
 kubeEvents:
   enabled: true
-
-newrelic-pixie: 
-  enabled: false
-  apiKey: px-api-f160bbb0-df25-454e-9aae-07c6340d0401
-
-pixie-chart:
-  enabled: false
-  deployKey: px-dep-99ad86c1-1a04-42b1-9806-eff14b139d8b
-  clusterName: will-dev-sre-poc-v7
