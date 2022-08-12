@@ -1136,36 +1136,36 @@ data:
   #        REMOTE_MONITORING: true
   #      labels:
   #        env: production
-  
-  pixie-health-check.yaml: |
-    ---
-    # This Flex config performs periodic checks of the Pixie
-    # /healthz and /statusz endpoints exposed by the Pixie Cloud Connector.
-    # A status for each endpoint is sent to New Relic in a pixieHealthCheck event.
-    #
-    # If Pixie is not installed in the cluster, no events will be generated.
-    # This can also be disabled with enablePixieHealthCheck: false in the values.yaml file.
-    discovery:
-      command:
-        exec: /var/db/newrelic-infra/nri-discovery-kubernetes --tls --port 10250
-        match:
-          label.name: vizier-cloud-connector
-    integrations:
-      - name: nri-flex
-        interval: 60s
-        config:
-          name: pixie-health-check
-          apis:
-            - event_type: pixieHealth
-              commands:
-                - run: curl --insecure -s https://${discovery.ip}:50800/healthz | xargs | awk '{print "cloud_connector_health:"$1}'
-                  split_by: ":"
-              merge: pixieHealthCheck
-            - event_type: pixieStatus
-              commands:
-                - run: curl --insecure -s https://${discovery.ip}:50800/statusz | awk '{if($1 == ""){ print "cloud_connector_status:OK" } else { print "cloud_connector_status:"$1 }}'
-                  split_by: ":"
-              merge: pixieHealthCheck
+#Pixie
+  # pixie-health-check.yaml: |
+  #   ---
+  #   # This Flex config performs periodic checks of the Pixie
+  #   # /healthz and /statusz endpoints exposed by the Pixie Cloud Connector.
+  #   # A status for each endpoint is sent to New Relic in a pixieHealthCheck event.
+  #   #
+  #   # If Pixie is not installed in the cluster, no events will be generated.
+  #   # This can also be disabled with enablePixieHealthCheck: false in the values.yaml file.
+  #   discovery:
+  #     command:
+  #       exec: /var/db/newrelic-infra/nri-discovery-kubernetes --tls --port 10250
+  #       match:
+  #         label.name: vizier-cloud-connector
+  #   integrations:
+  #     - name: nri-flex
+  #       interval: 60s
+  #       config:
+  #         name: pixie-health-check
+  #         apis:
+  #           - event_type: pixieHealth
+  #             commands:
+  #               - run: curl --insecure -s https://${discovery.ip}:50800/healthz | xargs | awk '{print "cloud_connector_health:"$1}'
+  #                 split_by: ":"
+  #             merge: pixieHealthCheck
+  #           - event_type: pixieStatus
+  #             commands:
+  #               - run: curl --insecure -s https://${discovery.ip}:50800/statusz | awk '{if($1 == ""){ print "cloud_connector_status:OK" } else { print "cloud_connector_status:"$1 }}'
+  #                 split_by: ":"
+  #             merge: pixieHealthCheck
 ---
 # Source: nri-bundle/charts/newrelic-infrastructure/templates/kubelet/scraper-configmap.yaml
 apiVersion: v1
@@ -1200,75 +1200,77 @@ metadata:
   namespace: newrelic
 ---
 # Source: nri-bundle/charts/newrelic-pixie/templates/job.yaml
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: nri-bundle-newrelic-pixie
-  namespace: newrelic
-  labels:
+#Pixie
+# apiVersion: batch/v1
+# kind: Job
+# metadata:
+#   name: nri-bundle-newrelic-pixie
+#   namespace: newrelic
+#   labels:
     
-    app: newrelic-pixie
-    app.kubernetes.io/name: newrelic-pixie
-    chart: newrelic-pixie-2.0.0
-    release: nri-bundle
-spec:
-  backoffLimit: 4
-  template:
-    metadata:
-      labels:
-        app.kubernetes.io/name: newrelic-pixie
-        release: nri-bundle
-    spec:
-      restartPolicy: Never
-      containers:
-      - name: newrelic-pixie
-        image: "newrelic/newrelic-pixie-integration:2.0.0"
-        imagePullPolicy: "IfNotPresent"
-        env:
-        - name: CLUSTER_NAME
-          value: will-dev-sre-poc-v7
-        - name: NR_LICENSE_KEY
-          valueFrom:
-            secretKeyRef:
-              name: nri-bundle-newrelic-infrastructure-license
-              key: licenseKey
-        - name: PIXIE_API_KEY
-          valueFrom:
-            secretKeyRef:
-              name: nri-bundle-newrelic-pixie-secrets
-              key: pixieApiKey
-        - name: PIXIE_CLUSTER_ID
-          valueFrom:
-            secretKeyRef:
-              key: cluster-id
-              name: pl-cluster-secrets
-        - name: COLLECT_INTERVAL_SEC
-          value: "15"
-        - name: HTTP_SPAN_LIMIT
-          value: "750"
-        - name: DB_SPAN_LIMIT
-          value: "250"
-        resources:
-          limits:
-            memory: 250M
-          requests:
-            cpu: 100m
-            memory: 250M
+#     app: newrelic-pixie
+#     app.kubernetes.io/name: newrelic-pixie
+#     chart: newrelic-pixie-2.0.0
+#     release: nri-bundle
+# spec:
+#   backoffLimit: 4
+#   template:
+#     metadata:
+#       labels:
+#         app.kubernetes.io/name: newrelic-pixie
+#         release: nri-bundle
+#     spec:
+#       restartPolicy: Never
+#       containers:
+#       - name: newrelic-pixie
+#         image: "newrelic/newrelic-pixie-integration:2.0.0"
+#         imagePullPolicy: "IfNotPresent"
+#         env:
+#         - name: CLUSTER_NAME
+#           value: will-dev-sre-poc-v7
+#         - name: NR_LICENSE_KEY
+#           valueFrom:
+#             secretKeyRef:
+#               name: nri-bundle-newrelic-infrastructure-license
+#               key: licenseKey
+#         - name: PIXIE_API_KEY
+#           valueFrom:
+#             secretKeyRef:
+#               name: nri-bundle-newrelic-pixie-secrets
+#               key: pixieApiKey
+#         - name: PIXIE_CLUSTER_ID
+#           valueFrom:
+#             secretKeyRef:
+#               key: cluster-id
+#               name: pl-cluster-secrets
+#         - name: COLLECT_INTERVAL_SEC
+#           value: "15"
+#         - name: HTTP_SPAN_LIMIT
+#           value: "750"
+#         - name: DB_SPAN_LIMIT
+#           value: "250"
+#         resources:
+#           limits:
+#             memory: 250M
+#           requests:
+#             cpu: 100m
+#             memory: 250M
 ---
 # Source: nri-bundle/charts/newrelic-pixie/templates/secret.yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  namespace: newrelic
-  labels:     
-    app: newrelic-pixie
-    app.kubernetes.io/name: newrelic-pixie
-    chart: newrelic-pixie-2.0.0
-    release: nri-bundle
-  name: nri-bundle-newrelic-pixie-secrets
-type: Opaque
-data:
-  pixieApiKey: cHgtYXBpLWYxNjBiYmIwLWRmMjUtNDU0ZS05YWFlLTA3YzYzNDBkMDQwMQ==
+#Pixie
+# apiVersion: v1
+# kind: Secret
+# metadata:
+#   namespace: newrelic
+#   labels:     
+#     app: newrelic-pixie
+#     app.kubernetes.io/name: newrelic-pixie
+#     chart: newrelic-pixie-2.0.0
+#     release: nri-bundle
+#   name: nri-bundle-newrelic-pixie-secrets
+# type: Opaque
+# data:
+#   pixieApiKey: cHgtYXBpLWYxNjBiYmIwLWRmMjUtNDU0ZS05YWFlLTA3YzYzNDBkMDQwMQ==
 ---
 # Source: nri-bundle/charts/nri-kube-events/templates/agent-configmap.yaml
 apiVersion: v1
