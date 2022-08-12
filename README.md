@@ -196,3 +196,12 @@ Seguir passo a passo do teste realizado neste documento oficial da AWS.
 ```
 https://docs.aws.amazon.com/pt_br/eks/latest/userguide/calico.html
   ```
+
+
+### New Relic K8s Agent
+
+Acessar o New Relic e validar se o cluster está adicionado e recebendo métricas.
+
+```
+https://onenr.io/0bRmDrZGrwy
+```
