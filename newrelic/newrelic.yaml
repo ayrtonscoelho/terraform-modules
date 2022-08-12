@@ -1810,320 +1810,320 @@ spec:
     app.kubernetes.io/name: nri-metadata-injection
 ---
 ##############################################
-#Daqui para baixo é referente ao pixie.
+#Pixie.
 ##############################################
 # Source: nri-bundle/charts/pixie-chart/templates/00_olm.yaml
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: olm
----
-# Source: nri-bundle/charts/pixie-chart/templates/00_olm.yaml
-kind: ServiceAccount
-apiVersion: v1
-metadata:
-  name: olm-operator-serviceaccount
-  namespace: olm
----
-# Source: nri-bundle/charts/pixie-chart/templates/00_olm.yaml
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: system:controller:operator-lifecycle-manager
-rules:
-- apiGroups: ["*"]
-  resources: ["*"]
-  verbs: ["*"]
-- nonResourceURLs: ["*"]
-  verbs: ["*"]
----
-# Source: nri-bundle/charts/pixie-chart/templates/00_olm.yaml
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: olm-operator-cluster-binding-olm
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: system:controller:operator-lifecycle-manager
-subjects:
-- kind: ServiceAccount
-  name: olm-operator-serviceaccount
-  namespace: olm
----
-# Source: nri-bundle/charts/pixie-chart/templates/00_olm.yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: olm-operator
-  namespace: olm
-  labels:
-    app: olm-operator
-spec:
-  strategy:
-    type: RollingUpdate
-  replicas: 1
-  selector:
-    matchLabels:
-      app: olm-operator
-  template:
-    metadata:
-      labels:
-        app: olm-operator
-    spec:
-      serviceAccountName: olm-operator-serviceaccount
-      containers:
-        - name: olm-operator
-          command:
-          - /bin/olm
-          args:
-          - --namespace
-          - $(OPERATOR_NAMESPACE)
-          - --writeStatusName
-          - ""
-          image: quay.io/operator-framework/olm@sha256:b706ee6583c4c3cf8059d44234c8a4505804adcc742bcddb3d1e2f6eff3d6519
-          imagePullPolicy: IfNotPresent
-          ports:
-            - containerPort: 8080
-            - containerPort: 8081
-              name: metrics
-              protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /healthz
-              port: 8080
-          readinessProbe:
-            httpGet:
-              path: /healthz
-              port: 8080
-          terminationMessagePolicy: FallbackToLogsOnError
-          env:
+# apiVersion: v1
+# kind: Namespace
+# metadata:
+#   name: olm
+# ---
+# # Source: nri-bundle/charts/pixie-chart/templates/00_olm.yaml
+# kind: ServiceAccount
+# apiVersion: v1
+# metadata:
+#   name: olm-operator-serviceaccount
+#   namespace: olm
+# ---
+# # Source: nri-bundle/charts/pixie-chart/templates/00_olm.yaml
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: ClusterRole
+# metadata:
+#   name: system:controller:operator-lifecycle-manager
+# rules:
+# - apiGroups: ["*"]
+#   resources: ["*"]
+#   verbs: ["*"]
+# - nonResourceURLs: ["*"]
+#   verbs: ["*"]
+# ---
+# # Source: nri-bundle/charts/pixie-chart/templates/00_olm.yaml
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: ClusterRoleBinding
+# metadata:
+#   name: olm-operator-cluster-binding-olm
+# roleRef:
+#   apiGroup: rbac.authorization.k8s.io
+#   kind: ClusterRole
+#   name: system:controller:operator-lifecycle-manager
+# subjects:
+# - kind: ServiceAccount
+#   name: olm-operator-serviceaccount
+#   namespace: olm
+# ---
+# # Source: nri-bundle/charts/pixie-chart/templates/00_olm.yaml
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: olm-operator
+#   namespace: olm
+#   labels:
+#     app: olm-operator
+# spec:
+#   strategy:
+#     type: RollingUpdate
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: olm-operator
+#   template:
+#     metadata:
+#       labels:
+#         app: olm-operator
+#     spec:
+#       serviceAccountName: olm-operator-serviceaccount
+#       containers:
+#         - name: olm-operator
+#           command:
+#           - /bin/olm
+#           args:
+#           - --namespace
+#           - $(OPERATOR_NAMESPACE)
+#           - --writeStatusName
+#           - ""
+#           image: quay.io/operator-framework/olm@sha256:b706ee6583c4c3cf8059d44234c8a4505804adcc742bcddb3d1e2f6eff3d6519
+#           imagePullPolicy: IfNotPresent
+#           ports:
+#             - containerPort: 8080
+#             - containerPort: 8081
+#               name: metrics
+#               protocol: TCP
+#           livenessProbe:
+#             httpGet:
+#               path: /healthz
+#               port: 8080
+#           readinessProbe:
+#             httpGet:
+#               path: /healthz
+#               port: 8080
+#           terminationMessagePolicy: FallbackToLogsOnError
+#           env:
 
-          - name: OPERATOR_NAMESPACE
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.namespace
-          - name: OPERATOR_NAME
-            value: olm-operator
-          resources:
-            requests:
-              cpu: 10m
-              memory: 160Mi
-
-
-      nodeSelector:
-        kubernetes.io/os: linux
----
-# Source: nri-bundle/charts/pixie-chart/templates/00_olm.yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: catalog-operator
-  namespace: olm
-  labels:
-    app: catalog-operator
-spec:
-  strategy:
-    type: RollingUpdate
-  replicas: 1
-  selector:
-    matchLabels:
-      app: catalog-operator
-  template:
-    metadata:
-      labels:
-        app: catalog-operator
-    spec:
-      serviceAccountName: olm-operator-serviceaccount
-      containers:
-        - name: catalog-operator
-          command:
-          - /bin/catalog
-          args:
-          - '-namespace'
-          - olm
-          - -configmapServerImage=quay.io/operator-framework/configmap-operator-registry:latest
-          - -util-image
-          -  quay.io/operator-framework/olm@sha256:b706ee6583c4c3cf8059d44234c8a4505804adcc742bcddb3d1e2f6eff3d6519
-          image: quay.io/operator-framework/olm@sha256:b706ee6583c4c3cf8059d44234c8a4505804adcc742bcddb3d1e2f6eff3d6519
-          imagePullPolicy: IfNotPresent
-          ports:
-            - containerPort: 8080
-            - containerPort: 8081
-              name: metrics
-              protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /healthz
-              port: 8080
-          readinessProbe:
-            httpGet:
-              path: /healthz
-              port: 8080
-          terminationMessagePolicy: FallbackToLogsOnError
-          env:
-
-          resources:
-            requests:
-              cpu: 10m
-              memory: 80Mi
+#           - name: OPERATOR_NAMESPACE
+#             valueFrom:
+#               fieldRef:
+#                 fieldPath: metadata.namespace
+#           - name: OPERATOR_NAME
+#             value: olm-operator
+#           resources:
+#             requests:
+#               cpu: 10m
+#               memory: 160Mi
 
 
-      nodeSelector:
-        kubernetes.io/os: linux
----
-# Source: nri-bundle/charts/pixie-chart/templates/00_olm.yaml
-kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: aggregate-olm-edit
-  labels:
-    rbac.authorization.k8s.io/aggregate-to-admin: "true"
-    rbac.authorization.k8s.io/aggregate-to-edit: "true"
-rules:
-- apiGroups: ["operators.coreos.com"]
-  resources: ["subscriptions"]
-  verbs: ["create", "update", "patch", "delete"]
-- apiGroups: ["operators.coreos.com"]
-  resources: ["clusterserviceversions", "catalogsources", "installplans", "subscriptions"]
-  verbs: ["delete"]
----
-# Source: nri-bundle/charts/pixie-chart/templates/00_olm.yaml
-kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: aggregate-olm-view
-  labels:
-    rbac.authorization.k8s.io/aggregate-to-admin: "true"
-    rbac.authorization.k8s.io/aggregate-to-edit: "true"
-    rbac.authorization.k8s.io/aggregate-to-view: "true"
-rules:
-- apiGroups: ["operators.coreos.com"]
-  resources: ["clusterserviceversions", "catalogsources", "installplans", "subscriptions", "operatorgroups"]
-  verbs: ["get", "list", "watch"]
-- apiGroups: ["packages.operators.coreos.com"]
-  resources: ["packagemanifests", "packagemanifests/icon"]
-  verbs: ["get", "list", "watch"]
----
-# Source: nri-bundle/charts/pixie-chart/templates/00_olm.yaml
-apiVersion: operators.coreos.com/v1
-kind: OperatorGroup
-metadata:
-  name: olm-operators
-  namespace: olm
-spec:
-  targetNamespaces:
-    - olm
----
-# Source: nri-bundle/charts/pixie-chart/templates/01_px_olm.yaml
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: px-operator
----
-# Source: nri-bundle/charts/pixie-chart/templates/01_px_olm.yaml
-apiVersion: operators.coreos.com/v1
-kind: OperatorGroup
-metadata:
-  name: global-operators
-  namespace: px-operator
----
-# Source: nri-bundle/charts/pixie-chart/templates/02_catalog.yaml
-apiVersion: operators.coreos.com/v1alpha1
-kind: CatalogSource
-metadata:
-  name: pixie-operator-index
-  namespace: px-operator
-spec:
-  sourceType: grpc
-  image: gcr.io/pixie-oss/pixie-prod/operator/bundle_index:0.0.1
-  displayName: Pixie Vizier Operator
-  publisher: px.dev
-  updateStrategy:
-    registryPoll:
-      interval: 10m
----
-# Source: nri-bundle/charts/pixie-chart/templates/03_subscription.yaml
-apiVersion: operators.coreos.com/v1alpha1
-kind: Subscription
-metadata:
-  name: pixie-operator-subscription
-  namespace: px-operator
-spec:
-  channel: stable
-  name: pixie-operator
-  source: pixie-operator-index
-  sourceNamespace: px-operator
-  installPlanApproval: Automatic
----
-# Source: nri-bundle/charts/pixie-chart/templates/04_vizier.yaml
-apiVersion: px.dev/v1alpha1
-kind: Vizier
-metadata:
-  name: pixie
-  namespace: newrelic
-spec:
-  deployKey: px-dep-99ad86c1-1a04-42b1-9806-eff14b139d8b
-  cloudAddr: withpixie.ai:443
-  disableAutoUpdate: false
-  useEtcdOperator: false
-  clusterName: will-dev-sre-poc-v7
-  dataAccess: Full
----
-# Source: nri-bundle/charts/pixie-chart/templates/deleter_role.yaml
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: pl-deleter-service-account
----
-# Source: nri-bundle/charts/pixie-chart/templates/deleter_role.yaml
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: pl-deleter-binding
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: pl-deleter-role
-subjects:
-- kind: ServiceAccount
-  name: pl-deleter-service-account
-  namespace: "newrelic"
----
-# Source: nri-bundle/charts/pixie-chart/templates/deleter_role.yaml
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: pl-deleter-role
-rules:
-# Allow actions on Kubernetes objects
-- apiGroups:
-  - ""
-  - apps
-  - rbac.authorization.k8s.io
-  - extensions
-  - etcd.database.coreos.com
-  - batch
-  - nats.io
-  - policy
-  resources:
-  - clusterroles
-  - clusterrolebindings
-  - configmaps
-  - secrets
-  - pods
-  - services
-  - deployments
-  - daemonsets
-  - persistentvolumes
-  - persistentvolumeclaims
-  - roles
-  - rolebindings
-  - serviceaccounts
-  - etcdclusters
-  - statefulsets
-  - cronjobs
-  - jobs
-  - natsclusters
-  - podsecuritypolicies
-  verbs: ["*"]
+#       nodeSelector:
+#         kubernetes.io/os: linux
+# ---
+# # Source: nri-bundle/charts/pixie-chart/templates/00_olm.yaml
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: catalog-operator
+#   namespace: olm
+#   labels:
+#     app: catalog-operator
+# spec:
+#   strategy:
+#     type: RollingUpdate
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: catalog-operator
+#   template:
+#     metadata:
+#       labels:
+#         app: catalog-operator
+#     spec:
+#       serviceAccountName: olm-operator-serviceaccount
+#       containers:
+#         - name: catalog-operator
+#           command:
+#           - /bin/catalog
+#           args:
+#           - '-namespace'
+#           - olm
+#           - -configmapServerImage=quay.io/operator-framework/configmap-operator-registry:latest
+#           - -util-image
+#           -  quay.io/operator-framework/olm@sha256:b706ee6583c4c3cf8059d44234c8a4505804adcc742bcddb3d1e2f6eff3d6519
+#           image: quay.io/operator-framework/olm@sha256:b706ee6583c4c3cf8059d44234c8a4505804adcc742bcddb3d1e2f6eff3d6519
+#           imagePullPolicy: IfNotPresent
+#           ports:
+#             - containerPort: 8080
+#             - containerPort: 8081
+#               name: metrics
+#               protocol: TCP
+#           livenessProbe:
+#             httpGet:
+#               path: /healthz
+#               port: 8080
+#           readinessProbe:
+#             httpGet:
+#               path: /healthz
+#               port: 8080
+#           terminationMessagePolicy: FallbackToLogsOnError
+#           env:
+
+#           resources:
+#             requests:
+#               cpu: 10m
+#               memory: 80Mi
+
+
+#       nodeSelector:
+#         kubernetes.io/os: linux
+# ---
+# # Source: nri-bundle/charts/pixie-chart/templates/00_olm.yaml
+# kind: ClusterRole
+# apiVersion: rbac.authorization.k8s.io/v1
+# metadata:
+#   name: aggregate-olm-edit
+#   labels:
+#     rbac.authorization.k8s.io/aggregate-to-admin: "true"
+#     rbac.authorization.k8s.io/aggregate-to-edit: "true"
+# rules:
+# - apiGroups: ["operators.coreos.com"]
+#   resources: ["subscriptions"]
+#   verbs: ["create", "update", "patch", "delete"]
+# - apiGroups: ["operators.coreos.com"]
+#   resources: ["clusterserviceversions", "catalogsources", "installplans", "subscriptions"]
+#   verbs: ["delete"]
+# ---
+# # Source: nri-bundle/charts/pixie-chart/templates/00_olm.yaml
+# kind: ClusterRole
+# apiVersion: rbac.authorization.k8s.io/v1
+# metadata:
+#   name: aggregate-olm-view
+#   labels:
+#     rbac.authorization.k8s.io/aggregate-to-admin: "true"
+#     rbac.authorization.k8s.io/aggregate-to-edit: "true"
+#     rbac.authorization.k8s.io/aggregate-to-view: "true"
+# rules:
+# - apiGroups: ["operators.coreos.com"]
+#   resources: ["clusterserviceversions", "catalogsources", "installplans", "subscriptions", "operatorgroups"]
+#   verbs: ["get", "list", "watch"]
+# - apiGroups: ["packages.operators.coreos.com"]
+#   resources: ["packagemanifests", "packagemanifests/icon"]
+#   verbs: ["get", "list", "watch"]
+# ---
+# # Source: nri-bundle/charts/pixie-chart/templates/00_olm.yaml
+# apiVersion: operators.coreos.com/v1
+# kind: OperatorGroup
+# metadata:
+#   name: olm-operators
+#   namespace: olm
+# spec:
+#   targetNamespaces:
+#     - olm
+# ---
+# # Source: nri-bundle/charts/pixie-chart/templates/01_px_olm.yaml
+# apiVersion: v1
+# kind: Namespace
+# metadata:
+#   name: px-operator
+# ---
+# # Source: nri-bundle/charts/pixie-chart/templates/01_px_olm.yaml
+# apiVersion: operators.coreos.com/v1
+# kind: OperatorGroup
+# metadata:
+#   name: global-operators
+#   namespace: px-operator
+# ---
+# # Source: nri-bundle/charts/pixie-chart/templates/02_catalog.yaml
+# apiVersion: operators.coreos.com/v1alpha1
+# kind: CatalogSource
+# metadata:
+#   name: pixie-operator-index
+#   namespace: px-operator
+# spec:
+#   sourceType: grpc
+#   image: gcr.io/pixie-oss/pixie-prod/operator/bundle_index:0.0.1
+#   displayName: Pixie Vizier Operator
+#   publisher: px.dev
+#   updateStrategy:
+#     registryPoll:
+#       interval: 10m
+# ---
+# # Source: nri-bundle/charts/pixie-chart/templates/03_subscription.yaml
+# apiVersion: operators.coreos.com/v1alpha1
+# kind: Subscription
+# metadata:
+#   name: pixie-operator-subscription
+#   namespace: px-operator
+# spec:
+#   channel: stable
+#   name: pixie-operator
+#   source: pixie-operator-index
+#   sourceNamespace: px-operator
+#   installPlanApproval: Automatic
+# ---
+# # Source: nri-bundle/charts/pixie-chart/templates/04_vizier.yaml
+# apiVersion: px.dev/v1alpha1
+# kind: Vizier
+# metadata:
+#   name: pixie
+#   namespace: newrelic
+# spec:
+#   deployKey: px-dep-99ad86c1-1a04-42b1-9806-eff14b139d8b
+#   cloudAddr: withpixie.ai:443
+#   disableAutoUpdate: false
+#   useEtcdOperator: false
+#   clusterName: will-dev-sre-poc-v7
+#   dataAccess: Full
+# ---
+# # Source: nri-bundle/charts/pixie-chart/templates/deleter_role.yaml
+# apiVersion: v1
+# kind: ServiceAccount
+# metadata:
+#   name: pl-deleter-service-account
+# ---
+# # Source: nri-bundle/charts/pixie-chart/templates/deleter_role.yaml
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: ClusterRoleBinding
+# metadata:
+#   name: pl-deleter-binding
+# roleRef:
+#   apiGroup: rbac.authorization.k8s.io
+#   kind: ClusterRole
+#   name: pl-deleter-role
+# subjects:
+# - kind: ServiceAccount
+#   name: pl-deleter-service-account
+#   namespace: "newrelic"
+# ---
+# # Source: nri-bundle/charts/pixie-chart/templates/deleter_role.yaml
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: ClusterRole
+# metadata:
+#   name: pl-deleter-role
+# rules:
+# # Allow actions on Kubernetes objects
+# - apiGroups:
+#   - ""
+#   - apps
+#   - rbac.authorization.k8s.io
+#   - extensions
+#   - etcd.database.coreos.com
+#   - batch
+#   - nats.io
+#   - policy
+#   resources:
+#   - clusterroles
+#   - clusterrolebindings
+#   - configmaps
+#   - secrets
+#   - pods
+#   - services
+#   - deployments
+#   - daemonsets
+#   - persistentvolumes
+#   - persistentvolumeclaims
+#   - roles
+#   - rolebindings
+#   - serviceaccounts
+#   - etcdclusters
+#   - statefulsets
+#   - cronjobs
+#   - jobs
+#   - natsclusters
+#   - podsecuritypolicies
+#   verbs: ["*"]
