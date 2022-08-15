@@ -3,12 +3,12 @@ name: prometheus-community
 description: A Helm chart for Kubernetes
 
 type: application
-version: 36.6.2
-appVersion: "36.6.2"
+version: 36.6.0
+appVersion: "36.6.0"
 
 dependencies:
   - name: kube-prometheus-stack
-    version: 36.6.2
+    version: 36.6.0
     repository: https://prometheus-community.github.io/helm-charts
  
   - name: grafana
