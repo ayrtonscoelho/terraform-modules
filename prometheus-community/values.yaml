@@ -709,7 +709,6 @@ grafana:
     # annotations: {}
     finalizers:
       - kubernetes.io/pvc-protection
-    claimName: kube-prometheus-stack-grafana
   rbac:
     create: true
     ## Use an existing ClusterRole/Role (depending on rbac.namespaced false/true)
@@ -1158,11 +1157,10 @@ grafana:
 
   ## Additional grafana server volume mounts
   # Defines additional volume mounts.
-  extraVolumeMounts: []
-    # - name: extra-volume-0
-    #   mountPath: /mnt/volume0
-    #   readOnly: true
-    #   existingClaim: volume-claim
+  extraVolumeMounts:
+    - name: volume
+      mountPath: /mnt/volume0
+      existingClaim: kube-prometheus-stack-grafana
     # - name: extra-volume-1
     #   mountPath: /mnt/volume1
     #   readOnly: true
