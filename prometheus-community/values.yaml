@@ -709,6 +709,7 @@ grafana:
     # annotations: {}
     finalizers:
       - kubernetes.io/pvc-protection
+    claimName: kube-prometheus-stack-grafana
   rbac:
     create: true
     ## Use an existing ClusterRole/Role (depending on rbac.namespaced false/true)
@@ -965,7 +966,7 @@ grafana:
   #           operator: In
   #           values:
   #           - sa-east-1a 
-  
+
   ## Additional init containers (evaluated as template)
   ## ref: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
   ##
