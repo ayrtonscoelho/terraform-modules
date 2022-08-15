@@ -1157,10 +1157,10 @@ grafana:
 
   ## Additional grafana server volume mounts
   # Defines additional volume mounts.
-  extraVolumeMounts:
-    - name: volume
-      mountPath: /mnt/volume0
-      existingClaim: kube-prometheus-stack-grafana
+  # extraVolumeMounts:
+  #   - name: volume
+  #     mountPath: /mnt/volume0
+  #     existingClaim: kube-prometheus-stack-grafana
     # - name: extra-volume-1
     #   mountPath: /mnt/volume1
     #   readOnly: true
