@@ -1303,7 +1303,7 @@ data:
                   "hide": false,
                   "interval": "",
                   "intervalFactor": 1,
-                  "legendFormat": "{{.pod}} {{ type }}",
+                  "legendFormat": "{{.pod}} {{ .type }}",
                   "refId": "A"
                 }
               ],
