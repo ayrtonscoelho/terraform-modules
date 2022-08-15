@@ -576,7 +576,7 @@ data:
               "hide": false,
               "interval": "",
               "intervalFactor": 1,
-              "legendFormat": "{{ type }}",
+              "legendFormat": "{{type}}",
               "refId": "A"
             }
           ],
