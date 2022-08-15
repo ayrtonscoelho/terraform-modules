@@ -709,6 +709,12 @@ grafana:
     # annotations: {}
     finalizers:
       - kubernetes.io/pvc-protection
+    # selectorLabels: {}
+    ## Sub-directory of the PV to mount. Can be templated.
+    # subPath: ""
+    ## Name of an existing PVC. Can be templated.
+    existingClaim: kube-prometheus-stack-grafana
+
   rbac:
     create: true
     ## Use an existing ClusterRole/Role (depending on rbac.namespaced false/true)
