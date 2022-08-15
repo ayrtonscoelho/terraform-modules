@@ -1,7 +1,7 @@
 imagePullSecrets: {}
 
 installation:
-  kubernetesProvider: EKS
+  #kubernetesProvider: EKS
   cni:
     type: AmazonVPC
 
