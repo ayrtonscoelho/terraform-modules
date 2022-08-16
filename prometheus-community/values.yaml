@@ -701,7 +701,7 @@ grafana:
   enabled: true
   persistence:
     type: pvc
-    #enabled: true
+    enabled: true
     storageClassName: gp3
     accessModes:
       - ReadWriteOnce
