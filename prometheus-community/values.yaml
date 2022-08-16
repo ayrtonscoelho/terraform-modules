@@ -701,7 +701,7 @@ grafana:
   enabled: true
   persistence:
     type: pvc
-    enabled: true
+    #enabled: true
     storageClassName: gp3
     accessModes:
       - ReadWriteOnce
@@ -714,15 +714,6 @@ grafana:
     # subPath: ""
     ## Name of an existing PVC. Can be templated.
     #existingClaim: kube-prometheus-stack-grafana
-    storage:
-      volumeClaimTemplate:
-        spec:
-          storageClassName: gp3
-          accessModes: ["ReadWriteOnce"]
-          resources:
-            requests:
-              storage: 200Gi
-          selector: {}
 
   rbac:
     create: true
