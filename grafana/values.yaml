@@ -676,7 +676,7 @@ sidecar:
   logLevel: INFO
   dashboards:
     env: {}
-    enabled: false
+    enabled: true
     SCProvider: true
     # label that the configmaps with dashboards are marked with
     label: grafana_dashboard
@@ -691,7 +691,7 @@ sidecar:
     # It's also possible to specify ALL to search in all namespaces.
     searchNamespace: null
     # Method to use to detect ConfigMap changes. With WATCH the sidecar will do a WATCH requests, with SLEEP it will list all ConfigMaps, then sleep for 60 seconds.
-    watchMethod: WATCH
+    watchMethod: SLEEP
     # search in configmap, secret or both
     resource: both
     # If specified, the sidecar will look for annotation with this name to create folder and put graph here.
@@ -730,7 +730,7 @@ sidecar:
     # Sets the size limit of the dashboard sidecar emptyDir volume
     sizeLimit: {}
   datasources:
-    enabled: false
+    enabled: true
     # label that the configmaps with datasources are marked with
     label: grafana_datasource
     # value of label that the configmaps with datasources are set to
@@ -740,7 +740,7 @@ sidecar:
     # It's also possible to specify ALL to search in all namespaces
     searchNamespace: null
     # Method to use to detect ConfigMap changes. With WATCH the sidecar will do a WATCH requests, with SLEEP it will list all ConfigMaps, then sleep for 60 seconds.
-    watchMethod: WATCH
+    watchMethod: SLEEP
     # search in configmap, secret or both
     resource: both
     # Endpoint to send request to reload datasources
