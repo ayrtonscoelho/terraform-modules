@@ -717,6 +717,11 @@ grafana:
     ## Name of an existing PVC. Can be templated.
     #existingClaim: kube-prometheus-stack-grafana
 
+  forceDeployDatasources: true
+  forceDeployDashboards: true
+  defaultDashboardsEnabled: true
+  defaultDashboardsTimezone: utc-3
+
   rbac:
     create: true
     ## Use an existing ClusterRole/Role (depending on rbac.namespaced false/true)
