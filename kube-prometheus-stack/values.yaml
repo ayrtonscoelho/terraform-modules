@@ -709,9 +709,9 @@ grafana:
     # annotations: {}
     finalizers:
       - kubernetes.io/pvc-protection
-    selectorLabels:
+    #selectorLabels:
       # matchLabels: 
-      type: grafana
+      #type: grafana
     ## Sub-directory of the PV to mount. Can be templated.
     # subPath: ""
     ## Name of an existing PVC. Can be templated.
