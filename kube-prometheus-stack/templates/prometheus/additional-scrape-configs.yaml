@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  prometheus-additional.yaml: LSBqb2JfbmFtZTogJ2ZsdWVudGQnCiAgc3RhdGljX2NvbmZpZ3M6CiAgICAtIHRhcmdldHM6IFsnZmx1ZW50ZC1hZ2dyZWdhdG9yLXByb21ldGhldXMtc2VydmljZS5mbHVlbnRkLnN2Yy5jbHVzdGVyLmxvY2FsOjI0MjMxJ10KCi0gam9iX25hbWU6ICdjb3JlLXBpeC1hcGktZ2F0ZXdheScKICBzY3JhcGVfaW50ZXJ2YWw6IDNzCiAgbWV0cmljc19wYXRoOiAnL21ldHJpY3MnCiAgc3RhdGljX2NvbmZpZ3M6CiAgICAtIHRhcmdldHM6IFsnY29yZS1waXgtYXBpLWdhdGV3YXkuY29yZS1waXgtYXBpLWdhdGV3YXkuc3ZjLmNsdXN0ZXIubG9jYWw6ODAwMCdd
+kind: Secret
+metadata:
+  annotations:
+    "helm.sh/hook": pre-install
+  creationTimestamp: null
+  name: additional-scrape-configs
+  namespace: monitoring
