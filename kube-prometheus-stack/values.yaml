@@ -3332,9 +3332,9 @@ prometheus:
             requests:
               storage: 50Gi
           storageClassName: gp3
-          selector:
-            matchLabels: 
-              type: kube-prometheus-stack
+          # selector:
+          #   matchLabels: 
+          #     type: kube-prometheus-stack
     ## Using tmpfs volume
     ##
     #  emptyDir:
