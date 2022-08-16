@@ -105,6 +105,8 @@ additionalPrometheusRulesMap: {}
 global:
   rbac:
     create: true
+  grafana:
+    enable: false
 
     ## Create ClusterRoles that extend the existing view, edit and admin ClusterRoles to interact with prometheus-operator CRDs
     ## Ref: https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles
