@@ -102,6 +102,9 @@ securityContext:
 containerSecurityContext:
   {}
 
+# Enable creating the grafana configmap
+createConfigmap: true
+
 # Extra configmaps to mount in grafana pods
 # Values are templated.
 extraConfigmapMounts: []
@@ -151,13 +154,15 @@ podPortName: grafana
 ##
 service:
   enabled: true
-  type: NodePort
-  # port: 80
+  type: ClusterIP
+  port: 80
   targetPort: 3000
     # targetPort: 4181 To be used with a proxy extraContainer
   annotations: {}
   labels: {}
   portName: service
+  # Adds the appProtocol field to the service. This allows to work with istio protocol selection. Ex: "http" or "tcp"
+  appProtocol: ""
 
 serviceMonitor:
   ## If true, a ServiceMonitor CRD is created for a prometheus operator
@@ -245,6 +250,7 @@ tolerations: []
 ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
 ##
 affinity: {}
+
 ## Additional init containers (evaluated as template)
 ## ref: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
 ##
@@ -281,17 +287,15 @@ extraContainerVolumes: []
 ##
 persistence:
   type: pvc
-  enabled: true
-  storageClassName: 
+  enabled: false
+  # storageClassName: default
   accessModes:
     - ReadWriteOnce
-  size: 20Gi
+  size: 10Gi
   # annotations: {}
   finalizers:
     - kubernetes.io/pvc-protection
-  # selectorLabels:
-  #   # matchLabels: 
-  #   type: grafana
+  # selectorLabels: {}
   ## Sub-directory of the PV to mount. Can be templated.
   # subPath: ""
   ## Name of an existing PVC. Can be templated.
@@ -560,6 +564,9 @@ dashboards: {}
   #     url: https://example.com/repository/test-b64.json
   #     token: ''
   #     b64content: true
+  #   local-dashboard-gitlab:
+  #     url: https://example.com/repository/test-gitlab.json
+  #     gitlabToken: ''
 
 ## Reference to external ConfigMap per provider. Use provider name as key and ConfigMap name as value.
 ## A provider dashboards must be defined either by external ConfigMaps or in values.yaml, not in both.
@@ -589,23 +596,9 @@ grafana.ini:
   grafana_net:
     url: https://grafana.net
 ## grafana Authentication can be enabled with the following values on grafana.ini
-  # server:
-    # The full public facing url you use in browser, used for redirects and emails
-    # root_url: '%(protocol)s://%(domain)s:%(http_port)s/'
-  # server:
-  #   root_url: 'https://grafana-d9c0e5-stg.owill.com.br'
-    # protocol: https
-  auth.google:
-  #   serve_from_sub_path: true
-  #   redirect_uri: 'https:/grafana-d9c0e5-stg.owill.com.br/login/google'
-    enabled: false
-  #   client_id: 73647153213-ie99c171f6opn9423jdrv39ndljqmrjc.apps.googleusercontent.com
-  #   client_secret: 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
-  #   scopes: https://www.googleapis.com/auth/userinfo.email
-  #   auth_url: https://accounts.google.com/o/oauth2/auth
-  #   token_url: https://oauth2.googleapis.com/token
-  #   allowed_domains: owill.com.br
-  #   allow_sign_up: true
+ # server:
+      # The full public facing url you use in browser, used for redirects and emails
+ #    root_url:
  # https://grafana.com/docs/grafana/latest/auth/github/#enable-github-in-grafana
  # auth.github:
  #    enabled: false
@@ -679,8 +672,11 @@ sidecar:
   enableUniqueFilenames: false
   readinessProbe: {}
   livenessProbe: {}
+  # Log level. Can be one of: DEBUG, INFO, WARN, ERROR, CRITICAL.
+  logLevel: INFO
   dashboards:
-    enabled: true
+    env: {}
+    enabled: false
     SCProvider: true
     # label that the configmaps with dashboards are marked with
     label: grafana_dashboard
@@ -695,7 +691,7 @@ sidecar:
     # It's also possible to specify ALL to search in all namespaces.
     searchNamespace: null
     # Method to use to detect ConfigMap changes. With WATCH the sidecar will do a WATCH requests, with SLEEP it will list all ConfigMaps, then sleep for 60 seconds.
-    watchMethod: SLEEP
+    watchMethod: WATCH
     # search in configmap, secret or both
     resource: both
     # If specified, the sidecar will look for annotation with this name to create folder and put graph here.
@@ -734,7 +730,7 @@ sidecar:
     # Sets the size limit of the dashboard sidecar emptyDir volume
     sizeLimit: {}
   datasources:
-    enabled: true
+    enabled: false
     # label that the configmaps with datasources are marked with
     label: grafana_datasource
     # value of label that the configmaps with datasources are set to
@@ -744,7 +740,7 @@ sidecar:
     # It's also possible to specify ALL to search in all namespaces
     searchNamespace: null
     # Method to use to detect ConfigMap changes. With WATCH the sidecar will do a WATCH requests, with SLEEP it will list all ConfigMaps, then sleep for 60 seconds.
-    watchMethod: SLEEP
+    watchMethod: WATCH
     # search in configmap, secret or both
     resource: both
     # Endpoint to send request to reload datasources
@@ -834,6 +830,8 @@ imageRenderer:
     # image-renderer service port used by both service and deployment
     port: 8081
     targetPort: 8081
+    # Adds the appProtocol field to the image-renderer service. This allows to work with istio protocol selection. Ex: "http" or "tcp"
+    appProtocol: ""
   # If https is enabled in Grafana, this needs to be set as 'https' to correctly configure the callback used in Grafana
   grafanaProtocol: http
   # In case a sub_path is used this needs to be added to the image renderer callback
@@ -867,7 +865,8 @@ imageRenderer:
   ## Affinity for pod assignment (evaluated as template)
   ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
   ##
-  affinity: {}  
+  affinity: {}
+
 networkPolicy:
   ## @param networkPolicy.enabled Enable creation of NetworkPolicy resources. Only Ingress traffic is filtered for now.
   ##
