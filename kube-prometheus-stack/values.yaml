@@ -720,7 +720,7 @@ grafana:
   forceDeployDatasources: true
   forceDeployDashboards: true
   defaultDashboardsEnabled: true
-  defaultDashboardsTimezone: utc-3
+  defaultDashboardsTimezone: utc
 
   rbac:
     create: true
