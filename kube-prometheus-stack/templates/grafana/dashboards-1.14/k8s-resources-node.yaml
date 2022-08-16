@@ -8,16 +8,16 @@ https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-promet
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: {{ .template "kube-prometheus-stack-grafana.namespace" . }}
-  name: {{ .printf "%s-%s" (include "kube-prometheus-stack.fullname" $) "k8s-resources-node" | trunc 63 | trimSuffix "-" }}
+  namespace: {{ template "kube-prometheus-stack-grafana.namespace" . }}
+  name: {{ printf "%s-%s" (include "kube-prometheus-stack.fullname" $) "k8s-resources-node" | trunc 63 | trimSuffix "-" }}
   annotations:
-{{ .toYaml .Values.grafana.sidecar.dashboards.annotations | indent 4 }}
+{{ toYaml .Values.grafana.sidecar.dashboards.annotations | indent 4 }}
   labels:
     {{- if $.Values.grafana.sidecar.dashboards.label }}
-    {{ .$.Values.grafana.sidecar.dashboards.label }}: {{ .ternary $.Values.grafana.sidecar.dashboards.labelValue "1" (not (empty $.Values.grafana.sidecar.dashboards.labelValue)) | quote }}
+    {{ $.Values.grafana.sidecar.dashboards.label }}: {{ ternary $.Values.grafana.sidecar.dashboards.labelValue "1" (not (empty $.Values.grafana.sidecar.dashboards.labelValue)) | quote }}
     {{- end }}
-    app: {{ .template "kube-prometheus-stack.name" $ }}-grafana
-{{ .include "kube-prometheus-stack.labels" $ | indent 4 }}
+    app: {{ template "kube-prometheus-stack.name" $ }}-grafana
+{{ include "kube-prometheus-stack.labels" $ | indent 4 }}
 data:
   k8s-resources-node.json: |-
     {
@@ -940,7 +940,7 @@ data:
                         "value": ""
                     },
                     "datasource": "$datasource",
-                    "hide": {{ .if .Values.grafana.sidecar.dashboards.multicluster.global.enabled }}0{{ .else }}2{{ .end }},
+                    "hide": {{ if .Values.grafana.sidecar.dashboards.multicluster.global.enabled }}0{{ else }}2{{ end }},
                     "includeAll": false,
                     "label": null,
                     "multi": false,
@@ -1018,7 +1018,7 @@ data:
                 "30d"
             ]
         },
-        "timezone": "{{ ..Values.grafana.defaultDashboardsTimezone }}",
+        "timezone": "{{ .Values.grafana.defaultDashboardsTimezone }}",
         "title": "Kubernetes / Compute Resources / Node (Pods)",
         "uid": "200ac8fdbfbb74b39aff88118e4d1c2c",
         "version": 0

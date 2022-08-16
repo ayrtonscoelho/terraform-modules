@@ -8,16 +8,16 @@ https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-promet
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: {{ .template "kube-prometheus-stack-grafana.namespace" . }}
-  name: {{ .printf "%s-%s" (include "kube-prometheus-stack.fullname" $) "alertmanager-overview" | trunc 63 | trimSuffix "-" }}
+  namespace: {{ template "kube-prometheus-stack-grafana.namespace" . }}
+  name: {{ printf "%s-%s" (include "kube-prometheus-stack.fullname" $) "alertmanager-overview" | trunc 63 | trimSuffix "-" }}
   annotations:
-{{ .toYaml .Values.grafana.sidecar.dashboards.annotations | indent 4 }}
+{{ toYaml .Values.grafana.sidecar.dashboards.annotations | indent 4 }}
   labels:
     {{- if $.Values.grafana.sidecar.dashboards.label }}
-    {{ .$.Values.grafana.sidecar.dashboards.label }}: {{ .ternary $.Values.grafana.sidecar.dashboards.labelValue "1" (not (empty $.Values.grafana.sidecar.dashboards.labelValue)) | quote }}
+    {{ $.Values.grafana.sidecar.dashboards.label }}: {{ ternary $.Values.grafana.sidecar.dashboards.labelValue "1" (not (empty $.Values.grafana.sidecar.dashboards.labelValue)) | quote }}
     {{- end }}
-    app: {{ .template "kube-prometheus-stack.name" $ }}-grafana
-{{ .include "kube-prometheus-stack.labels" $ | indent 4 }}
+    app: {{ template "kube-prometheus-stack.name" $ }}-grafana
+{{ include "kube-prometheus-stack.labels" $ | indent 4 }}
 data:
   alertmanager-overview.json: |-
     {
@@ -54,6 +54,7 @@ data:
                         "dashLength": 10,
                         "dashes": false,
                         "datasource": "$datasource",
+                        "description": "current set of alerts stored in the Alertmanager",
                         "fill": 1,
                         "fillGradient": 0,
                         "gridPos": {
@@ -147,6 +148,7 @@ data:
                         "dashLength": 10,
                         "dashes": false,
                         "datasource": "$datasource",
+                        "description": "rate of successful and invalid alerts received by the Alertmanager",
                         "fill": 1,
                         "fillGradient": 0,
                         "gridPos": {
@@ -260,6 +262,7 @@ data:
                         "dashLength": 10,
                         "dashes": false,
                         "datasource": "$datasource",
+                        "description": "rate of successful and invalid notifications sent by the Alertmanager",
                         "fill": 1,
                         "fillGradient": 0,
                         "gridPos": {
@@ -359,6 +362,7 @@ data:
                         "dashLength": 10,
                         "dashes": false,
                         "datasource": "$datasource",
+                        "description": "latency of notifications sent by the Alertmanager",
                         "fill": 1,
                         "fillGradient": 0,
                         "gridPos": {
@@ -602,7 +606,7 @@ data:
                 "30d"
             ]
         },
-        "timezone": "{{ ..Values.grafana.defaultDashboardsTimezone }}",
+        "timezone": "{{ .Values.grafana.defaultDashboardsTimezone }}",
         "title": "Alertmanager / Overview",
         "uid": "alertmanager-overview",
         "version": 0
