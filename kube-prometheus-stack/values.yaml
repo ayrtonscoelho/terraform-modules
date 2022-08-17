@@ -719,7 +719,7 @@ grafana:
 
   forceDeployDatasources: true
   forceDeployDashboards: true
-  defaultDashboardsEnabled: true
+  defaultDashboardsEnabled: false
   defaultDashboardsTimezone: utc
 
   rbac:
