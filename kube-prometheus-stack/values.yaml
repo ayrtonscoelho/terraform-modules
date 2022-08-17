@@ -876,7 +876,7 @@ grafana:
   ##
   service:
     enabled: true
-    type: NodePort
+    type: ClusterIP
     # port: 80
     targetPort: 3000
       # targetPort: 4181 To be used with a proxy extraContainer
@@ -911,13 +911,13 @@ grafana:
     #     - "my.host.com"
 
   ingress:
-    enabled: false
+    enabled: true
     # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
     # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
-    # ingressClassName: nginx
+    ingressClassName: kong
     # Values can be templated
-    annotations: {}
-      # kubernetes.io/ingress.class: nginx
+    annotations:
+      kubernetes.io/ingress.class: kong
       # kubernetes.io/tls-acme: "true"
     labels: {}
     path: /
@@ -926,7 +926,8 @@ grafana:
     pathType: Prefix
 
     hosts:
-      - chart-example.local
+      - grafana-sre-test.owill.com.br
+    https: true
     ## Extra paths to prepend to every host configuration. This is useful when working with annotation based services.
     extraPaths: []
     # - path: /*
@@ -935,12 +936,12 @@ grafana:
     #     servicePort: use-annotation
     ## Or for k8s > 1.19
     # - path: /*
-    #   pathType: Prefix
-    #   backend:
-    #     service:
-    #       name: ssl-redirect
-    #       port:
-    #         name: use-annotation
+    #pathType: Prefix
+    backend:
+      service:
+        name: kube-prometheus-stack-grafana
+        port:
+          name: http
 
 
     tls: []
