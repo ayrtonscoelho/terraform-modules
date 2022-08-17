@@ -167,25 +167,29 @@ Blocked (To Do)
 
 ### Grafana Ingress
 
-1. Alterar o **values.yaml** do grafana
+1. Alterar o **values.yaml** do kube-prometheus-stack
 ```
-ingress:
-  enabled: true
-  annotations:
-    konghq.com/https-redirect-status-code: '302'
-    konghq.com/protocols: https
-    konghq.com/strip-path: 'true'
-    kubernetes.io/ingress.class: kong
-  labels:
-    app.kubernetes.io/service-name: grafana
-  path: /
-  pathType: Prefix
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: kong
+      konghq.com/https-redirect-status-code: '302'
+      konghq.com/protocols: https
+      konghq.com/strip-path: 'true'
+    labels: {}
+    path: /
+    pathType: Prefix
 
-  hosts:
-    - <HOST>
-  extraPaths: []
-
-  tls: []
+    hosts:
+      - grafana-sre-test.owill.com.br
+    https: true
+    extraPaths: []
+    backend:
+      service:
+        name: kube-prometheus-stack-grafana
+        port:
+          name: http
+    tls: []
  ```
 
 
