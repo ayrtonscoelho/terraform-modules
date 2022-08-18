@@ -197,24 +197,24 @@ configuration:
   backupStorageLocation:
     # name is the name of the backup storage location where backups should be stored. If a name is not provided,
     # a backup storage location will be created with the name "default". Optional.
-    name:
+    #name:
     # provider is the name for the backup storage location provider. If omitted
     # `configuration.provider` will be used instead.
-    provider: aws
+    #provider: aws
     # bucket is the name of the bucket to store backups in. Required.
     bucket: will-dev-sre-poc-v8-velero
     # caCert defines a base64 encoded CA bundle to use when verifying TLS connections to the provider. Optional.
-    caCert:
+    #caCert:
     # prefix is the directory under which all Velero data should be stored within the bucket. Optional.
-    prefix:
+    #prefix:
     # default indicates this location is the default backup storage location. Optional.
-    default:
+    #default:
     # accessMode determines if velero can write to this backup storage location. Optional.
     # default to ReadWrite, ReadOnly is used during migrations and restores.
-    accessMode: ReadWrite
+    #accessMode: ReadWrite
     # Additional provider-specific configuration. See link above
     # for details of required/optional fields for your provider.
-    config: {}
+    #config: {}
     #  region:
     #  s3ForcePathStyle:region
     #  s3Url:
