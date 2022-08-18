@@ -314,12 +314,12 @@ rbac:
 #     name:
 #     annotations:
 #     labels:
-  serviceAccount:
-    server:
-      create: true
-      name:
-      annotations:
-        eks.amazonaws.com/role-arn: "arn:aws:iam:::role/eks-velero-backup"
+serviceAccount:
+  server:
+    create: true
+    name:
+    annotations:
+      eks.amazonaws.com/role-arn: "arn:aws:iam:::role/eks-velero-backup"
 
 # Info about the secret to be used by the Velero deployment, which
 # should contain credentials for the cloud provider IAM account you've
