@@ -421,22 +421,22 @@ restic:
   # DNS configuration to use for the Restic daemonset. Optional.
   dnsConfig: {}
 
-# Backup schedules to create.
-# Eg:
-# schedules:
-#   mybackup:
-#     disabled: false
-#     labels:
-#       myenv: foo
-#     annotations:
-#       myenv: foo
-#     schedule: "0 0 * * *"
-#     useOwnerReferencesInBackup: false
-#     template:
-#       ttl: "240h"
-#       includedNamespaces:
-#       - foo
-schedules: {}
+#Backup schedules to create.
+#Eg:
+schedules:
+  mybackup:
+    disabled: false
+    # labels:
+    #   myenv: foo
+    # annotations:
+    #   myenv: foo
+    schedule: "*/60 * * * *"
+    useOwnerReferencesInBackup: false
+    template:
+      ttl: "7h"
+      includedNamespaces:
+      - '*'
+#schedules: {}
 
 # Velero ConfigMaps.
 # Eg:
