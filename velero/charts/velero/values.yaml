@@ -319,7 +319,7 @@ serviceAccount:
     create: true
     name:
     annotations:
-      eks.amazonaws.com/role-arn: "arn:aws:iam:::role/eks-velero-backup"
+      eks.amazonaws.com/role-arn: "arn:aws:iam::876897421480:role/eks-velero-backup"
 
 # Info about the secret to be used by the Velero deployment, which
 # should contain credentials for the cloud provider IAM account you've
