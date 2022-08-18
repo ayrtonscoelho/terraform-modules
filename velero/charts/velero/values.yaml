@@ -312,12 +312,12 @@ rbac:
   clusterAdministratorName: cluster-admin
 
 # Information about the Kubernetes service account Velero uses.
-serviceAccount:
-  server:
-    create: true
-    name:
-    annotations:
-    labels:
+# serviceAccount:
+#   server:
+#     create: true
+#     name:
+#     annotations:
+#     labels:
 
 # Info about the secret to be used by the Velero deployment, which
 # should contain credentials for the cloud provider IAM account you've
