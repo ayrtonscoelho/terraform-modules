@@ -194,7 +194,7 @@ cleanUpCRDs: false
 ##
 configuration:
   # Cloud provider being used (e.g. aws, azure, gcp).
-  provider:
+  provider: aws
 
   # Parameters for the `default` BackupStorageLocation. See
   # https://velero.io/docs/v1.6/api-types/backupstoragelocation/
@@ -206,7 +206,7 @@ configuration:
     # `configuration.provider` will be used instead.
     provider: aws
     # bucket is the name of the bucket to store backups in. Required.
-    bucket:
+    bucket: will-dev-sre-poc-v8-velero
     # caCert defines a base64 encoded CA bundle to use when verifying TLS connections to the provider. Optional.
     caCert:
     # prefix is the directory under which all Velero data should be stored within the bucket. Optional.
@@ -220,7 +220,7 @@ configuration:
     # for details of required/optional fields for your provider.
     config: {}
     #  region:
-    #  s3ForcePathStyle:
+    #  s3ForcePathStyle:region
     #  s3Url:
     #  kmsKeyId:
     #  resourceGroup:
@@ -239,11 +239,11 @@ configuration:
     name:
     # provider is the name for the volume snapshot provider. If omitted
     # `configuration.provider` will be used instead.
-    provider:
+    #provider:
     # Additional provider-specific configuration. See link above
     # for details of required/optional fields for your provider.
-    config: {}
-  #    region:
+    config:
+      region: us-east-1
   #    apiTimeout:
   #    resourceGroup:
   #    The ID of the subscription where volume snapshots should be stored, if different from the cluster’s subscription. If specified, also requires `configuration.volumeSnapshotLocation.config.resourceGroup`to be set. (Azure only)
