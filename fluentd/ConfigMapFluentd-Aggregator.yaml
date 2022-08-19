@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluentd-aggregator-configmap
+  namespace: fluentd
+data:
+  CLUSTER_NAME: eks-sre-poc-v8
+  ENVIRONMENT: poc
