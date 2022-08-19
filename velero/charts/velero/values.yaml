@@ -202,7 +202,7 @@ configuration:
     # `configuration.provider` will be used instead.
     #provider: aws
     # bucket is the name of the bucket to store backups in. Required.
-    bucket: will-dev-sre-poc-v8-velero
+    bucket: will-dev-sre-poc-v8-velero-backups
     # caCert defines a base64 encoded CA bundle to use when verifying TLS connections to the provider. Optional.
     #caCert:
     # prefix is the directory under which all Velero data should be stored within the bucket. Optional.
@@ -285,7 +285,7 @@ configuration:
   logFormat:
 
   # Set true for backup all pod volumes without having to apply annotation on the pod when used restic Default: false. Other option: false.
-  defaultVolumesToRestic:
+  defaultVolumesToRestic: false
 
   # How often 'restic prune' is run for restic repositories by default. Default: 168h. Optional.
   defaultResticPruneFrequency:
@@ -319,7 +319,7 @@ serviceAccount:
     create: true
     name:
     annotations:
-      eks.amazonaws.com/role-arn: "arn:aws:iam::876897421480:role/eks-velero-backup"
+      eks.amazonaws.com/role-arn: "arn:aws:iam::876897421480:role/will-dev-sre-poc-v8-service-account-addon-velero-role"
 
 # Info about the secret to be used by the Velero deployment, which
 # should contain credentials for the cloud provider IAM account you've
@@ -430,10 +430,12 @@ schedules:
     #   myenv: foo
     # annotations:
     #   myenv: foo
-    schedule: "*/60 * * * *"
+    #schedule: "*/2 * * * *"
+    schedule: "0 0 * * *"
     useOwnerReferencesInBackup: false
     template:
-      ttl: "7h"
+      ttl: "0h96m0s"
+      #ttl: "0h05m0s"
       includedNamespaces:
       - '*'
 #schedules: {}
