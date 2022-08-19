@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: fluentd-daemonset
+  namespace: fluentd
+spec:
+  selector:
+    matchLabels:
+      name: fluentd
+  template:
+    metadata:
+      labels:
+        name: fluentd
+    spec:
+      volumes:
+        - name: varlog
+          hostPath:
+            path: /var/log
+            type: ''
+        - name: varlogcontainers
+          hostPath:
+            path: /var/log/containers
+            type: ''
+        - name: varlogpods
+          hostPath:
+            path: /var/log/pods
+            type: ''
+        - name: varlibdockercontainers
+          hostPath:
+            path: /var/lib/docker/containers/
+            type: ''
+      containers:
+        - name: fluentd-daemonset
+          image: >-
+            142401413602.dkr.ecr.sa-east-1.amazonaws.com/ecr-fluentd:backoffice-api-mail-69cf8ff120947455f53698252ea1f1bbc3dd9839
+          envFrom:
+            - configMapRef:
+                name: fluentd-configmap
+          env:
+            - name: K8S_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+          resources:
+            limits:
+              cpu: 500m
+              memory: 2560Mi
+            requests:
+              cpu: 100m
+              memory: 1536Mi
+          volumeMounts:
+            - name: varlog
+              mountPath: /var/log
+            - name: varlogcontainers
+              readOnly: true
+              mountPath: /var/log/containers
+            - name: varlogpods
+              readOnly: true
+              mountPath: /var/log/pods
+            - name: varlibdockercontainers
+              readOnly: true
+              mountPath: /var/lib/docker/containers
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      serviceAccountName: fluentd
+      serviceAccount: fluentd
+      securityContext: {}
+      schedulerName: default-scheduler
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 0
+  revisionHistoryLimit: 10

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluentd-configmap
+  namespace: fluentd
+data:
+  FLUENTDAGGREGATOR_HOST: fluentd-aggregator-service.fluentd.svc.cluster.local
+  FLUENT_UID: '0'
+binaryData: {}

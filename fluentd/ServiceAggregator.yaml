@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fluentd-aggregator-service
+  namespace: fluentd
+spec:
+  ports:
+    - name: 24224tcp-fluentd-aggregator
+      protocol: TCP
+      port: 24224
+      targetPort: 24224
+  selector:
+    name: fluentd-aggregator
+  type: ClusterIP
+  sessionAffinity: None
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
