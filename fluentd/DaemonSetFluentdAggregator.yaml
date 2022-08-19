@@ -45,6 +45,8 @@ spec:
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
+      serviceAccountName: fluentd-aggregator
+      serviceAccount: fluentd-aggregator      
       securityContext: {}
       schedulerName: default-scheduler
   updateStrategy:
