@@ -51,5 +51,5 @@ spec:
     type: RollingUpdate
     rollingUpdate:
       maxUnavailable: 1
-      maxSurge: 5
+      maxSurge: 0
   revisionHistoryLimit: 10
