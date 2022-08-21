@@ -431,10 +431,10 @@ schedules:
     # annotations:
     #   myenv: foo
     #schedule: "*/2 * * * *"
-    schedule: "0 0 * * *"
+    schedule: "0 20 * * *"
     useOwnerReferencesInBackup: false
     template:
-      ttl: "0h96m0s"
+      ttl: "48h0m0s"
       #ttl: "0h05m0s"
       includedNamespaces:
       - '*'
