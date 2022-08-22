@@ -657,7 +657,16 @@ terminationGracePeriodSeconds: 30
 
 # Affinity for pod assignment
 # Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
-# affinity: {}
+affinity:
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+    - labelSelector:
+        matchExpressions:
+        - key: app
+          operator: In
+          values:
+          -  kong-ingress-controller-kong
+      topologyKey: "kubernetes.io/hostname"
 
 # Topology spread constraints for pod assignment (requires Kubernetes >= 1.19)
 # Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
