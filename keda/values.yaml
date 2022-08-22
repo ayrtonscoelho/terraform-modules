@@ -22,18 +22,18 @@ imagePullSecrets: []
 
 operator:
   name: keda-operator
-  replicaCount: 1
+  replicaCount: 2
   # -- Affinity for pod scheduling https://kubernetes.io/docs/tasks/configure-pod-container/assign-pods-nodes-using-node-affinity/ for KEDA operator. Takes precedence over the `affinity` field
-  affinity: {}
-    # podAntiAffinity:
-    #   requiredDuringSchedulingIgnoredDuringExecution:
-    #   - labelSelector:
-    #       matchExpressions:
-    #       - key: app
-    #         operator: In
-    #         values:
-    #         - keda-operator
-    #     topologyKey: "kubernetes.io/hostname"
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: app
+            operator: In
+            values:
+            - keda-operator
+        topologyKey: "kubernetes.io/hostname"
 
 metricsServer:
   replicaCount: 1
