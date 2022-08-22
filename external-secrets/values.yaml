@@ -52,7 +52,8 @@ serviceAccount:
   # -- Specifies whether a service account should be created.
   create: true
   # -- Annotations to add to the service account.
-  annotations: {}
+  annotations:
+    eks.amazonaws.com/role-arn: "arn:aws:iam::876897421480:role/will-dev-sre-poc-v8-service-account-addon-external-secrets-role"
   # -- Extra Labels to add to the service account.
   extraLabels: {}
   # -- The name of the service account to use.
