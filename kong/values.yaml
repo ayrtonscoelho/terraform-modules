@@ -690,7 +690,7 @@ podLabels: {}
 
 # Kong pod count.
 # It has no effect when autoscaling.enabled is set to true
-replicaCount: 2
+replicaCount: 4
 
 # Annotations to be added to Kong deployment
 deploymentAnnotations: {}
@@ -700,8 +700,8 @@ deploymentAnnotations: {}
 # "resources" and, if using the controller, "ingressController.resources" in values.yaml
 autoscaling:
   enabled: true
-  minReplicas: 2
-  maxReplicas: 3
+  minReplicas: 4
+  maxReplicas: 10
   behavior: {}
   ## targetCPUUtilizationPercentage only used if the cluster doesn't support autoscaling/v2beta
   targetCPUUtilizationPercentage:
