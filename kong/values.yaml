@@ -662,10 +662,10 @@ affinity:
     requiredDuringSchedulingIgnoredDuringExecution:
     - labelSelector:
         matchExpressions:
-        - key: app
+        - key: app.kubernetes.io/name
           operator: In
           values:
-          -  kong-ingress-controller-kong
+          -  kong
       topologyKey: "kubernetes.io/hostname"
 
 # Topology spread constraints for pod assignment (requires Kubernetes >= 1.19)
