@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta
 kind: DaemonSet
 metadata:
   name: fluentd-daemonset
@@ -74,6 +74,6 @@ spec:
   updateStrategy:
     type: RollingUpdate
     rollingUpdate:
-      maxUnavailable: 0
-      maxSurge: 4
+      maxUnavailable: 1
+      maxSurge: 2
   revisionHistoryLimit: 10
