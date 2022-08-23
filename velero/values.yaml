@@ -430,7 +430,7 @@ schedules:
     #   myenv: foo
     # annotations:
     #   myenv: foo
-    schedule: "*/10 * * * *"
+    schedule: "*/30 * * * *"
     #schedule: "0 20 * * *"
     useOwnerReferencesInBackup: false
     template:
