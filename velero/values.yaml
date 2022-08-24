@@ -437,7 +437,7 @@ schedules:
       ttl: "48h0m0s"
       #ttl: "0h05m0s"
       includedNamespaces:
-      - 'nginx'
+      - '*'
 #schedules: {}
 
 # Velero ConfigMaps.
