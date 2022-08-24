@@ -209,3 +209,53 @@ Acessar o New Relic e validar se o cluster está adicionado e recebendo métrica
 ```
 https://onenr.io/0bRmDrZGrwy
 ```
+
+
+### Aplicação teste ./paulo-api
+
+
+Aplicar o manifesto abaixo para subir a API utilizando os seguintes workloads defaults:
+
+-> External Secret
+
+-> KEDA
+
+-> NewRelic
+
+```
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: paulo-api
+  namespace: argocd
+spec:
+  destination:
+    namespace: paulo
+    server: https://kubernetes.default.svc
+  #Bloco para o Argo ignorar o aumento de replicas baseado em HPA.
+  ignoreDifferences:
+    - group: apps
+      jsonPointers:
+        - /spec/replicas
+      kind: Deployment
+      name: paulo-api
+      namespace: paulo
+  project: foundation-sre
+  source:
+    path: paulo-api
+    repoURL: https://github.com/ayrtonscoelho/terraform-modules.git
+    targetRevision: argo_test
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      backoff:
+        duration: 10s
+        factor: 2
+        maxDuration: 3m0s
+      limit: 5
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+```
