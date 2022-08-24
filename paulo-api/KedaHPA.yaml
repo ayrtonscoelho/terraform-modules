@@ -1,0 +1,32 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  labels:
+    scaledobject.keda.sh/name: paulo-api
+  name: paulo-api
+  namespace: paulo
+spec:
+  maxReplicaCount: 4
+  minReplicaCount: 1
+  scaleTargetRef:
+    name: paulo-api
+  triggers:
+    - metadata:
+        type: Utilization
+        value: '50'
+      type: memory
+    - metadata:
+        type: Utilization
+        value: '50'
+      type: cpu
+    - authenticationRef:
+        name: keda-trigger-auth-new-relic
+      metadata:
+        noDataError: 'true'
+        nrql: >-
+          SELECT count(apm.service.transaction.duration) as 'Web throughput'
+          FROM Metric WHERE (entity.guid =
+          'MzUwMjYwNnxBUE18QVBQTElDQVRJT058MTMyMDAxMzc1Mw') AND (transactionType
+          = 'Web') since 1 minute ago
+        threshold: '10'
+      type: new-relic
