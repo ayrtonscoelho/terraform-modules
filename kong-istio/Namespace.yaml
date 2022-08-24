@@ -3,7 +3,7 @@ kind: Namespace
 metadata:
   annotations:
     "helm.sh/hook": pre-install
-  name: istio-system
+  name: kong-istio
   labels:
     istio-injection: enabled
 spec: {}
