@@ -284,8 +284,8 @@ configuration:
   # Set log-format for Velero pod. Default: text. Other option: json.
   logFormat:
 
-  # Set true for backup all pod volumes without having to apply annotation on the pod when used restic Default: false. Other option: false.
-  defaultVolumesToRestic: false
+  # Set true for backup all pod volumes without having to apply annotation on the pod when used restic Default: false. Other option: false.***
+  defaultVolumesToRestic: true
 
   # How often 'restic prune' is run for restic repositories by default. Default: 168h. Optional.
   defaultResticPruneFrequency:
@@ -430,8 +430,8 @@ schedules:
     #   myenv: foo
     # annotations:
     #   myenv: foo
-    #schedule: "*/20 * * * *"
-    schedule: "0 20 * * *"
+    schedule: "*/5 * * * *"
+    #schedule: "0 20 * * *"
     useOwnerReferencesInBackup: false
     template:
       ttl: "48h0m0s"
