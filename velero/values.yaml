@@ -424,21 +424,6 @@ restic:
 #Backup schedules to create.
 #Eg:
 schedules:
-  mybackup-nginx:
-    disabled: false
-    # labels:
-    #   myenv: foo
-    # annotations:
-    #   myenv: foo
-    schedule: "*/5 * * * *"
-    #schedule: "0 20 * * *"
-    useOwnerReferencesInBackup: false
-    template:
-      ttl: "48h0m0s"
-      #ttl: "0h05m0s"
-      includedNamespaces:
-      - 'nginx'
-
   mybackup:
     disabled: false
     # labels:
