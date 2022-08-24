@@ -436,6 +436,22 @@ schedules:
     template:
       ttl: "48h0m0s"
       #ttl: "0h05m0s"
+      excludedNamespaces:
+      - argocd
+      - calico-apiserver
+      - calico-system
+      - external-secrets
+      - fluentd
+      - keda
+      - kong-ingress-controller
+      - kube-node-lease
+      - kube-public
+      - kube-system
+      - monitoring
+      - newrelic
+      - reloader
+      - tigera-operator
+      - velero
       includedNamespaces:
       - '*'
 #schedules: {}
