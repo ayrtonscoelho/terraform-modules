@@ -60,7 +60,7 @@ metadata:
   labels:
     app.kubernetes.io/name: paulo-api
 spec:
-  replicas: 8
+  replicas: 4
   strategy:
       steps:
       - setWeight: 20
