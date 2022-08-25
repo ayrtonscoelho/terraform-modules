@@ -4,4 +4,4 @@ metadata:
   name: snapshot-quota
 spec:
   hard:
-    count/volumesnapshots.snapshot.storage.k8s.io: "10"
+    count/volumesnapshots.snapshot.storage.k8s.io: "5"
