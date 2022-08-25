@@ -95,12 +95,12 @@ spec:
         livenessProbe:
           httpGet:
             path: /appVersion
-        port: 8000        
-        initialDelaySeconds: 20
+            port: 8000        
+          initialDelaySeconds: 20
         readinessProbe:
           httpGet:
             path: /appVersion
-          port: 8000        
+            port: 8000        
           initialDelaySeconds: 20                
         ports:
           - name: http
