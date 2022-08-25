@@ -6,3 +6,4 @@ metadata:
 data:
   VAR1: primeira_envvars
   VAR2: segunda_envvars
+  VAR3: terceira_envvars
