@@ -4,7 +4,7 @@ apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
   name: istiod
-  namespace: default
+  namespace: istio-system
   labels:
     app: istiod
     istio.io/rev: default
@@ -34,7 +34,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: istio
-  namespace: default
+  namespace: istio-system
   labels:
     istio.io/rev: default
     install.operator.istio.io/owning-resource: unknown
@@ -61,7 +61,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: istio-sidecar-injector
-  namespace: default
+  namespace: istio-system
   labels:
     istio.io/rev: default
     install.operator.istio.io/owning-resource: unknown
@@ -1501,7 +1501,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: istiod
-  namespace: default
+  namespace: istio-system
   labels:
     istio.io/rev: default
     install.operator.istio.io/owning-resource: unknown
@@ -1535,7 +1535,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: istiod
-  namespace: default
+  namespace: istio-system
   labels:
     app: istiod
     istio.io/rev: default
@@ -1682,7 +1682,7 @@ apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
   name: istiod
-  namespace: default
+  namespace: istio-system
   labels:
     app: istiod
     release: istiod
@@ -1715,7 +1715,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: EnvoyFilter
 metadata:
   name: stats-filter-1.11
-  namespace: default
+  namespace: istio-system
   labels:
     istio.io/rev: default
 spec:
@@ -1840,7 +1840,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: EnvoyFilter
 metadata:
   name: tcp-stats-filter-1.11
-  namespace: default
+  namespace: istio-system
   labels:
     istio.io/rev: default
 spec:
@@ -1957,7 +1957,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: EnvoyFilter
 metadata:
   name: stats-filter-1.12
-  namespace: default
+  namespace: istio-system
   labels:
     istio.io/rev: default
 spec:
@@ -2082,7 +2082,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: EnvoyFilter
 metadata:
   name: tcp-stats-filter-1.12
-  namespace: default
+  namespace: istio-system
   labels:
     istio.io/rev: default
 spec:
@@ -2199,7 +2199,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: EnvoyFilter
 metadata:
   name: stats-filter-1.13
-  namespace: default
+  namespace: istio-system
   labels:
     istio.io/rev: default
 spec:
@@ -2324,7 +2324,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: EnvoyFilter
 metadata:
   name: tcp-stats-filter-1.13
-  namespace: default
+  namespace: istio-system
   labels:
     istio.io/rev: default
 spec:
@@ -2441,7 +2441,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: EnvoyFilter
 metadata:
   name: stats-filter-1.14
-  namespace: default
+  namespace: istio-system
   labels:
     istio.io/rev: default
 spec:
@@ -2566,7 +2566,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: EnvoyFilter
 metadata:
   name: tcp-stats-filter-1.14
-  namespace: default
+  namespace: istio-system
   labels:
     istio.io/rev: default
 spec:
@@ -2683,7 +2683,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: EnvoyFilter
 metadata:
   name: stats-filter-1.15
-  namespace: default
+  namespace: istio-system
   labels:
     istio.io/rev: default
 spec:
@@ -2808,7 +2808,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: EnvoyFilter
 metadata:
   name: tcp-stats-filter-1.15
-  namespace: default
+  namespace: istio-system
   labels:
     istio.io/rev: default
 spec:
@@ -2935,7 +2935,7 @@ webhooks:
   clientConfig:
     service:
       name: istiod
-      namespace: default
+      namespace: istio-system
       path: "/inject"
       port: 443
   sideEffects: None
@@ -2964,7 +2964,7 @@ webhooks:
   clientConfig:
     service:
       name: istiod
-      namespace: default
+      namespace: istio-system
       path: "/inject"
       port: 443
   sideEffects: None
@@ -2995,7 +2995,7 @@ webhooks:
   clientConfig:
     service:
       name: istiod
-      namespace: default
+      namespace: istio-system
       path: "/inject"
       port: 443
   sideEffects: None
@@ -3022,7 +3022,7 @@ webhooks:
   clientConfig:
     service:
       name: istiod
-      namespace: default
+      namespace: istio-system
       path: "/inject"
       port: 443
   sideEffects: None
