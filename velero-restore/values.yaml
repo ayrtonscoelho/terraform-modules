@@ -53,11 +53,18 @@ dnsPolicy: ClusterFirst
 # If the value is a string then it is evaluated as a template.
 initContainers:
  - name: velero-plugin-for-aws
-   image: velero/velero-plugin-for-aws:v1.3.0
+   image: velero/velero-plugin-for-aws:v1.5.0
    imagePullPolicy: IfNotPresent
    volumeMounts:
      - mountPath: /target
        name: plugins
+ - name: velero-plugin-for-csi
+   image: velero/velero-plugin-for-csi:v0.3.0
+   imagePullPolicy: IfNotPresent
+   volumeMounts:
+     - mountPath: /target
+       name: plugins
+
   #   imagePullPolicy: IfNotPresent
   #   volumeMounts:
   #     - mountPath: /target
@@ -235,7 +242,7 @@ configuration:
     name: snapshot-location
     # provider is the name for the volume snapshot provider. If omitted
     # `configuration.provider` will be used instead.
-    provider:
+    provider: velero.io/aws
     # Additional provider-specific configuration. See link above
     # for details of required/optional fields for your provider.
     config:
@@ -275,8 +282,8 @@ configuration:
   extraEnvVars: {}
 
   # Comma separated list of velero feature flags. default: empty
-  # features: EnableCSI
-  features:
+  features: EnableCSI
+  #features:
 
   # Set log-level for Velero pod. Default: info. Other options: debug, warning, error, fatal, panic.
   logLevel:
@@ -284,8 +291,8 @@ configuration:
   # Set log-format for Velero pod. Default: text. Other option: json.
   logFormat:
 
-  # Set true for backup all pod volumes without having to apply annotation on the pod when used restic Default: false. Other option: false.
-  defaultVolumesToRestic: true
+  # Set true for backup all pod volumes without having to apply annotation on the pod when used restic Default: false. Other option: false.***
+  defaultVolumesToRestic: false
 
   # How often 'restic prune' is run for restic repositories by default. Default: 168h. Optional.
   defaultResticPruneFrequency:
@@ -430,12 +437,28 @@ schedules:
     #   myenv: foo
     # annotations:
     #   myenv: foo
-    #schedule: "*/2 * * * *"
-    schedule: "0 20 * * *"
+    schedule: "*/5 * * * *"
+    #schedule: "0 20 * * *"
     useOwnerReferencesInBackup: false
     template:
       ttl: "48h0m0s"
       #ttl: "0h05m0s"
+      excludedNamespaces:
+      - argocd
+      - calico-apiserver
+      - calico-system
+      - external-secrets
+      - fluentd
+      - keda
+      - kong-ingress-controller
+      - kube-node-lease
+      - kube-public
+      - kube-system
+      - monitoring
+      - newrelic
+      - reloader
+      - tigera-operator
+      - velero
       includedNamespaces:
       - '*'
 #schedules: {}
