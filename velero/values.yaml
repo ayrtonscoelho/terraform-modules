@@ -275,8 +275,8 @@ configuration:
   extraEnvVars: {}
 
   # Comma separated list of velero feature flags. default: empty
-  # features: EnableCSI
-  features:
+  features: EnableCSI
+  #features:
 
   # Set log-level for Velero pod. Default: info. Other options: debug, warning, error, fatal, panic.
   logLevel:
