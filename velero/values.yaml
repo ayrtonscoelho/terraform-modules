@@ -437,7 +437,7 @@ schedules:
     #   myenv: foo
     # annotations:
     #   myenv: foo
-    schedule: "*/5 * * * *"
+    schedule: "*/60 * * * *"
     #schedule: "0 20 * * *"
     useOwnerReferencesInBackup: false
     template:
@@ -459,6 +459,10 @@ schedules:
       - reloader
       - tigera-operator
       - velero
+      #####
+      #- kong-istio
+      #- istio-system
+      #- paulo
       includedNamespaces:
       - '*'
 #schedules: {}
