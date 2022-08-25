@@ -6,8 +6,8 @@ metadata:
   name: paulo-api
   namespace: paulo
 spec:
-  maxReplicaCount: 4
-  minReplicaCount: 1
+  maxReplicaCount: 6
+  minReplicaCount: 4
   scaleTargetRef:
     apiVersion: argoproj.io/v1alpha1
     kind: Rollout
