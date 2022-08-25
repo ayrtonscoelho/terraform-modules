@@ -98,10 +98,10 @@ spec:
             protocol: TCP
         resources:
           limits:
-            cpu: 500m
+            cpu: 200m
             memory: 300Mi
           requests:
-            cpu: 400m
+            cpu: 150m
             memory: 200Mi
         imagePullPolicy: IfNotPresent
       restartPolicy: Always
