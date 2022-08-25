@@ -104,9 +104,8 @@ spec:
             cpu: 400m
             memory: 200Mi
         imagePullPolicy: IfNotPresent
-    restartPolicy: Always
-    terminationGracePeriodSeconds: 30
-    serviceAccountName: paulo-api
-    serviceAccount: paulo-api
-    dnsPolicy: ClusterFirst
-    schedulerName: default-scheduler
+      restartPolicy: Always
+      serviceAccountName: paulo-api
+      serviceAccount: paulo-api
+      dnsPolicy: ClusterFirst
+      schedulerName: default-scheduler
