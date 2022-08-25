@@ -62,6 +62,7 @@ metadata:
 spec:
   replicas: 4
   strategy:
+    canary:
       steps:
       - setWeight: 20
       - pause: {duration: 10}
