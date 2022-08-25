@@ -9,6 +9,8 @@ spec:
   maxReplicaCount: 4
   minReplicaCount: 1
   scaleTargetRef:
+    apiVersion: argoproj.io/v1alpha1
+    kind: Rollout
     name: paulo-api
   triggers:
     - metadata:
