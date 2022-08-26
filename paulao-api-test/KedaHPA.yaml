@@ -2,16 +2,16 @@ apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
   labels:
-    scaledobject.keda.sh/name: paulo-api
-  name: paulo-api
-  namespace: paulo
+    scaledobject.keda.sh/name: paulao-api-test
+  name: paulao-api-test
+  namespace: paulao-api-test
 spec:
   maxReplicaCount: 6
   minReplicaCount: 4
   scaleTargetRef:
     apiVersion: argoproj.io/v1alpha1
     kind: Rollout
-    name: paulo-api
+    name: paulao-api-test
   triggers:
     - metadata:
         type: Utilization

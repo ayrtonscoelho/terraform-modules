@@ -347,7 +347,7 @@ data:
     # This is the configuration file for the infrastructure agent. See:
     # https://docs.newrelic.com/docs/infrastructure/install-infrastructure-agent/configuration/infrastructure-agent-configuration-settings/
     custom_attributes:
-      clusterName: will-dev-sre-poc-v8
+      clusterName: will-dev-sre-poc-v9
     http_server_enabled: true
     http_server_port: 8001
     is_forward_only: true
@@ -446,7 +446,7 @@ spec:
             - name: "NRI_KUBERNETES_SINK_HTTP_PORT"
               value: "8001"
             - name: "NRI_KUBERNETES_CLUSTERNAME"
-              value: will-dev-sre-poc-v8
+              value: will-dev-sre-poc-v9
             - name: "NRI_KUBERNETES_VERBOSE"
               value: "false"
 
@@ -723,7 +723,7 @@ data:
     # This is the configuration file for the infrastructure agent. See:
     # https://docs.newrelic.com/docs/infrastructure/install-infrastructure-agent/configuration/infrastructure-agent-configuration-settings/
     custom_attributes:
-      clusterName: will-dev-sre-poc-v8
+      clusterName: will-dev-sre-poc-v9
     http_server_enabled: true
     http_server_port: 8002
     is_forward_only: true
@@ -776,7 +776,7 @@ spec:
             - name: "NRI_KUBERNETES_SINK_HTTP_PORT"
               value: "8002"
             - name: "NRI_KUBERNETES_CLUSTERNAME"
-              value: will-dev-sre-poc-v8
+              value: will-dev-sre-poc-v9
             - name: "NRI_KUBERNETES_VERBOSE"
               value: "false"
 
@@ -908,7 +908,7 @@ data:
     # This is the configuration file for the infrastructure agent. See:
     # https://docs.newrelic.com/docs/infrastructure/install-infrastructure-agent/configuration/infrastructure-agent-configuration-settings/
     custom_attributes:
-      clusterName: will-dev-sre-poc-v8
+      clusterName: will-dev-sre-poc-v9
     features:
       docker_enabled: false
     http_server_enabled: true
@@ -965,7 +965,7 @@ spec:
             - name: "NRI_KUBERNETES_SINK_HTTP_PORT"
               value: "8003"
             - name: "NRI_KUBERNETES_CLUSTERNAME"
-              value: will-dev-sre-poc-v8
+              value: will-dev-sre-poc-v9
             - name: "NRI_KUBERNETES_VERBOSE"
               value: "false"
 
@@ -1027,7 +1027,7 @@ spec:
                   apiVersion: "v1"
                   fieldPath: "spec.nodeName"
             - name: "CLUSTER_NAME"
-              value: will-dev-sre-poc-v8
+              value: will-dev-sre-poc-v9
             - name: "NRIA_PASSTHROUGH_ENVIRONMENT"
               value: "CLUSTER_NAME"
             - name: "NRIA_HOST"
@@ -1227,7 +1227,7 @@ metadata:
 #         imagePullPolicy: "IfNotPresent"
 #         env:
 #         - name: CLUSTER_NAME
-#           value: will-dev-sre-poc-v8
+#           value: will-dev-sre-poc-v9
 #         - name: NR_LICENSE_KEY
 #           valueFrom:
 #             secretKeyRef:
@@ -1340,7 +1340,7 @@ data:
       - name: newRelicInfra
         config:
           agentEndpoint: http://localhost:8001/v1/data
-          clusterName: will-dev-sre-poc-v8
+          clusterName: will-dev-sre-poc-v9
           agentHTTPTimeout: 30s
 ---
 # Source: nri-bundle/charts/nri-kube-events/templates/deployment.yaml
@@ -1767,7 +1767,7 @@ spec:
         imagePullPolicy: IfNotPresent
         env:
         - name: clusterName
-          value: will-dev-sre-poc-v8
+          value: will-dev-sre-poc-v9
         ports:
           - containerPort: 8443
             protocol: TCP
@@ -2069,7 +2069,7 @@ spec:
 #   cloudAddr: withpixie.ai:443
 #   disableAutoUpdate: false
 #   useEtcdOperator: false
-#   clusterName: will-dev-sre-poc-v8
+#   clusterName: will-dev-sre-poc-v9
 #   dataAccess: Full
 # ---
 # # Source: nri-bundle/charts/pixie-chart/templates/deleter_role.yaml

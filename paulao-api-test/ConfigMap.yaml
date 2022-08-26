@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: paulao-api-test-configmap
+  namespace: paulao-api-test
+data:
+  VAR1: VALUE1
+  VAR2: VALUE2
+  VAR3: VALUE3
+  APP_VERSION: '1'

@@ -204,14 +204,14 @@ https://docs.aws.amazon.com/pt_br/eks/latest/userguide/calico.html
 
 ### New Relic K8s Agent
 
-Acessar o New Relic e validar se o cluster está adicionado e recebendo métricas.
+Ace#ssar o New Relic e validar se o cluster está adicionado e recebendo métricas.
 
 ```
 https://onenr.io/0bRmDrZGrwy
 ```
 
 
-### Aplicação teste ./paulo-api
+### Aplicação teste ./paulao-api-test
 
 
 Aplicar o manifesto abaixo para subir a API utilizando os seguintes workloads defaults:
@@ -226,11 +226,11 @@ Aplicar o manifesto abaixo para subir a API utilizando os seguintes workloads de
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: paulo-api
+  name: paulao-api-test
   namespace: argocd
 spec:
   destination:
-    namespace: paulo
+    namespace: paulao-api-test
     server: https://kubernetes.default.svc
   #Bloco para o Argo ignorar o aumento de replicas baseado em HPA.
   ignoreDifferences:
@@ -238,11 +238,11 @@ spec:
       jsonPointers:
         - /spec/replicas
       kind: Deployment
-      name: paulo-api
-      namespace: paulo
+      name: paulao-api-test
+      namespace: paulao-api-test
   project: foundation-sre
   source:
-    path: paulo-api
+    path: paulao-api-test
     repoURL: https://github.com/ayrtonscoelho/terraform-modules.git
     targetRevision: argo_test
   syncPolicy:
