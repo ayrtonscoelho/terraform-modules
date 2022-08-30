@@ -3,7 +3,7 @@ kind: Provisioner
 metadata:
   name: will-default
   annotations:
-    helm.sh/hook": post-install
+    "helm.sh/hook": post-install
 spec:
   requirements:
     - key: karpenter.sh/capacity-type
