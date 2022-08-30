@@ -62,16 +62,16 @@ spec:
             cpu: 150m
             memory: 200Mi
         imagePullPolicy: IfNotPresent
-        volumeMounts:
-        - name: persistent-storage
-          mountPath: /app
+        # volumeMounts:
+        # - name: persistent-storage
+        #   mountPath: /app
           
       restartPolicy: Always
       serviceAccountName: paulao-api-test
       serviceAccount: paulao-api-test
       dnsPolicy: ClusterFirst
       schedulerName: default-scheduler
-      volumes:
-      - name: persistent-storage
-        persistentVolumeClaim:
-          claimName: paulao-api-test-pvc
+      # volumes:
+      # - name: persistent-storage
+      #   persistentVolumeClaim:
+      #     claimName: paulao-api-test-pvc
