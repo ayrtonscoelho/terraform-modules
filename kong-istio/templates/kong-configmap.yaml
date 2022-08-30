@@ -8,13 +8,13 @@ data:
     _format_version: "1.1"
 
     services:
-    - name: plugin-test-srv
+      - name: plugin-test-srv
         url: http://mockbin.com/request
         routes:
         - name: plugin-test-route
-            tags:
-            - plugin-test
-            methods:
-            - GET
-            paths:
-            - "/request_paulo($|/$)"
+          tags:
+          - plugin-test
+          methods:
+          - GET
+          paths:
+          - "/request_paulo($|/$)"
