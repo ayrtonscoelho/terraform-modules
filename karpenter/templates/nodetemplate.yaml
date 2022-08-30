@@ -1,0 +1,11 @@
+apiVersion: karpenter.k8s.aws/v1alpha1
+kind: AWSNodeTemplate
+metadata:
+  name: will-default
+  annotations:
+    helm.sh/hook": post-install
+spec:
+  subnetSelector:
+    karpenter.sh/discovery/cluster: will-dev-sre-poc-v9
+  securityGroupSelector:
+    karpenter.sh/discovery/cluster: will-dev-sre-poc-v9
