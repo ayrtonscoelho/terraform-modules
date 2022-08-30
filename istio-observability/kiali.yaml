@@ -111,11 +111,6 @@ data:
       metrics_port: 9090
       port: 20001
       web_root: /kiali
-    grafana:
-      url:
-      in_cluster_url: http://kube-prometheus-stack-grafana.monitoring.svc.cluster.local
-    prometheus:
-      in_cluster_url: http://kube-prometheus-stack-prometheus.monitoring:9090      
 ...
 ---
 # Source: kiali-server/templates/role-viewer.yaml

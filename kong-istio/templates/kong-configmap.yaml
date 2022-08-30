@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kong-config
+  namespace: kong-istio
+data:
+  kong.yml: |
+    _format_version: "1.1"
+
+    services:
+    - name: plugin-test-srv
+        url: http://mockbin.com/request
+        routes:
+        - name: plugin-test-route
+            tags:
+            - plugin-test
+            methods:
+            - GET
+            paths:
+            - "/request($|/$)"
