@@ -1,26 +1,3 @@
-#ES - Secret do AWS Manager referente a licenseKey do New Relic
-apiVersion: external-secrets.io/v1beta1
-kind: ExternalSecret
-metadata:
-  annotations:
-    "helm.sh/hook": pre-install
-  name: es-api-key
-  namespace: newrelic
-spec:
-  dataFrom:
-    - extract:
-        conversionStrategy: Default
-        decodingStrategy: None
-        key: new-relic-secret-test-sre
-  refreshInterval: 30s
-  secretStoreRef:
-    kind: ClusterSecretStore
-    name: aws-cluster-secret-store
-  target:
-    creationPolicy: Owner
-    deletionPolicy: Retain
-    name: nri-bundle-newrelic-infrastructure-license
----
 # Source: nri-bundle/charts/kube-state-metrics/templates/clusterrolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
