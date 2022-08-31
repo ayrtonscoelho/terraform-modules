@@ -1,0 +1,13 @@
+apiVersion: karpenter.k8s.aws/v1alpha1
+kind: AWSNodeTemplate
+metadata:
+  name: will-default
+  annotations:
+    # This is what defines this resource as a hook. Without this line, the
+    # job is considered part of the release.
+    "helm.sh/hook": post-install
+spec:
+  subnetSelector:
+    karpenter.sh/discovery/cluster: will-dev-sre-poc-v9
+  securityGroupSelector:
+    karpenter.sh/discovery/cluster: will-dev-sre-poc-v9
