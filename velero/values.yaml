@@ -437,13 +437,14 @@ schedules:
     #   myenv: foo
     # annotations:
     #   myenv: foo
-    schedule: "0 6 * * *"
+    schedule: "0 14 * * *"
     useOwnerReferencesInBackup: false
     template:
       ttl: "24h0m0s"
       #ttl: "0h05m0s"
       excludedNamespaces:
       - argocd
+      - argo-rollouts
       - calico-apiserver
       - calico-system
       - external-secrets
@@ -458,6 +459,8 @@ schedules:
       - reloader
       - tigera-operator
       - velero
+      - karpenter
+      - kong-istio
       includedNamespaces:
       - '*'
 #schedules: {}
