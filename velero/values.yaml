@@ -437,7 +437,8 @@ schedules:
     #   myenv: foo
     # annotations:
     #   myenv: foo
-    schedule: "0 14 * * *"
+    #schedule: "0 14 * * *"
+    schedule: "*/60 * * * *"
     useOwnerReferencesInBackup: false
     template:
       ttl: "24h0m0s"
