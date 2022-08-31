@@ -270,7 +270,7 @@ O Karpenter e seus manifestos são instalados via ArgoCD, então após subir o c
 
 Documentação completa -> https://karpenter.sh
 
-1- Certificar-se que as **Subnets** e **Security Groups** associados ao cluster possuem as seguintes **Tags** associadas: 
+1- Certificar-se que as **Subnets** associados ao cluster possuem as seguintes **Tags** associadas: 
 
 ```
 karpenter.sh/discovery/cluster: ${CLUSTER_NAME}
