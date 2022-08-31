@@ -1,77 +1,38 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Rollout
-metadata:
-  name: paulao-api-test
-  namespace: paulao-api-test
-  annotations:
-    reloader.stakater.com/auto: "true"
-  labels:
-    app.kubernetes.io/name: paulao-api-test
-spec:
-  replicas: 4
-  strategy:
-    canary:
-      steps:
-      - setWeight: 20
-      - pause: {duration: 60}
-      - setWeight: 40
-      - pause: {duration: 60}
-      - setWeight: 60
-      - pause: {duration: 60}
-      - setWeight: 80
-      - pause: {duration: 60}
-  revisionHistoryLimit: 2
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: paulao-api-test
-  template:
-    metadata:
-      labels:
-        app.kubernetes.io/name: paulao-api-test
-    spec:
-      containers:
-      - name: paulao-api-test
-        envFrom:
-          - configMapRef:
-              name: paulao-api-test-configmap
-              optional: false
-          - secretRef:
-              name: paulao-api-test-secrets
-              optional: false        
-        image: >-
-          142401413602.dkr.ecr.sa-east-1.amazonaws.com/ecr-flask-api-example:paulo-teste-newrelic-d98d1b6fc15df3cd1830d459db01e1c584d0113c
-        livenessProbe:
-          httpGet:
-            path: /appVersion
-            port: 8000        
-          initialDelaySeconds: 20
-        readinessProbe:
-          httpGet:
-            path: /appVersion
-            port: 8000        
-          initialDelaySeconds: 20                
-        ports:
-          - name: http
-            containerPort: 8000
-            protocol: TCP
-        resources:
-          limits:
-            cpu: 200m
-            memory: 300Mi
-          requests:
-            cpu: 150m
-            memory: 200Mi
-        imagePullPolicy: IfNotPresent
-        # volumeMounts:
-        # - name: persistent-storage
-        #   mountPath: /app
-          
-      restartPolicy: Always
-      serviceAccountName: paulao-api-test
-      serviceAccount: paulao-api-test
-      dnsPolicy: ClusterFirst
-      schedulerName: default-scheduler
-      # volumes:
-      # - name: persistent-storage
-      #   persistentVolumeClaim:
-      #     claimName: paulao-api-test-pvc
+# apiVersion: argoproj.io/v1alpha1
+# kind: Rollout
+# metadata:
+#   name: paulao-api-test
+#   namespace: paulao-api-test
+#   annotations:
+#     reloader.stakater.com/auto: "true"
+#   labels:
+#     app.kubernetes.io/name: paulao-api-test
+# spec:
+#   replicas: 4
+#   strategy:
+#     canary:
+#       steps:
+#       - setWeight: 20
+#       - pause: {duration: 60}
+#       - setWeight: 40
+#       - pause: {duration: 60}
+#       - setWeight: 60
+#       - pause: {duration: 60}
+#       - setWeight: 80
+#       - pause: {duration: 60}
+#   selector:
+#     matchLabels:
+#       app.kubernetes.io/name: paulao-api-test
+#   workloadRef: 
+#     apiVersion: apps/v1
+#     kind: Deployment
+#     name: paulao-api-test
+#     # namespace: paulao-api-test
+#   # Minimum number of seconds for which a newly created pod should be ready
+#   # without any of its container crashing, for it to be considered available.
+#   # Defaults to 0 (pod will be considered available as soon as it is ready)
+#   minReadySeconds: 30
+
+#   # The number of old ReplicaSets to retain.
+#   # Defaults to 10
+#   revisionHistoryLimit: 3    
