@@ -122,8 +122,8 @@ admin:
   # Enable creating a Kubernetes service for the admin API
   # Disabling this is recommended for most ingress controller configurations
   # Enterprise users that wish to use Kong Manager with the controller should enable this
-  enabled: false
-  type: NodePort
+  enabled: true
+  type: ClusterIP
   # To specify annotations or labels for the admin service, add them to the respective
   # "annotations" or "labels" dictionaries below.
   annotations: {}
@@ -433,6 +433,7 @@ dblessConfig:
   #     #   - name: example
   #     #     paths:
   #     #     - "/example"
+
   ## Optionally specify any extra sidecar containers to be included in the
   ## migration jobs
   ## See https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core
@@ -448,6 +449,9 @@ dblessConfig:
 # created in k8s.  It uses CRDs for more fine grained control over routing and
 # for Kong specific configuration.
 ingressController:
+  
+  installCRDs: true
+
   enabled: true
   image:
     repository: kong/kubernetes-ingress-controller
