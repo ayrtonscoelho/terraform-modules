@@ -209,7 +209,7 @@ configuration:
     # `configuration.provider` will be used instead.
     #provider: aws
     # bucket is the name of the bucket to store backups in. Required.
-    bucket: will-dev-poc-velero-v1-velero-backups
+    bucket: will-dev-poc-velero-v2-velero-backups
     # caCert defines a base64 encoded CA bundle to use when verifying TLS connections to the provider. Optional.
     #caCert:
     # prefix is the directory under which all Velero data should be stored within the bucket. Optional.
@@ -326,7 +326,7 @@ serviceAccount:
     create: true
     name:
     annotations:
-      eks.amazonaws.com/role-arn: "arn:aws:iam::876897421480:role/will-dev-poc-velero-v1-sa-velero"
+      eks.amazonaws.com/role-arn: "arn:aws:iam::876897421480:role/will-dev-poc-velero-v2-sa-velero"
 
 # Info about the secret to be used by the Velero deployment, which
 # should contain credentials for the cloud provider IAM account you've
