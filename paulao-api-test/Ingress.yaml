@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: paulao-api-test
+  namespace: paulao-api-test
+  annotations:
+    konghq.com/plugins: 'rate-limiting-example'
+    konghq.com/https-redirect-status-code: '302'
+    konghq.com/protocols: https
+    konghq.com/strip-path: 'true'
+    kubernetes.io/ingress.class: kong-istio
+spec:
+  rules:
+    - host: argocd-sre.owill.com.br
+      http:
+        paths:
+          - path: /paulao-api-test
+            pathType: Prefix
+            backend:
+              service:
+                name: paulao-api-test
+                port:
+                  number: 8000

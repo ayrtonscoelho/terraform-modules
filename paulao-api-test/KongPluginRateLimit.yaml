@@ -1,0 +1,10 @@
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: rate-limiting-example
+  namespace: paulao-api-test
+config:
+  hour: 10000
+  minute: 60
+  policy: local
+plugin: rate-limiting
