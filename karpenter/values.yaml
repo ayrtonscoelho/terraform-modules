@@ -1,8 +1,8 @@
 karpenter:
   serviceAccount:
     annotations:
-      eks.amazonaws.com/role-arn: "arn:aws:iam::876897421480:role/will-dev-sre-poc-v9-sa-karpenter"
-  clusterName: "will-dev-sre-poc-v9"
+      eks.amazonaws.com/role-arn: "arn:aws:iam::876897421480:role/will-dev-sre-poc-v10-sa-karpenter"
+  clusterName: "will-dev-sre-poc-v10"
   clusterEndpoint: "https://A74297C716E6FAA3C171617D56730C8F.gr7.us-east-1.eks.amazonaws.com"
   aws:
       defaultInstanceProfile: "karpenter-nodegroup-iam"
