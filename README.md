@@ -211,16 +211,19 @@ https://onenr.io/0bRmDrZGrwy
 ```
 
 
-### Aplicação teste ./paulao-api-test
+### Aplicação teste paulao-api-test
 
 
 Aplicar o manifesto abaixo para subir a API utilizando os seguintes workloads defaults:
 
--> External Secret
+- External Secret
 
--> KEDA
+- Reloader
 
--> NewRelic
+- KEDA
+
+- NewRelic
+
 
 ```
 apiVersion: argoproj.io/v1alpha1
@@ -258,4 +261,57 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ApplyOutOfSyncOnly=true
+  ```
+
+
+### Karpenter (Node Autoscaling)
+
+O Karpenter e seus manifestos são instalados via ArgoCD, então após subir o cluster só será necessário executar os testes.
+
+Documentação completa -> https://karpenter.sh
+
+1- Certificar-se que as **Subnets** e **Security Groups** associados ao cluster possuem as seguintes **Tags** associadas: 
+
 ```
+karpenter.sh/discovery/cluster: ${CLUSTER_NAME}
+```
+
+2- Aplicar o manifesto para criar um deployment de teste.
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inflate
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: inflate
+  template:
+    metadata:
+      labels:
+        app: inflate
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+        - name: inflate
+          image: public.ecr.aws/eks-distro/kubernetes/pause:3.2
+          resources:
+            requests:
+              cpu: 1
+  ```
+
+3- Executar o comando para aumentar a quantidade de replicas do deployment criado e forçar scaling de **nodes**.
+
+```
+kubectl scale deployment inflate --replicas 15
+  ```
+
+4- Executar o comando para visualizar os logs do Karpenter e validar o funcionamento.
+
+```
+kubectl logs -f -n karpenter -l app.kubernetes.io/name=karpenter -c controller
+  ```
+
+5- Verificar se os **nodes** subiram e se os **pods do deployment** também.
