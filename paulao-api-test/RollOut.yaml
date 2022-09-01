@@ -8,18 +8,23 @@ metadata:
   labels:
     app.kubernetes.io/name: paulao-api-test
 spec:
-  strategy:
-    canary:
-      steps:
-      - setWeight: 20
-      - pause: {duration: 60}
-      - setWeight: 40
-      - pause: {duration: 60}
-      - setWeight: 60
-      - pause: {duration: 60}
-      - setWeight: 80
-      - pause: {duration: 60}
-  workloadRef: 
+  replicas: 8
+  workloadRef:
     apiVersion: apps/v1
     kind: Deployment
     name: paulao-api-test
+  strategy:
+    canary:
+      steps:
+        - setWeight: 20
+        - pause:
+            duration: 60
+        - setWeight: 40
+        - pause:
+            duration: 60
+        - setWeight: 60
+        - pause:
+            duration: 60
+        - setWeight: 80
+        - pause:
+            duration: 60
