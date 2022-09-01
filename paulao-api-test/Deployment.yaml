@@ -56,6 +56,13 @@ spec:
       serviceAccount: paulao-api-test
       dnsPolicy: ClusterFirst
       schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 20%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
       # volumes:
       # - name: persistent-storage
       #   persistentVolumeClaim:
