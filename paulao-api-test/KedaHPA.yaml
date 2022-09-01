@@ -30,5 +30,5 @@ spec:
           FROM Metric WHERE (entity.guid =
           'MzUwMjYwNnxBUE18QVBQTElDQVRJT058MTMyMDAxMzc1Mw') AND (transactionType
           = 'Web') since 1 minute ago
-        threshold: '500'
+        threshold: 1000
       type: new-relic
