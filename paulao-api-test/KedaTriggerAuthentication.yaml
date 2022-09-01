@@ -1,16 +1,16 @@
-# apiVersion: keda.sh/v1alpha1
-# kind: TriggerAuthentication
-# metadata:
-#   name: keda-trigger-auth-new-relic
-#   namespace: paulao-api-test
-# spec:
-#   secretTargetRef:
-#     - key: apiKey
-#       name: paulo-keda-newrelic
-#       parameter: queryKey
-#     - key: account
-#       name: paulo-keda-newrelic
-#       parameter: account
-#     - key: region
-#       name: paulo-keda-newrelic
-#       parameter: region
+apiVersion: keda.sh/v1alpha1
+kind: TriggerAuthentication
+metadata:
+  name: keda-trigger-auth-new-relic
+  namespace: paulao-api-test
+spec:
+  secretTargetRef:
+    - key: apiKey
+      name: paulo-keda-newrelic
+      parameter: queryKey
+    - key: account
+      name: paulo-keda-newrelic
+      parameter: account
+    - key: region
+      name: paulo-keda-newrelic
+      parameter: region
