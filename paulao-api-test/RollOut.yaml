@@ -6,7 +6,7 @@ metadata:
   annotations:
     reloader.stakater.com/auto: "true"
   labels:
-    app.kubernetes.io/name: paulao-api-test
+    app: paulao-api-test
 spec:
   replicas: 2
   workloadRef:

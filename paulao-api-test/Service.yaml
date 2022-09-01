@@ -4,12 +4,12 @@ metadata:
   name: paulao-api-test
   namespace: paulao-api-test
   labels:
-    app.kubernetes.io/name: paulao-api-test
+    app: paulao-api-test
 spec:
   ports:
     - protocol: TCP
       port: 8000
       targetPort: 8000
   selector:
-    app.kubernetes.io/name: paulao-api-test
+    app: paulao-api-test
   type: ClusterIP
