@@ -8,7 +8,7 @@ metadata:
   labels:
     app.kubernetes.io/name: paulao-api-test
 spec:
-  replicas: 8
+  replicas: 2
   workloadRef:
     apiVersion: apps/v1
     kind: Deployment
