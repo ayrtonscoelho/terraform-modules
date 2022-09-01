@@ -8,7 +8,6 @@ metadata:
   labels:
     app.kubernetes.io/name: paulao-api-test
 spec:
-  replicas: 2
   strategy:
     canary:
       steps:
@@ -27,12 +26,3 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: paulao-api-test
-    # namespace: paulao-api-test
-  # Minimum number of seconds for which a newly created pod should be ready
-  # without any of its container crashing, for it to be considered available.
-  # Defaults to 0 (pod will be considered available as soon as it is ready)
-  minReadySeconds: 30
-
-  # The number of old ReplicaSets to retain.
-  # Defaults to 10
-  revisionHistoryLimit: 3    
