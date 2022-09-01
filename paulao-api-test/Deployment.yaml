@@ -42,10 +42,10 @@ spec:
             protocol: TCP
         resources:
           limits:
-            cpu: 200m
+            cpu: 2
             memory: 300Mi
           requests:
-            cpu: 150m
+            cpu: 1
             memory: 200Mi
         imagePullPolicy: IfNotPresent
         # volumeMounts:

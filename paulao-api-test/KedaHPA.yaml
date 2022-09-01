@@ -6,8 +6,8 @@ metadata:
   name: paulao-api-test
   namespace: paulao-api-test
 spec:
-  maxReplicaCount: 16
-  minReplicaCount: 8
+  maxReplicaCount: 40
+  minReplicaCount: 5
   scaleTargetRef:
     apiVersion: argoproj.io/v1alpha1
     kind: Rollout
