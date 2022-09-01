@@ -18,13 +18,13 @@ spec:
       steps:
         - setWeight: 20
         - pause:
-            duration: 60
+            duration: 30
         - setWeight: 40
         - pause:
-            duration: 60
+            duration: 30
         - setWeight: 60
         - pause:
-            duration: 60
+            duration: 30
         - setWeight: 80
         - pause:
-            duration: 60
+            duration: 30
