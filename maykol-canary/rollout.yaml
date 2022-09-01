@@ -3,7 +3,7 @@ kind: Rollout
 metadata:
   name: rollout-ref-deployment
 spec:
-  replicas: 5
+  replicas: 8
   workloadRef:
     apiVersion: apps/v1
     kind: Deployment
@@ -12,4 +12,14 @@ spec:
     canary:
       steps:
         - setWeight: 20
-        - pause: {duration: 10s}
+        - pause:
+            duration: 60
+        - setWeight: 40
+        - pause:
+            duration: 60
+        - setWeight: 60
+        - pause:
+            duration: 60
+        - setWeight: 80
+        - pause:
+            duration: 60
