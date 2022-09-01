@@ -7,7 +7,7 @@ metadata:
   namespace: paulao-api-test
 spec:
   maxReplicaCount: 40
-  minReplicaCount: 5
+  minReplicaCount: 2
   scaleTargetRef:
     apiVersion: argoproj.io/v1alpha1
     kind: Rollout
@@ -29,6 +29,6 @@ spec:
           SELECT count(apm.service.transaction.duration) as 'Web throughput'
           FROM Metric WHERE (entity.guid =
           'MzUwMjYwNnxBUE18QVBQTElDQVRJT058MTMyMDAxMzc1Mw') AND (transactionType
-          = 'Web') since 1 minute ago
-        threshold: '1000'
+          = 'Web') since 2 minute ago
+        threshold: '300'
       type: new-relic
