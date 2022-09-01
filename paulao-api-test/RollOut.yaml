@@ -19,9 +19,6 @@ spec:
       - pause: {duration: 60}
       - setWeight: 80
       - pause: {duration: 60}
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: paulao-api-test
   workloadRef: 
     apiVersion: apps/v1
     kind: Deployment
