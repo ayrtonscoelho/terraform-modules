@@ -249,7 +249,7 @@ proxy:
     
     #"service.beta.kubernetes.io/aws-load-balancer-scheme": "internal"
     #"service.beta.kubernetes.io/aws-load-balancer-internal": "true"
-    #"service.beta.kubernetes.io/aws-load-balancer-subnets": "subnet-0477d50b8dd22d312, subnet-0efb610393c8bf5aa, subnet-001b3e7f0820cb1ab"  
+    "service.beta.kubernetes.io/aws-load-balancer-subnets": "subnet-0477d50b8dd22d312, subnet-0efb610393c8bf5aa, subnet-001b3e7f0820cb1ab"  
 
 
 
