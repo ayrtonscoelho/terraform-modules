@@ -247,6 +247,9 @@ proxy:
     "service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags": "Management=Managed by ArgoCD"
 
     #ANNOTATIONS TO DO
+    "service.beta.kubernetes.io/aws-load-balancer-access-log-enabled" : "true"
+    "service.beta.kubernetes.io/aws-load-balancer-access-log-s3-bucket-name": "will-access-logs-dev"
+    "service.beta.kubernetes.io/aws-load-balancer-access-log-s3-bucket-prefix": "alb"
     # Security Group
     # Logs S3
     # Preserve IP
