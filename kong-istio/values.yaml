@@ -240,7 +240,7 @@ proxy:
 
   annotations:
     "service.beta.kubernetes.io/aws-load-balancer-scheme": "internal"
-    "service.beta.kubernetes.io/aws-load-balancer-type": "nlb-ip"
+    "service.beta.kubernetes.io/aws-load-balancer-type": "nlb"
     #"service.beta.kubernetes.io/aws-load-balancer-type": "elb"
     "service.beta.kubernetes.io/aws-load-balancer-internal": "true"
     "service.beta.kubernetes.io/aws-load-balancer-backend-protocol": "ssl"
