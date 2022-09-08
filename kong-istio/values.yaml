@@ -250,6 +250,7 @@ proxy:
     "service.beta.kubernetes.io/aws-load-balancer-access-log-enabled" : "true"
     "service.beta.kubernetes.io/aws-load-balancer-access-log-s3-bucket-name": "will-access-logs-dev"
     "service.beta.kubernetes.io/aws-load-balancer-access-log-s3-bucket-prefix": "alb"
+    "service.beta.kubernetes.io/aws-load-balancer-ssl-negotiation-policy": "ELBSecurityPolicy-2016-08"
     # Security Group
     # Logs S3
     # Preserve IP
