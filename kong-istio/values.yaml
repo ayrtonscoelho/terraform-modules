@@ -241,8 +241,9 @@ proxy:
   annotations:
     #"service.beta.kubernetes.io/aws-load-balancer-internal": "false"
     "service.beta.kubernetes.io/aws-load-balancer-type": "nlb-ip"
-    "service.beta.kubernetes.io/aws-load-balancer-scheme": "internet-facing"
-    "service.beta.kubernetes.io/aws-load-balancer-subnets": "subnet-0477d50b8dd22d312, subnet-0efb610393c8bf5aa, subnet-001b3e7f0820cb1ab"
+    #"service.beta.kubernetes.io/aws-load-balancer-scheme": "internet-facing"
+    "service.beta.kubernetes.io/aws-load-balancer-scheme": "internal"
+    #"service.beta.kubernetes.io/aws-load-balancer-subnets": "subnet-0477d50b8dd22d312, subnet-0efb610393c8bf5aa, subnet-001b3e7f0820cb1ab"
     "service.beta.kubernetes.io/aws-load-balancer-backend-protocol": "ssl"
     "service.beta.kubernetes.io/aws-load-balancer-ssl-cert": "arn:aws:acm:us-east-1:876897421480:certificate/2877ad41-1874-435f-b7f6-e1f79edbb411"
     "service.beta.kubernetes.io/aws-load-balancer-ssl-ports": "kong-proxy-tls"
