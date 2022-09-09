@@ -699,6 +699,12 @@ alertmanager:
 ## Using default values from https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
 ##
 grafana:
+  # Use an existing secret for the admin user.
+  admin:
+    ## Name of the secret. Can be templated.
+    existingSecret: "grafana-secret"
+    userKey: admin-user
+    passwordKey: admin-password
   enabled: true
   persistence:
     type: pvc
@@ -735,7 +741,7 @@ grafana:
   ##
   defaultDashboardsTimezone: utc
 
-  adminPassword: prom-operator
+  # adminPassword: prom-operator
 
   rbac:
     ## If true, Grafana PSPs will be created
