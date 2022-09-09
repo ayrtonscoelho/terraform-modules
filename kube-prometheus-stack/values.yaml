@@ -1182,7 +1182,17 @@ grafana:
   ## Configure grafana datasources
   ## ref: http://docs.grafana.org/administration/provisioning/#datasources
   ##
-  datasources: {}
+  datasources:
+    apiVersion: 1
+    datasources:
+    - name: Prometheus
+      type: prometheus
+      uid: prometheus
+      url: http://kube-prometheus-stack-prometheus.monitoring:9090/
+      access: proxy
+      isDefault: true
+      jsonData:
+        timeInterval: 30s
   #  datasources.yaml:
   #    apiVersion: 1
   #    datasources:
