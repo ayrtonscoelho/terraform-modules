@@ -1450,7 +1450,7 @@ grafana:
       # label that the configmaps with datasources are marked with
       label: grafana_datasource
       # value of label that the configmaps with datasources are set to
-      labelValue: ""
+      labelValue: "1"
       # If specified, the sidecar will search for datasource config-maps inside this namespace.
       # Otherwise the namespace in which the sidecar is running will be used.
       # It's also possible to specify ALL to search in all namespaces
