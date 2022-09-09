@@ -1182,7 +1182,9 @@ grafana:
   ## Configure grafana datasources
   ## ref: http://docs.grafana.org/administration/provisioning/#datasources
   ##
+  #  datasources.yaml:
   datasources:
+   datasources.yaml:
     apiVersion: 1
     datasources:
     - name: Prometheus
