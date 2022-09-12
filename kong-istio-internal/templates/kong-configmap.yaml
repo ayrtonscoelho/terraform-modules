@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: kong-config
-  namespace: kong-istio
+  namespace: kong-istio-internal
 data:
   kong.yml: |
     _format_version: "1.1"
