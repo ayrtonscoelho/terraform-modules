@@ -249,10 +249,6 @@ proxy:
     "service.beta.kubernetes.io/aws-load-balancer-scheme": "internet-facing"
     "service.beta.kubernetes.io/aws-load-balancer-internal": "false"
 
-    #INTERNAL
-    #"service.beta.kubernetes.io/aws-load-balancer-scheme": "internal"
-    #"service.beta.kubernetes.io/aws-load-balancer-internal": "true"
-
     #DEPRECATED ELB
     #"service.beta.kubernetes.io/aws-load-balancer-type": "elb"
     #"service.beta.kubernetes.io/aws-load-balancer-ssl-negotiation-policy": "ELBSecurityPolicy-2016-08" #elb

@@ -245,10 +245,6 @@ proxy:
     "service.beta.kubernetes.io/aws-load-balancer-ssl-ports": "kong-proxy-tls"
     "service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags": "Management=Managed by ArgoCD"
     
-    #EXTERNAL (PROD)
-    #"service.beta.kubernetes.io/aws-load-balancer-scheme": "internet-facing"
-    #"service.beta.kubernetes.io/aws-load-balancer-internal": "false"
-
     #INTERNAL
     "service.beta.kubernetes.io/aws-load-balancer-scheme": "internal"
     "service.beta.kubernetes.io/aws-load-balancer-internal": "true"
