@@ -8,6 +8,6 @@ metadata:
     "helm.sh/hook": post-install
 spec:
   subnetSelector:
-    karpenter.sh/discovery/cluster: will-dev-sre-poc-v11
+    karpenter.sh/discovery/cluster: will-dev-sre-poc-v12
   securityGroupSelector:
-    karpenter.sh/discovery/cluster: will-dev-sre-poc-v11
+    karpenter.sh/discovery/cluster: will-dev-sre-poc-v12
