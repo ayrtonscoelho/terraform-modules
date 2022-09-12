@@ -521,7 +521,7 @@ ingressController:
     # caBundle:
     #   | Add the CA bundle content here.
 
-  ingressClass: kong-istio
+  ingressClass: kong-istio-external
   # annotations for IngressClass resource (Kubernetes 1.18+)
   ingressClassAnnotations: {}
 
