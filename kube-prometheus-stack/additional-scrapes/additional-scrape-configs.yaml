@@ -11,3 +11,7 @@
 - job_name: 'paulo'
   static_configs:
     - targets: ['paulo.paulo.svc.cluster.local:24231']    
+
+- job_name: 'paulo2'
+  static_configs:
+    - targets: ['paulo.paulo-dois.svc.cluster.local:24231']    
