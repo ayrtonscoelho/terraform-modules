@@ -1,0 +1,9 @@
+- job_name: 'fluentd'
+  static_configs:
+    - targets: ['fluentd-aggregator-prometheus-service.fluentd.svc.cluster.local:24231']
+
+- job_name: 'core-pix-api-gateway'
+  scrape_interval: 3s
+  metrics_path: '/metrics'
+  static_configs:
+    - targets: ['core-pix-api-gateway.core-pix-api-gateway.svc.cluster.local:8000']
