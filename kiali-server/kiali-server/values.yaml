@@ -81,10 +81,10 @@ external_services:
     enabled: true
   istio:
     root_namespace: ""
-  grafana:
-    url: http://kube-prometheus-stack-grafana.monitoring.svc.cluster.local:80
-  prometheus:
-    url: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
+  # grafana:
+  #   url: http://kube-prometheus-stack-grafana.monitoring.svc.cluster.local:80
+  # prometheus:
+  #   url: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
 identity: {}
   #cert_file:
   #private_key_file:
