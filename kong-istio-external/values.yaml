@@ -249,6 +249,8 @@ proxy:
     "service.beta.kubernetes.io/aws-load-balancer-internal": "false"
     "service.beta.kubernetes.io/aws-load-balancer-subnets": "subnet-0477d50b8dd22d312, subnet-0efb610393c8bf5aa, subnet-001b3e7f0820cb1ab"
     "alb.ingress.kubernetes.io/security-groups": "sg-066c3836da1063033, sg-0679154f13474c0b6, sg-06fd62bfb12fa2667, sg-081632a7b5e3145bb, sg-08e7d9973ec9ed401"
+    #teste
+    "service.beta.kubernetes.io/aws-load-balancer-manage-backend-security-group-rules": "false"
 
 
 
