@@ -13,6 +13,7 @@ spec:
   template:
     metadata:
       labels:
+        version: v1
         app: paulao-api-test
     spec:
       containers:
