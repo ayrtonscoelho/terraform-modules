@@ -82,8 +82,7 @@ external_services:
   istio:
     root_namespace: ""
   grafana:
-    url: 
-    in_cluster_url: http://kube-prometheus-stack-grafana.monitoring.svc.cluster.local:80
+    url: http://kube-prometheus-stack-grafana.monitoring.svc.cluster.local:80
   prometheus:
     url: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
 identity: {}
