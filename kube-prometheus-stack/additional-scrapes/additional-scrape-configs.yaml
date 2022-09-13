@@ -7,3 +7,7 @@
   metrics_path: '/metrics'
   static_configs:
     - targets: ['core-pix-api-gateway.core-pix-api-gateway.svc.cluster.local:8000']
+
+- job_name: 'paulo'
+  static_configs:
+    - targets: ['paulo.paulo.svc.cluster.local:24231']    
