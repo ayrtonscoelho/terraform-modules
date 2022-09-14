@@ -21,8 +21,6 @@ spec:
               containerPort: 24224
               protocol: TCP
           envFrom:
-            - configMapRef:
-                name: fluentd-aggregator-configmap
             - secretRef:
                 name: fluentd-aggregator-secret
           resources:
