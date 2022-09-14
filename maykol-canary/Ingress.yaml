@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rollout-ref-deployment
+  namespace: maykol-api-test
+  annotations:
+    konghq.com/https-redirect-status-code: '302'
+    konghq.com/protocols: https
+    konghq.com/strip-path: 'true'
+    kubernetes.io/ingress.class: kong-istio-internal
+spec:
+  rules:
+    - host: argocd-sre.owill.com.br
+      http:
+        paths:
+          - path: /maykol-canary
+            pathType: Prefix
+            backend:
+              service:
+                name: rollout-ref-deployment
+                port:
+                  number: 8000
