@@ -3,6 +3,10 @@ kind: Service
 metadata:
   name: fluentd-aggregator-prometheus-service
   namespace: fluentd
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/path: /metrics
+    prometheus.io/port: "24231"
 spec:
   ports:
     - name: 24224tcp-fluentd-aggregator-prometheus
