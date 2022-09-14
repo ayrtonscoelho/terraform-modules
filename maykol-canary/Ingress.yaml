@@ -10,10 +10,10 @@ metadata:
     kubernetes.io/ingress.class: kong-istio-internal
 spec:
   rules:
-    - host: argocd-sre.owill.com.br
+    - host: maykol-sre.owill.com.br
       http:
         paths:
-          - path: /maykol-canary
+          - path: /
             pathType: Prefix
             backend:
               service:
