@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-grafana-datasource
+  namespace: monitoring
+  labels:
+    grafana_datasource: '1'
+data:
+  datasource.yaml: |-
+    apiVersion: 1
+    datasources:
+    - name: Prometheus
+      type: prometheus
+      uid: prometheus
+      url: http://prometheus-server.monitoring/
+      access: proxy
+      isDefault: true
+      jsonData:
+        timeInterval: 30s
