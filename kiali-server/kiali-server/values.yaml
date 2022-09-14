@@ -109,3 +109,4 @@ server:
   metrics_enabled: true
   metrics_port: 9090
   web_root: ""
+  web_fqdn: argocd-sre.owill.com.br
