@@ -23,7 +23,7 @@
     ca_file: /etc/prom-certs/root-cert.pem
     cert_file: /etc/prom-certs/cert-chain.pem
     key_file: /etc/prom-certs/key.pem
-  insecure_skip_verify: true  # Prometheus does not support Istio security naming, thus skip verifying target pod certificate
+  # insecure_skip_verify: true  # Prometheus does not support Istio security naming, thus skip verifying target pod certificate
 
 - job_name: 'envoy-stats'
   metrics_path: /stats/prometheus
@@ -39,4 +39,4 @@
     ca_file: /etc/prom-certs/root-cert.pem
     cert_file: /etc/prom-certs/cert-chain.pem
     key_file: /etc/prom-certs/key.pem
-    insecure_skip_verify: true  # Prometheus does not support Istio security naming, thus skip verifying target pod certificate
+    # insecure_skip_verify: true  # Prometheus does not support Istio security naming, thus skip verifying target pod certificate
