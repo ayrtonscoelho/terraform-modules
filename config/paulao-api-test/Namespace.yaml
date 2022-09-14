@@ -3,5 +3,6 @@ kind: Namespace
 metadata:
   labels:
     istio-injection: enabled
+    sidecar.jaegertracing.io/inject: "true"
   name: paulao-api-test
 spec: {}
