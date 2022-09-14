@@ -1692,7 +1692,15 @@ prometheusOperator:
 
   ## Annotations to add to the operator deployment
   ##
-  annotations: {}
+  annotations: 
+    prometheus.istio.io/merge-metrics: "false"
+    traffic.sidecar.istio.io/includeInboundPorts: ""   # do not intercept any inbound ports
+    traffic.sidecar.istio.io/includeOutboundIPRanges: ""  # do not intercept any outbound traffic
+    proxy.istio.io/config: |  # configure an env variable `OUTPUT_CERTS` to write certificates to the given folder
+      proxyMetadata:
+        OUTPUT_CERTS: /etc/istio-output-certs
+    sidecar.istio.io/userVolumeMount: '[{"name": "istio-certs", "mountPath": "/etc/istio-output-certs"}]' # mount the shared volume at sidecar proxy
+  
 
   ## Labels to add to the operator pod
   ##
