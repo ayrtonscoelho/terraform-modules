@@ -8,10 +8,35 @@
   static_configs:
     - targets: ['core-pix-api-gateway.core-pix-api-gateway.svc.cluster.local:8000']
 
-- job_name: 'paulo'
-  static_configs:
-    - targets: ['paulo.paulo.svc.cluster.local:24231']    
+- job_name: 'istiod'
+  kubernetes_sd_configs:
+  - role: endpoints
+    namespaces:
+      names:
+      - istio-system
+  relabel_configs:
+  - source_labels: [__meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
+    action: keep
+    regex: istiod;http-monitoring
+  scheme: https
+  tls_config:
+    ca_file: /etc/prom-certs/root-cert.pem
+    cert_file: /etc/prom-certs/cert-chain.pem
+    key_file: /etc/prom-certs/key.pem
+  insecure_skip_verify: true  # Prometheus does not support Istio security naming, thus skip verifying target pod certificate
 
-- job_name: 'paulo2'
-  static_configs:
-    - targets: ['paulo.paulo-dois.svc.cluster.local:24231']    
+- job_name: 'envoy-stats'
+  metrics_path: /stats/prometheus
+  kubernetes_sd_configs:
+  - role: pod
+
+  relabel_configs:
+  - source_labels: [__meta_kubernetes_pod_container_port_name]
+    action: keep
+    regex: '.*-envoy-prom'    
+  scheme: https
+  tls_config:
+    ca_file: /etc/prom-certs/root-cert.pem
+    cert_file: /etc/prom-certs/cert-chain.pem
+    key_file: /etc/prom-certs/key.pem
+    insecure_skip_verify: true  # Prometheus does not support Istio security naming, thus skip verifying target pod certificate
