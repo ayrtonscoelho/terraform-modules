@@ -48,8 +48,8 @@ deployment:
   image_version: v1.56 # version like "v1.39" (see: https://quay.io/repository/kiali/kiali?tab=tags) or a digest hash
   ingress:
     additional_labels: {}
-    class_name: "nginx"
-    #enabled:
+    class_name: "kong-istio-internal"
+    enabled: true
     override_yaml:
       metadata: {}
   instance_name: "kiali"
