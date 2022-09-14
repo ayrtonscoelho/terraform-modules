@@ -2589,7 +2589,7 @@ prometheus:
     # Additional volumes on the output StatefulSet definition.
     volumes:
       - emptyDir:
-        medium: Memory
+          medium: Memory
         name: istio-certs
 
     # Additional VolumeMounts on the output StatefulSet definition.
