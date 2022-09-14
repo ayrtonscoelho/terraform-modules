@@ -8,7 +8,7 @@ metadata:
     konghq.com/https-redirect-status-code: '302'
     konghq.com/protocols: https
     konghq.com/strip-path: 'true'
-    kubernetes.io/ingress.class: kong-istio
+    kubernetes.io/ingress.class: kong-istio-internal
 spec:
   rules:
     - host: argocd-sre.owill.com.br
