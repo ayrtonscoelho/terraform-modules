@@ -23,6 +23,7 @@
     ca_file: /etc/prom-certs/root-cert.pem
     cert_file: /etc/prom-certs/cert-chain.pem
     key_file: /etc/prom-certs/key.pem
+    insecure_skip_verify: true
 
 - job_name: 'envoy-stats'
   metrics_path: /stats/prometheus
@@ -34,3 +35,8 @@
     action: keep
     regex: '.*-envoy-prom'    
   scheme: https
+  tls_config:
+    ca_file: /etc/prom-certs/root-cert.pem
+    cert_file: /etc/prom-certs/cert-chain.pem
+    key_file: /etc/prom-certs/key.pem
+    insecure_skip_verify: true
