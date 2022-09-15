@@ -15,7 +15,7 @@ spec:
         - /spec/replicas
       kind: Rollout
       name: maykol-canary
-      namespace: maykol-canary
+      namespace: maykol-api-test
   project: foundation-sre
   source:
     path: maykol-canary
