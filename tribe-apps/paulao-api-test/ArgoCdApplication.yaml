@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  name: paulao-api-test
+  namespace: argocd
+spec:
+  destination:
+    namespace: paulao-api-test
+    server: https://kubernetes.default.svc
+  ignoreDifferences:
+    - group: argoproj.io/v1alpha1
+      jsonPointers:
+        - /spec/replicas
+      kind: Rollout
+      name: paulao-api-test
+      namespace: paulao-api-test
+  project: foundation-sre
+  source:
+    path: paulao-api-test
+    repoURL: https://github.com/ayrtonscoelho/terraform-modules.git
+    targetRevision: argo_test
+  syncPolicy:
+    retry:
+      backoff:
+        duration: 10s
+        factor: 2
+        maxDuration: 3m0s
+      limit: 5
+    syncOptions:
+      - CreateNamespace=false
+      - ApplyOutOfSyncOnly=true
