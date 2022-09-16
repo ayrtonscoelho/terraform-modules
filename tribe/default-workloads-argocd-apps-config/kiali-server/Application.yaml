@@ -9,7 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default-workloads
   source:
-    path: default-workloads/kiali-server
+    path: default-workloads/kiali-server/kiali-server
     repoURL: https://github.com/ayrtonscoelho/terraform-modules.git
     targetRevision: refactoring
   syncPolicy:
