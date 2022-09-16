@@ -44,11 +44,18 @@ spec:
                   fieldPath: spec.nodeName
           resources:
             limits:
-              cpu: 500m
-              memory: 2560Mi
+              cpu: '400m'
+              memory: 1Gi
             requests:
-              cpu: 100m
-              memory: 1536Mi
+              cpu: 200m
+              memory: 0.5Gi          
+          # resources:
+          #   limits:
+          #     cpu: 500m
+          #     memory: 2560Mi
+          #   requests:
+          #     cpu: 100m
+          #     memory: 1536Mi
           volumeMounts:
             - name: varlog
               mountPath: /var/log
