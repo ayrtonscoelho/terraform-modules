@@ -53,7 +53,7 @@ serviceAccount:
   create: true
   # -- Annotations to add to the service account.
   annotations:
-    eks.amazonaws.com/role-arn: "arn:aws:iam::876897421480:role/will-dev-sre-poc-v13-sa-external-secrets"
+    eks.amazonaws.com/role-arn: "arn:aws:iam::876897421480:role/will-dev-sre-poc-v14-sa-external-secrets"
   # -- Extra Labels to add to the service account.
   extraLabels: {}
   # -- The name of the service account to use.
