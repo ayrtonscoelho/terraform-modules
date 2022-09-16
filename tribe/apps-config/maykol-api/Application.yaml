@@ -14,7 +14,7 @@ spec:
       kind: Rollout
       name: maykol-api
       namespace: maykol-api
-  project: tribe-applications
+  project: tribe-apps
   source:
     path: tribe/tribe-apps-manifests/maykol-api
     repoURL: https://github.com/ayrtonscoelho/terraform-modules.git
