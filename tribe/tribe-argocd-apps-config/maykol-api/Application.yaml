@@ -1,22 +1,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: maykol-canary
+  name: maykol-api
   namespace: argocd
 spec:
   destination:
-    namespace: maykol-canary
+    namespace: maykol-api
     server: https://kubernetes.default.svc
   ignoreDifferences:
     - group: argoproj.io/v1alpha1
       jsonPointers:
         - /spec/replicas
       kind: Rollout
-      name: maykol-canary
-      namespace: maykol-api-test
+      name: maykol-api
+      namespace: maykol-api
   project: tribe-applications
   source:
-    path: tribe/tribe-apps-manifests/maykol-canary
+    path: tribe/tribe-apps-manifests/maykol-api
     repoURL: https://github.com/ayrtonscoelho/terraform-modules.git
     targetRevision: refactoring
   syncPolicy:
