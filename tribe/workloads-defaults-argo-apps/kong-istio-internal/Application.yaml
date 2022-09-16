@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kong-istio-internal
+  namespace: argocd
+spec:
+  destination:
+    namespace: kong-istio-internal
+    server: https://kubernetes.default.svc
+  project: workloads-default
+  source:
+    path: workloads-defaults/kong-istio-internal
+    repoURL: https://github.com/ayrtonscoelho/terraform-modules.git
+    targetRevision: argo_test
+  syncPolicy:
+    retry:
+      backoff:
+        duration: 10s
+        factor: 2
+        maxDuration: 3m0s
+      limit: 5
+    syncOptions:
+      - CreateNamespace=false
+      - ApplyOutOfSyncOnly=true
