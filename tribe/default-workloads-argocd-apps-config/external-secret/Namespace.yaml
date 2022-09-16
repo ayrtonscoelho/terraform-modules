@@ -5,5 +5,5 @@ metadata:
     argocd.argoproj.io/sync-wave: "-1"
   labels:
     istio-injection: enabled
-  name: external-secret
+  name: external-secrets
 spec: {}
