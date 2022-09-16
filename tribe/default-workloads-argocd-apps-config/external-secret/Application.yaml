@@ -5,7 +5,7 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    namespace: external-secret
+    namespace: external-secrets
     server: https://kubernetes.default.svc
   project: default-workloads
   source:
