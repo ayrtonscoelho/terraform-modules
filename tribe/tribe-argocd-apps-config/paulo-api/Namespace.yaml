@@ -6,5 +6,5 @@ metadata:
   labels:
     istio-injection: enabled
     sidecar.jaegertracing.io/inject: "true"
-  name: maykol-api-test
+  name: paulo-api
 spec: {}

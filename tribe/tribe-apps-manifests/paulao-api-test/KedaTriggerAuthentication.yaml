@@ -2,7 +2,7 @@ apiVersion: keda.sh/v1alpha1
 kind: TriggerAuthentication
 metadata:
   name: keda-trigger-auth-new-relic
-  namespace: paulao-api-test
+  namespace: paulo-api
 spec:
   secretTargetRef:
     - key: apiKey

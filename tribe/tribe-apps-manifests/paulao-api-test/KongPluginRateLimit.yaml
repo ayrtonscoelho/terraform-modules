@@ -2,7 +2,7 @@
 # kind: KongPlugin
 # metadata:
 #   name: rate-limiting-example
-#   namespace: paulao-api-test
+#   namespace: paulo-api
 # config:
 #   hour: 10000
 #   minute: 60

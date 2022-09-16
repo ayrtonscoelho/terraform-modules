@@ -1,8 +1,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: paulao-api-test
-  namespace: paulao-api-test
+  name: paulo-api
+  namespace: paulo-api
   annotations:
     konghq.com/plugins: 'rate-limiting-example'
     konghq.com/https-redirect-status-code: '302'
@@ -14,10 +14,10 @@ spec:
     - host: argocd-sre.owill.com.br
       http:
         paths:
-          - path: /paulao-api-test
+          - path: /paulo-api
             pathType: Prefix
             backend:
               service:
-                name: paulao-api-test
+                name: paulo-api
                 port:
                   number: 8000

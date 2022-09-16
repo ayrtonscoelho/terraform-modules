@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: paulo-api
+  namespace: argocd
+spec:
+  destination:
+    namespace: paulo-api
+    server: https://kubernetes.default.svc
+  ignoreDifferences:
+    - group: argoproj.io/v1alpha1
+      jsonPointers:
+        - /spec/replicas
+      kind: Rollout
+      name: paulo-api
+      namespace: paulo-api
+  project: tribe-applications
+  source:
+    path: tribe/tribe-apps-manifests/maykol-canary/paulo-api
+    repoURL: https://github.com/ayrtonscoelho/terraform-modules.git
+    targetRevision: refactoring
+  syncPolicy:
+    retry:
+      backoff:
+        duration: 10s
+        factor: 2
+        maxDuration: 3m0s
+      limit: 5
+    syncOptions:
+      - CreateNamespace=false
+      - ApplyOutOfSyncOnly=true

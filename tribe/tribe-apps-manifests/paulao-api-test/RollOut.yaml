@@ -1,18 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: paulao-api-test
-  namespace: paulao-api-test
+  name: paulo-api
+  namespace: paulo-api
   annotations:
     reloader.stakater.com/auto: "true"
   labels:
-    app: paulao-api-test
+    app: paulo-api
 spec:
   replicas: 2
   workloadRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: paulao-api-test
+    name: paulo-api
   strategy:
     canary:
       steps:
