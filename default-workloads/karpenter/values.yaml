@@ -3,7 +3,7 @@ karpenter:
     annotations:
       eks.amazonaws.com/role-arn: "arn:aws:iam::876897421480:role/will-dev-sre-poc-v14-sa-karpenter"
   clusterName: "will-dev-sre-poc-v14"
-  clusterEndpoint: "https://33e598d1de677e62415cb8ed43c4caee.gr7.us-east-1.eks.amazonaws.com/"
+  clusterEndpoint: "https://30DD770A5F7664DE478D9E6A5A4CCA5C.gr7.us-east-1.eks.amazonaws.com/"
   aws:
       defaultInstanceProfile: "will-dev-sre-poc-v14-karpenter-nodegroup-iam"
   logLevel: "debug"
