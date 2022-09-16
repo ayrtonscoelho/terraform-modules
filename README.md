@@ -315,3 +315,75 @@ kubectl logs -f -n karpenter -l app.kubernetes.io/name=karpenter -c controller
   ```
 
 5- Verificar se os **nodes** subiram e se os **pods do deployment** também.
+
+
+
+# Nova forma de subir projetos:
+
+-> Default workloads (applications do Argo + Namespaces):
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tribe-argocd-apps-config
+  namespace: argocd
+spec:
+  destination:
+    namespace: default-workloads-argocd-apps-config
+    server: https://kubernetes.default.svc
+  project: tribe-applications
+  source:  
+    directory:
+      recurse: true
+      jsonnet: {}
+    path: tribe/default-workloads-argocd-apps-config
+    repoURL: https://github.com/ayrtonscoelho/terraform-modules.git
+    targetRevision: refactoring
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      backoff:
+        duration: 10s
+        factor: 2
+        maxDuration: 3m0s
+      limit: 5
+    syncOptions:
+      - CreateNamespace=false
+      - ApplyOutOfSyncOnly=true
+
+-> Default applications (tribe):
+
+
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tribe-argocd-apps-config
+  namespace: argocd
+spec:
+  destination:
+    namespace: tribe-argocd-apps-config
+    server: https://kubernetes.default.svc
+  project: tribe-applications
+  source:  
+    directory:
+      recurse: true
+      jsonnet: {}
+    path: tribe/tribe-argocd-apps-config
+    repoURL: https://github.com/ayrtonscoelho/terraform-modules.git
+    targetRevision: refactoring
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      backoff:
+        duration: 10s
+        factor: 2
+        maxDuration: 3m0s
+      limit: 5
+    syncOptions:
+      - CreateNamespace=false
+      - ApplyOutOfSyncOnly=true
