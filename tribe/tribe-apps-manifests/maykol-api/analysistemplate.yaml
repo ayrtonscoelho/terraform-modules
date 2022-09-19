@@ -17,8 +17,8 @@ spec:
         address: http://prometheus-server.monitoring
         query: |
           sum(irate(
-            istio_requests_total{reporter="source",destination_service=~"https://maykol-sre.owill.com.br/",response_code!~"5.*"}[5m]
+            istio_requests_total{reporter="source",destination_service=~"maykol-sre.owill.com.br/",response_code!~"5.*"}[5m]
           )) /
           sum(irate(
-            istio_requests_total{reporter="source",destination_service=~"https://maykol-sre.owill.com.br/"}[5m]
+            istio_requests_total{reporter="source",destination_service=~"maykol-sre.owill.com.br/"}[5m]
           ))
