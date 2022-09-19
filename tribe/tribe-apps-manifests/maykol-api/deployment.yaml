@@ -18,8 +18,8 @@ spec:
           #image: argoproj/rollouts-demo:blue
           #image: argoproj/rollouts-demo:red
           #image: argoproj/rollouts-demo:yellow
-          #image: 142401413602.dkr.ecr.sa-east-1.amazonaws.com/ecr-flask-api-example:maykol
-          image: 142401413602.dkr.ecr.sa-east-1.amazonaws.com/ecr-flask-api-example:maykol-red
+          image: 142401413602.dkr.ecr.sa-east-1.amazonaws.com/ecr-flask-api-example:maykol
+          #image: 142401413602.dkr.ecr.sa-east-1.amazonaws.com/ecr-flask-api-example:maykol-red
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
