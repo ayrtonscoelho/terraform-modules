@@ -2,6 +2,10 @@ kind: Service
 apiVersion: v1
 metadata:
   name: rollout-ref-deployment
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/path: /metrics
+    prometheus.io/port: "8080"
 spec:
   selector:
     app: rollout-ref-deployment

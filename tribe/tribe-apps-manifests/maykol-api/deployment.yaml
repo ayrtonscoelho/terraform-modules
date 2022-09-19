@@ -11,7 +11,7 @@ spec:
     metadata:
       labels:
         app: rollout-ref-deployment
-        version: v1
+        version: v2
     spec:
       containers:
         - name: rollouts-demo
