@@ -14,7 +14,7 @@ spec:
     failureLimit: 3
     provider:
       prometheus:
-        address: prometheus-server.monitoring.svc.cluster.local:80
+        address: http://prometheus-server.monitoring/
         query: |
           sum(irate(
             istio_requests_total{reporter="source",destination_service=~"https://maykol-sre.owill.com.br/",response_code!~"5.*"}[5m]
