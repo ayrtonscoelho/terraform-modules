@@ -4,7 +4,7 @@ metadata:
   name: success-rate
 spec:
   args:
-  - name: maykol-sre.owill.com.br
+  - name: https://maykol-sre.owill.com.br
   metrics:
   - name: success-rate
     interval: 5m
