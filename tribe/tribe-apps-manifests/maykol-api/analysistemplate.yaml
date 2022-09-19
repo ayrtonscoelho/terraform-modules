@@ -1,0 +1,19 @@
+# apiVersion: argoproj.io/v1alpha1
+# kind: AnalysisTemplate
+# metadata:
+#   name: success-rate
+# spec:
+#   args:
+#   - name: service-name
+#   metrics:
+#   - name: webmetric
+#     successCondition: result == true
+#     provider:
+#       web:
+#         #url: "http://my-server.com/api/v1/measurement?service={{ args.service-name }}"
+#         url: "https://maykol-sre.owill.com.br/"
+#         timeoutSeconds: 20 # defaults to 10 seconds
+#         headers:
+#           - key: Authorization
+#             value: "Bearer {{ args.api-token }}"
+#         jsonPath: "{$.data.ok}"
