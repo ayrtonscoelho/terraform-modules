@@ -13,7 +13,7 @@ spec:
       analysis:
         templates:
         - templateName: success-rate
-        startingStep: 2 # delay starting analysis run until setWeight: 40%
+        startingStep: 1 # delay starting analysis run until setWeight: 40%
         # args:
         # - name: service-name
         #   value: rollout-ref-deployment.maykol-api:80
