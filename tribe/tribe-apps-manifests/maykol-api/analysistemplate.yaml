@@ -4,7 +4,7 @@ metadata:
   name: success-rate
 spec:
   args:
-  - name: https://maykol-sre.owill.com.br
+  - name: rollout-ref-deployment.maykol-api:80
   metrics:
   - name: success-rate
     interval: 5m
@@ -14,7 +14,7 @@ spec:
     failureLimit: 3
     provider:
       prometheus:
-        address: http://rollout-ref-deployment.maykol-api
+        address: http://prometheus-server.monitoring.svc.cluster.local
         query: |
           sum(irate(
             istio_requests_total{reporter="source",destination_service=~"{{args.service-name}}",response_code!~"5.*"}[5m]
