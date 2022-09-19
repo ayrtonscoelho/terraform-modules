@@ -10,6 +10,13 @@ spec:
     name: rollout-ref-deployment
   strategy:
     canary:
+      analysis:
+        templates:
+        - templateName: success-rate
+        startingStep: 1 # delay starting analysis run until setWeight: 40%
+        args:
+        - name: service-name
+          value: maykol-sre.owill.com.br
       steps:
         - setWeight: 20
         - pause:
