@@ -18,9 +18,19 @@ spec:
           #image: argoproj/rollouts-demo:blue
           #image: argoproj/rollouts-demo:red
           #image: argoproj/rollouts-demo:yellow
-          image: 142401413602.dkr.ecr.sa-east-1.amazonaws.com/ecr-flask-api-example:maykol
+          image: 142401413602.dkr.ecr.sa-east-1.amazonaws.com/ecr-flask-api-example:maykol-blue
           #image: 142401413602.dkr.ecr.sa-east-1.amazonaws.com/ecr-flask-api-example:maykol-red
           imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080        
+            initialDelaySeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080        
+            initialDelaySeconds: 20  
           ports:
             - containerPort: 8080
           resources:
