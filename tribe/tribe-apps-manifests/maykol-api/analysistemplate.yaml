@@ -7,7 +7,7 @@ spec:
   - name: error-rate
     interval: 5m
     #successCondition: len(result) == 0 || result[0] > 0.95
-    successCondition: result[0] <= 0.20
+    failureCondition: result[0] >= 0.10
     failureLimit: 3
     provider:
       prometheus:
