@@ -5,7 +5,7 @@ metadata:
 spec:
   metrics:
   - name: error-rate
-    interval: 5m
+    interval: 2m
     #successCondition: len(result) == 0 || result[0] > 0.95
     failureCondition: result[0] >= 20
     failureLimit: 2
