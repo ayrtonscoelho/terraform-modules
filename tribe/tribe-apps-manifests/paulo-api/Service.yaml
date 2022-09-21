@@ -3,6 +3,10 @@ kind: Service
 metadata:
   name: paulo-api
   namespace: paulo-api
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/path: /metrics
+    prometheus.io/port: "8000"
   labels:
     app: paulo-api
 spec:
