@@ -26,7 +26,8 @@ spec:
               name: paulo-api-secrets
               optional: false        
         image: >-
-          142401413602.dkr.ecr.sa-east-1.amazonaws.com/ecr-flask-api-example:paulo-teste-newrelic-b50a71d77e56696ded86abb0d08d6a6796d2dc1e
+          142401413602.dkr.ecr.sa-east-1.amazonaws.com/ecr-flask-api-example:paulo-teste-newrelic-d8c1d03aba6b660c9ecd7d9c3725beaa60b9bb1e
+        # 142401413602.dkr.ecr.sa-east-1.amazonaws.com/ecr-flask-api-example:paulo-teste-newrelic-b50a71d77e56696ded86abb0d08d6a6796d2dc1e
         #v2: 142401413602.dkr.ecr.sa-east-1.amazonaws.com/ecr-flask-api-example:paulo-teste-newrelic-d98d1b6fc15df3cd1830d459db01e1c584d0113c
         #v1: 142401413602.dkr.ecr.sa-east-1.amazonaws.com/ecr-flask-api-example:paulo-teste-newrelic-b50a71d77e56696ded86abb0d08d6a6796d2dc1e
         livenessProbe:
