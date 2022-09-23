@@ -115,8 +115,8 @@ txtOwnerId: Z0606217KFJ9VW7JD937
 #txtSuffix: ""
 
 
-domainFilters: 
-  - "will-dev.local"
+# domainFilters: 
+#   - "will-dev.local"
 
 provider: aws
 
