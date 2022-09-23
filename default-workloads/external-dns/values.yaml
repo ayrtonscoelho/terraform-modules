@@ -22,7 +22,7 @@ serviceAccount:
   annotations:
   # The name of the service account to use.
     eks.amazonaws.com/role-arn: "arn:aws:iam::876897421480:role/will-dev-sre-poc-v14-sa-external-secrets"
-  name: "external-secrets"
+  name: "external-dns"
 
 rbac:
   # Specifies whether RBAC resources should be created
