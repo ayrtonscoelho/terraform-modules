@@ -19,10 +19,10 @@ serviceAccount:
   # Specifies whether a service account should be created
   create: true
   # Annotations to add to the service account
-  annotations: {}
+  annotations:
   # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
-  name: ""
+    eks.amazonaws.com/role-arn: "arn:aws:iam::876897421480:role/will-dev-sre-poc-v14-sa-external-secrets"
+  name: "external-secrets"
 
 rbac:
   # Specifies whether RBAC resources should be created
@@ -118,5 +118,5 @@ registry: txt
 domainFilters: 
   - "vcarrazzone.com.br"
 
-provider: cloudflare
+provider: aws
 
