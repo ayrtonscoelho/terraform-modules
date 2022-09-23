@@ -110,7 +110,7 @@ sources:
 policy: upsert-only
 
 registry: txt
-txtOwnerId: "Z0606217KFJ9VW7JD937"
+txtOwnerId: Z0606217KFJ9VW7JD937
 #txtPrefix: ""
 #txtSuffix: ""
 
