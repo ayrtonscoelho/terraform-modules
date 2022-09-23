@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rollout-ref-deployment
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: maykol-sre.will-dev.local
+    konghq.com/https-redirect-status-code: '302'
+    konghq.com/protocols: https
+    konghq.com/strip-path: 'true'
+    kubernetes.io/ingress.class: kong-istio-internal
+spec:
+  rules:
+    - host: maykol-sre.will-dev.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: rollout-ref-deployment
+                port:
+                  number: 80
