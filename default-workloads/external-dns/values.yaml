@@ -116,7 +116,7 @@ registry: txt
 
 
 domainFilters: 
-  - "vcarrazzone.com.br"
+  - "will-dev.local"
 
 provider: aws
 
