@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   name: rollout-ref-deployment
   annotations:
+    external-dns.alpha.kubernetes.io/hostname: maykol-sre.will-dev.local
     konghq.com/https-redirect-status-code: '302'
     konghq.com/protocols: https
     konghq.com/strip-path: 'true'
@@ -10,6 +11,16 @@ metadata:
 spec:
   rules:
     - host: maykol-sre.owill.com.br
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: rollout-ref-deployment
+                port:
+                  number: 80
+    - host: maykol-sre.will-dev.local
       http:
         paths:
           - path: /
