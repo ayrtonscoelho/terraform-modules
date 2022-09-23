@@ -110,7 +110,7 @@ sources:
 policy: upsert-only
 
 registry: txt
-#txtOwnerId: "external-dns"
+txtOwnerId: "Z0606217KFJ9VW7JD937"
 #txtPrefix: ""
 #txtSuffix: ""
 
