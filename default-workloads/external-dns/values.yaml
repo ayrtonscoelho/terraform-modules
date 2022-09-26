@@ -21,7 +21,7 @@ serviceAccount:
   # Annotations to add to the service account
   annotations:
   # The name of the service account to use.
-    eks.amazonaws.com/role-arn: "arn:aws:iam::876897421480:role/will-dev-sre-poc-v14-sa-external-dns"
+    eks.amazonaws.com/role-arn: "arn:aws:iam::607150308374:role/external-dns-test-sre"
   name: "external-dns"
 
 rbac:
