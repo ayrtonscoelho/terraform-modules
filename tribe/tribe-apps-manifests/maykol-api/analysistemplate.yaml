@@ -7,7 +7,7 @@ spec:
   - name: error-rate
     interval: 30s
     #successCondition: len(result) == 0 || result[0] > 0.95
-    failureCondition: result[0] >= 10
+    failureCondition: result[0] >= 0.10
     failureLimit: 2
     provider:
       prometheus:
@@ -18,7 +18,7 @@ spec:
           )) /
           sum(irate(
             istio_requests_total{reporter="source",destination_service=~"maykol-sre.owill.com.br"}[5m]
-          )) * 100
+          ))
 
 # apiVersion: argoproj.io/v1alpha1
 # kind: AnalysisTemplate
