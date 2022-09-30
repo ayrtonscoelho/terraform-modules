@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: rollout-ref-deployment
+  name: maykol-api
 spec:
   replicas: 4
   workloadRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: rollout-ref-deployment
+    name: maykol-api
   strategy:
     canary:
       analysis:
@@ -16,7 +16,7 @@ spec:
         startingStep: 1 # delay starting analysis run until setWeight: 40%
         # args:
         # - name: service-name
-        #   value: rollout-ref-deployment.maykol-api:80
+        #   value: maykol-api.maykol-api:80
       steps:
       - setWeight: 20
       - pause: {duration: 120}

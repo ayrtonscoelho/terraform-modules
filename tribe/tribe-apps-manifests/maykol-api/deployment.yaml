@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: rollout-ref-deployment
+  name: maykol-api
 spec:
   replicas: 0
   selector:
     matchLabels:
-      app: rollout-ref-deployment
+      app: maykol-api
   template:
     metadata:
       labels:
-        app: rollout-ref-deployment
-        version: v1
+        app: maykol-api
+        version: blue
     spec:
       containers:
         - name: rollouts-demo

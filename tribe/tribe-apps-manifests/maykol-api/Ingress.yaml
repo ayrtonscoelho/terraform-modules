@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: rollout-ref-deployment
+  name: maykol-api
   annotations:
     external-dns.alpha.kubernetes.io/hostname: maykol-sre.will-dev.local
     konghq.com/https-redirect-status-code: '302'
@@ -17,7 +17,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: rollout-ref-deployment
+                name: maykol-api
                 port:
                   number: 80
     - host: maykol-sre.will-dev.local
@@ -27,6 +27,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: rollout-ref-deployment
+                name: maykol-api
                 port:
                   number: 80
