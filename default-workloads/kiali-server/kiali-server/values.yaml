@@ -34,7 +34,15 @@ deployment:
   affinity:
     node: {}
     pod: {}
-    pod_anti: {}
+    pod_anti:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: app.kubernetes.io/name
+            operator: In
+            values:
+            -  kiali
+        topologyKey: "kubernetes.io/hostname"
   configmap_annotations: {}
   custom_secrets: []
   host_aliases: []
@@ -62,14 +70,14 @@ deployment:
   pod_annotations: {}
   pod_labels: {}
   priority_class_name: ""
-  replicas: 1
+  replicas: 2
   resources:
     requests:
-      cpu: "500m"
-      memory: "500Mi"
+      cpu: "250m"
+      memory: "250Mi"
     limits:
-      cpu: "1"
-      memory: "1Gi"
+      cpu: "512m"
+      memory: "512Mi"
   secret_name: "kiali"
   service_annotations: {}
   service_type: ""
