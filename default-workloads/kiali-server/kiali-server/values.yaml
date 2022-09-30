@@ -23,7 +23,7 @@ istio_namespace: "" # default is where Kiali is installed
 auth:
   openid: {}
   openshift: {}
-  strategy: ""
+  strategy: "anonymous"
 
 deployment:
   # This only limits what Kiali will attempt to see, but Kiali Service Account has permissions to see everything.
@@ -65,9 +65,10 @@ deployment:
   replicas: 1
   resources:
     requests:
-      cpu: "10m"
-      memory: "64Mi"
+      cpu: "500m"
+      memory: "500Mi"
     limits:
+      cpu: "1"
       memory: "1Gi"
   secret_name: "kiali"
   service_annotations: {}
