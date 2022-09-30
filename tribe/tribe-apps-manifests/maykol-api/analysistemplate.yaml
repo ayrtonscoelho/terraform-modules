@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AnalysisTemplate
 metadata:
-  name: error-rate
+  name: maykol-api-error-rate
 spec:
   metrics:
   - name: error-rate

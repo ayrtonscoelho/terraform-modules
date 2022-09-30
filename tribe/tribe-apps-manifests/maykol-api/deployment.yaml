@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: maykol-api
+  name: maykol-api-deployment
 spec:
   replicas: 0
   selector:

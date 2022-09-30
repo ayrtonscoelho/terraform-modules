@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: maykol-api
+  name: maykol-api-ingress
   annotations:
     external-dns.alpha.kubernetes.io/hostname: maykol-sre.will-dev.local
     konghq.com/https-redirect-status-code: '302'

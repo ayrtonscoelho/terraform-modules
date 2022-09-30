@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: maykol-api
+  name: maykol-api-rollout
 spec:
   replicas: 4
   workloadRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: maykol-api
+    name: maykol-api-deployment
   strategy:
     canary:
       analysis:
