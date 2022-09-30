@@ -17,7 +17,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: maykol-api
+                name: maykol-api-service
                 port:
                   number: 80
     - host: maykol-sre.will-dev.local
@@ -27,6 +27,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: maykol-api
+                name: maykol-api-service
                 port:
                   number: 80
