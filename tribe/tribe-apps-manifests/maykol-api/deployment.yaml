@@ -11,6 +11,7 @@ spec:
     metadata:
       labels:
         app: maykol-api
+        teste: maykol
         version: blue
         #version: red
     spec:
