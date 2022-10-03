@@ -1349,8 +1349,8 @@ pushgateway:
     type: ClusterIP
 
   ## pushgateway Deployment Strategy type
-  # strategy:
-  #   type: Recreate
+  strategy:
+    type: Recreate
 
   persistentVolume:
     ## If true, pushgateway will create/use a Persistent Volume Claim
