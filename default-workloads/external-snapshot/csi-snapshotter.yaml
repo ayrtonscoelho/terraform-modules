@@ -306,6 +306,13 @@ spec:
         image: gcr.io/k8s-staging-sig-storage/csi-snapshotter:v6.0.1
         imagePullPolicy: IfNotPresent
         name: csi-snapshotter
+        resources:
+          limits:
+            cpu: 30m
+            memory: 100Mi
+          requests:
+            cpu: 15m
+            memory: 50Mi          
         volumeMounts:
         - mountPath: /csi
           name: socket-dir
@@ -323,7 +330,7 @@ spec:
               fieldPath: spec.nodeName
         image: k8s.gcr.io/sig-storage/hostpathplugin:v1.8.0
         imagePullPolicy: IfNotPresent
-        name: hostpath
+        name: hostpath         
         securityContext:
           privileged: true
         volumeMounts:

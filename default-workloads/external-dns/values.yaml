@@ -88,7 +88,13 @@ extraVolumes: []
 
 extraVolumeMounts: []
 
-resources: {}
+resources:
+  limits:
+    cpu: 50m
+    memory: 150Mi
+  requests:
+    cpu: 25m
+    memory: 100Mi   
 
 nodeSelector: {}
 

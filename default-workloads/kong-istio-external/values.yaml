@@ -560,10 +560,10 @@ ingressController:
   resources:
     limits:
       cpu: 500m
-      memory: 300Mi
+      memory: 900Mi
     requests:
       cpu: 50m
-      memory: 128Mi
+      memory: 450Mi
 
 # -----------------------------------------------------------------------------
 # Postgres sub-chart parameters

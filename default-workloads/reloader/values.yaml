@@ -90,14 +90,14 @@ reloader:
 
     # Specify resource requests/limits for the deployment.
     # Example:
-    # resources:
-    #   limits:
-    #     cpu: "100m"
-    #     memory: "512Mi"
-    #   requests:
-    #     cpu: "10m"
-    #     memory: "128Mi"
-    resources: {}
+    resources:
+      limits:
+        cpu: 20m
+        memory: 50Mi
+      requests:
+        cpu: 10m
+        memory: 25Mi
+    # resources: {}
     pod:
       annotations: {}
     priorityClassName: ""

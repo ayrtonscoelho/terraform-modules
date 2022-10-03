@@ -27,18 +27,11 @@ spec:
                 name: fluentd-aggregator-secret
           resources:
             limits:
-              cpu: '400m'
+              cpu: 400m
               memory: 1Gi
             requests:
-              cpu: 200m
-              memory: 0.5Gi
-          # resources:
-          #   limits:
-          #     cpu: '1'
-          #     memory: 3Gi
-          #   requests:
-          #     cpu: 500m
-          #     memory: 2Gi
+              cpu: 250m
+              memory: 600Mi  
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           imagePullPolicy: Always

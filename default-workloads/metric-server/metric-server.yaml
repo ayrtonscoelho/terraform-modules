@@ -158,11 +158,14 @@ spec:
             port: https
             scheme: HTTPS
           initialDelaySeconds: 20
-          periodSeconds: 10
+          periodSeconds: 10          
         resources:
-          requests:
+          limits:
             cpu: 100m
             memory: 200Mi
+          requests:
+            cpu: 50m
+            memory: 100Mi
         securityContext:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true

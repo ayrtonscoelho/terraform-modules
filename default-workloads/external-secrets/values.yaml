@@ -1,4 +1,4 @@
-replicaCount: 1
+replicaCount: 2
 
 image:
   repository: ghcr.io/external-secrets/external-secrets
@@ -95,10 +95,13 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-resources: {}
-  # requests:
-  #   cpu: 10m
-  #   memory: 32Mi
+resources:
+  limits:
+    cpu: 50m
+    memory: 150Mi
+  requests:
+    cpu: 25m
+    memory: 100Mi   
 
 prometheus:
   # -- deprecated. will be removed with 0.7.0, use serviceMonitor instead.
@@ -142,7 +145,7 @@ webhook:
   certCheckInterval: "5m"
   # -- Specifices the lookaheadInterval for certificate validity
   lookaheadInterval: ""
-  replicaCount: 1
+  replicaCount: 2
   certDir: /tmp/certs
   # -- specifies whether validating webhooks should be created with failurePolicy: Fail or Ignore
   failurePolicy: Fail
@@ -239,16 +242,19 @@ webhook:
       # runAsNonRoot: true
       # runAsUser: 1000
 
-  resources: {}
-      # requests:
-      #   cpu: 10m
-      #   memory: 32Mi
+  resources:
+    limits:
+      cpu: 50m
+      memory: 150Mi
+    requests:
+      cpu: 25m
+      memory: 100Mi   
 
 certController:
   # -- Specifies whether a certificate controller deployment be created.
   create: true
   requeueInterval: "5m"
-  replicaCount: 1
+  replicaCount: 2
   image:
     repository: ghcr.io/external-secrets/external-secrets
     pullPolicy: IfNotPresent
@@ -335,10 +341,13 @@ certController:
       # runAsNonRoot: true
       # runAsUser: 1000
 
-  resources: {}
-      # requests:
-      #   cpu: 10m
-      #   memory: 32Mi
+  resources:
+    limits:
+      cpu: 50m
+      memory: 300Mi
+    requests:
+      cpu: 25m
+      memory: 150Mi   
 
 clusterSecretStore:
   name: aws-cluster-secret-store

@@ -14666,7 +14666,7 @@ metadata:
     app.kubernetes.io/part-of: argo-rollouts
   name: argo-rollouts
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app.kubernetes.io/name: argo-rollouts
@@ -14695,6 +14695,13 @@ spec:
           name: metrics
         - containerPort: 8080
           name: healthz
+        resources:
+          limits:
+            cpu: 50m
+            memory: 120Mi
+          requests:
+            cpu: 25m
+            memory: 60Mi          
         readinessProbe:
           failureThreshold: 3
           httpGet:

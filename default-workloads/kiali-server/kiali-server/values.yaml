@@ -117,5 +117,5 @@ server:
   port: 20001
   metrics_enabled: true
   metrics_port: 9090
-  web_root: ""
-  web_fqdn: argocd-sre.owill.com.br
+  web_root: "/"
+  web_fqdn: kiali-sre.owill.com.br
