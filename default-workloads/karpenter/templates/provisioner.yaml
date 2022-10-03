@@ -11,7 +11,8 @@ spec:
       values: ["on-demand", "spot"]
     - key: "node.kubernetes.io/instance-type"
       operator: In
-      values: ["t3.large", "t3.xlarge", "t3.2xlarge", "t3a.large", "t3a.xlarge", "t3a.2xlarge"]
+      # values: ["t3.large", "t3.xlarge", "t3.2xlarge", "t3a.large", "t3a.xlarge", "t3a.2xlarge"]
+      values: ["t3.xlarge", "t3.2xlarge", "t3a.large", "t3a.xlarge", "t3a.2xlarge"]
     - key: "topology.kubernetes.io/zone"
       operator: In
       values: ["us-east-1a", "us-east-1b", "us-east-1c"]
