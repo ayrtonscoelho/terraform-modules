@@ -1,27 +1,27 @@
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: newrelic
-#   namespace: argocd
-# spec:
-#   destination:
-#     namespace: newrelic
-#     server: https://kubernetes.default.svc
-#   project: default-workloads
-#   source:
-#     path: default-workloads/newrelic
-#     repoURL: https://github.com/ayrtonscoelho/terraform-modules.git
-#     targetRevision: refactoring
-#   syncPolicy:
-#     automated:
-#       prune: true
-#       selfHeal: true
-#     retry:
-#       backoff:
-#         duration: 10s
-#         factor: 2
-#         maxDuration: 3m0s
-#       limit: 5
-#     syncOptions:
-#       - CreateNamespace=false
-#       - ApplyOutOfSyncOnly=true
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: newrelic
+  namespace: argocd
+spec:
+  destination:
+    namespace: newrelic
+    server: https://kubernetes.default.svc
+  project: default-workloads
+  source:
+    path: default-workloads/newrelic
+    repoURL: https://github.com/ayrtonscoelho/terraform-modules.git
+    targetRevision: refactoring
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      backoff:
+        duration: 10s
+        factor: 2
+        maxDuration: 3m0s
+      limit: 5
+    syncOptions:
+      - CreateNamespace=false
+      - ApplyOutOfSyncOnly=true
