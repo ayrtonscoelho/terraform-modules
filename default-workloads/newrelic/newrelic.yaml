@@ -893,196 +893,196 @@ data:
       docker_enabled: false
     http_server_enabled: true
     http_server_port: 8003
----
+#---
 # Source: nri-bundle/charts/newrelic-infrastructure/templates/kubelet/daemonset.yaml
-apiVersion: apps/v1
-kind: DaemonSet
-metadata:
-  namespace: newrelic
-  labels:
-    app.kubernetes.io/instance: nri-bundle
-    app.kubernetes.io/name: newrelic-infrastructure
-    app.kubernetes.io/version: 3.4.0
-    helm.sh/chart: newrelic-infrastructure-3.7.4
-    mode: privileged
-  name: nri-bundle-nrk8s-kubelet
-spec:
-  updateStrategy: 
-    rollingUpdate:
-      maxUnavailable: 1
-    type: RollingUpdate
-  selector:
-    matchLabels:
-      app.kubernetes.io/instance: nri-bundle
-      app.kubernetes.io/name: newrelic-infrastructure
-      app.kubernetes.io/component: kubelet
-  template:
-    metadata:
-      annotations:
-        checksum/nri-kubernetes: 7aed9d900426c9810109aafd4eccbd62433a972894cf06845b578b54dcc2b221
-        checksum/agent-config: 0bcc79a4f9af30960d94170501ac61afc4440734c44de01392f47f4982d98d5b
-        checksum/license-secret: 8d0ae15490f899832648a084b9e1607dc60fdc32b5be2bf4d0838b75ddeca99b
-        checksum/integrations_config: 350f245c31d4969ccbfec0c654e645346b183b9c96db42eaa734b015510f0e96
-      labels:
-        app.kubernetes.io/instance: nri-bundle
-        app.kubernetes.io/name: newrelic-infrastructure
-        mode: privileged
-        app.kubernetes.io/component: kubelet
-    spec:
-      serviceAccountName: nri-bundle-newrelic-infrastructure
-      hostNetwork: false
-      dnsPolicy: ClusterFirstWithHostNet
-      containers:
-        - name: kubelet
-          image: "newrelic/nri-kubernetes:3.4.0"
-          imagePullPolicy: IfNotPresent
-          securityContext:
-            allowPrivilegeEscalation: false
-            readOnlyRootFilesystem: true
-            runAsGroup: 2000
-            runAsUser: 1000
-          env:
-            - name: "NRI_KUBERNETES_SINK_HTTP_PORT"
-              value: "8003"
-            - name: "NRI_KUBERNETES_CLUSTERNAME"
-              value: will-dev-sre-poc-v14
-            - name: "NRI_KUBERNETES_VERBOSE"
-              value: "false"
+# apiVersion: apps/v1
+# kind: DaemonSet
+# metadata:
+#   namespace: newrelic
+#   labels:
+#     app.kubernetes.io/instance: nri-bundle
+#     app.kubernetes.io/name: newrelic-infrastructure
+#     app.kubernetes.io/version: 3.4.0
+#     helm.sh/chart: newrelic-infrastructure-3.7.4
+#     mode: privileged
+#   name: nri-bundle-nrk8s-kubelet
+# spec:
+#   updateStrategy: 
+#     rollingUpdate:
+#       maxUnavailable: 1
+#     type: RollingUpdate
+#   selector:
+#     matchLabels:
+#       app.kubernetes.io/instance: nri-bundle
+#       app.kubernetes.io/name: newrelic-infrastructure
+#       app.kubernetes.io/component: kubelet
+#   template:
+#     metadata:
+#       annotations:
+#         checksum/nri-kubernetes: 7aed9d900426c9810109aafd4eccbd62433a972894cf06845b578b54dcc2b221
+#         checksum/agent-config: 0bcc79a4f9af30960d94170501ac61afc4440734c44de01392f47f4982d98d5b
+#         checksum/license-secret: 8d0ae15490f899832648a084b9e1607dc60fdc32b5be2bf4d0838b75ddeca99b
+#         checksum/integrations_config: 350f245c31d4969ccbfec0c654e645346b183b9c96db42eaa734b015510f0e96
+#       labels:
+#         app.kubernetes.io/instance: nri-bundle
+#         app.kubernetes.io/name: newrelic-infrastructure
+#         mode: privileged
+#         app.kubernetes.io/component: kubelet
+#     spec:
+#       serviceAccountName: nri-bundle-newrelic-infrastructure
+#       hostNetwork: false
+#       dnsPolicy: ClusterFirstWithHostNet
+#       containers:
+#         - name: kubelet
+#           image: "newrelic/nri-kubernetes:3.4.0"
+#           imagePullPolicy: IfNotPresent
+#           securityContext:
+#             allowPrivilegeEscalation: false
+#             readOnlyRootFilesystem: true
+#             runAsGroup: 2000
+#             runAsUser: 1000
+#           env:
+#             - name: "NRI_KUBERNETES_SINK_HTTP_PORT"
+#               value: "8003"
+#             - name: "NRI_KUBERNETES_CLUSTERNAME"
+#               value: will-dev-sre-poc-v14
+#             - name: "NRI_KUBERNETES_VERBOSE"
+#               value: "false"
 
-            - name: "NRI_KUBERNETES_NODENAME"
-              valueFrom:
-                fieldRef:
-                  apiVersion: "v1"
-                  fieldPath: "spec.nodeName"
-            # Required to connect to the kubelet
-            - name: "NRI_KUBERNETES_NODEIP"
-              valueFrom:
-                fieldRef:
-                  apiVersion: "v1"
-                  fieldPath: "status.hostIP"
-          volumeMounts:
-            - name: nri-kubernetes-config
-              mountPath: /etc/newrelic-infra/nri-kubernetes.yml
-              subPath: nri-kubernetes.yml
-          resources: 
-            limits:
-              cpu: 150m
-              memory: 300M
-            requests:
-              cpu: 100m
-              memory: 150M
-        - name: agent
-          image: "newrelic/infrastructure-bundle:2.8.20"
-          args: [ "newrelic-infra" ]
-          imagePullPolicy: IfNotPresent
-          securityContext:
-            allowPrivilegeEscalation: true
-            privileged: true
-            readOnlyRootFilesystem: true
-            runAsGroup: 0
-            runAsUser: 0
-          ports:
-            - containerPort: 8003
-          env:
-            - name: NRIA_LICENSE_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: nri-bundle-newrelic-infrastructure-license
-                  key: licenseKey
+#             - name: "NRI_KUBERNETES_NODENAME"
+#               valueFrom:
+#                 fieldRef:
+#                   apiVersion: "v1"
+#                   fieldPath: "spec.nodeName"
+#             # Required to connect to the kubelet
+#             - name: "NRI_KUBERNETES_NODEIP"
+#               valueFrom:
+#                 fieldRef:
+#                   apiVersion: "v1"
+#                   fieldPath: "status.hostIP"
+#           volumeMounts:
+#             - name: nri-kubernetes-config
+#               mountPath: /etc/newrelic-infra/nri-kubernetes.yml
+#               subPath: nri-kubernetes.yml
+#           resources: 
+#             limits:
+#               cpu: 150m
+#               memory: 300M
+#             requests:
+#               cpu: 100m
+#               memory: 150M
+#         - name: agent
+#           image: "newrelic/infrastructure-bundle:2.8.20"
+#           args: [ "newrelic-infra" ]
+#           imagePullPolicy: IfNotPresent
+#           securityContext:
+#             allowPrivilegeEscalation: true
+#             privileged: true
+#             readOnlyRootFilesystem: true
+#             runAsGroup: 0
+#             runAsUser: 0
+#           ports:
+#             - containerPort: 8003
+#           env:
+#             - name: NRIA_LICENSE_KEY
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: nri-bundle-newrelic-infrastructure-license
+#                   key: licenseKey
 
-            - name: "NRIA_OVERRIDE_HOSTNAME_SHORT"
-              valueFrom:
-                fieldRef:
-                  apiVersion: "v1"
-                  fieldPath: "spec.nodeName"
+#             - name: "NRIA_OVERRIDE_HOSTNAME_SHORT"
+#               valueFrom:
+#                 fieldRef:
+#                   apiVersion: "v1"
+#                   fieldPath: "spec.nodeName"
 
-            - name: "NRIA_OVERRIDE_HOSTNAME"
-              valueFrom:
-                fieldRef:
-                  apiVersion: "v1"
-                  fieldPath: "spec.nodeName"
+#             - name: "NRIA_OVERRIDE_HOSTNAME"
+#               valueFrom:
+#                 fieldRef:
+#                   apiVersion: "v1"
+#                   fieldPath: "spec.nodeName"
 
-            - name: "NRI_KUBERNETES_NODE_NAME"
-              valueFrom:
-                fieldRef:
-                  apiVersion: "v1"
-                  fieldPath: "spec.nodeName"
-            - name: "CLUSTER_NAME"
-              value: will-dev-sre-poc-v14
-            - name: "NRIA_PASSTHROUGH_ENVIRONMENT"
-              value: "CLUSTER_NAME"
-            - name: "NRIA_HOST"
-              valueFrom:
-                fieldRef:
-                  apiVersion: "v1"
-                  fieldPath: "status.hostIP"
-          volumeMounts:
-            - name: config
-              mountPath: /etc/newrelic-infra.yml
-              subPath: newrelic-infra.yml
-            - name: nri-integrations-cfg-volume
-              mountPath: /etc/newrelic-infra/integrations.d/
-            - name: dev
-              mountPath: /dev
-            - name: host-docker-socket
-              mountPath: /var/run/docker.sock
-            - name: log
-              mountPath: /var/log
-            - name: host-volume
-              mountPath: /host
-              readOnly: true
-            - mountPath: /var/db/newrelic-infra/data
-              name: agent-tmpfs-data
-            - mountPath: /var/db/newrelic-infra/user_data
-              name: agent-tmpfs-user-data
-            - mountPath: /tmp
-              name: agent-tmpfs-tmp
-          resources: 
-            limits:
-              cpu: 150m
-              memory: 300M
-            requests:
-              cpu: 100m
-              memory: 150M
-      volumes:
-        - name: dev
-          hostPath:
-            path: /dev
-        - name: host-docker-socket
-          hostPath:
-            path: /var/run/docker.sock
-        - name: log
-          hostPath:
-            path: /var/log
-        - name: host-volume
-          hostPath:
-            path: /
-        - name: agent-tmpfs-data
-          emptyDir: {}
-        - name: agent-tmpfs-user-data
-          emptyDir: {}
-        - name: agent-tmpfs-tmp
-          emptyDir: {}
-        - name: nri-kubernetes-config
-          configMap:
-            name: nri-bundle-nrk8s-kubelet
-            items:
-              - key: nri-kubernetes.yml
-                path: nri-kubernetes.yml
-        - name: config
-          configMap:
-            name: nri-bundle-nrk8s-agent-kubelet
-            items:
-              - key: newrelic-infra.yml
-                path: newrelic-infra.yml
-        - name: nri-integrations-cfg-volume
-          configMap:
-            name: nri-bundle-nrk8s-integrations-cfg
-      tolerations:
-        - effect: NoSchedule
-          operator: Exists
-        - effect: NoExecute
-          operator: Exists
+#             - name: "NRI_KUBERNETES_NODE_NAME"
+#               valueFrom:
+#                 fieldRef:
+#                   apiVersion: "v1"
+#                   fieldPath: "spec.nodeName"
+#             - name: "CLUSTER_NAME"
+#               value: will-dev-sre-poc-v14
+#             - name: "NRIA_PASSTHROUGH_ENVIRONMENT"
+#               value: "CLUSTER_NAME"
+#             - name: "NRIA_HOST"
+#               valueFrom:
+#                 fieldRef:
+#                   apiVersion: "v1"
+#                   fieldPath: "status.hostIP"
+#           volumeMounts:
+#             - name: config
+#               mountPath: /etc/newrelic-infra.yml
+#               subPath: newrelic-infra.yml
+#             - name: nri-integrations-cfg-volume
+#               mountPath: /etc/newrelic-infra/integrations.d/
+#             - name: dev
+#               mountPath: /dev
+#             - name: host-docker-socket
+#               mountPath: /var/run/docker.sock
+#             - name: log
+#               mountPath: /var/log
+#             - name: host-volume
+#               mountPath: /host
+#               readOnly: true
+#             - mountPath: /var/db/newrelic-infra/data
+#               name: agent-tmpfs-data
+#             - mountPath: /var/db/newrelic-infra/user_data
+#               name: agent-tmpfs-user-data
+#             - mountPath: /tmp
+#               name: agent-tmpfs-tmp
+#           resources: 
+#             limits:
+#               cpu: 150m
+#               memory: 300M
+#             requests:
+#               cpu: 100m
+#               memory: 150M
+#       volumes:
+#         - name: dev
+#           hostPath:
+#             path: /dev
+#         - name: host-docker-socket
+#           hostPath:
+#             path: /var/run/docker.sock
+#         - name: log
+#           hostPath:
+#             path: /var/log
+#         - name: host-volume
+#           hostPath:
+#             path: /
+#         - name: agent-tmpfs-data
+#           emptyDir: {}
+#         - name: agent-tmpfs-user-data
+#           emptyDir: {}
+#         - name: agent-tmpfs-tmp
+#           emptyDir: {}
+#         - name: nri-kubernetes-config
+#           configMap:
+#             name: nri-bundle-nrk8s-kubelet
+#             items:
+#               - key: nri-kubernetes.yml
+#                 path: nri-kubernetes.yml
+#         - name: config
+#           configMap:
+#             name: nri-bundle-nrk8s-agent-kubelet
+#             items:
+#               - key: newrelic-infra.yml
+#                 path: newrelic-infra.yml
+#         - name: nri-integrations-cfg-volume
+#           configMap:
+#             name: nri-bundle-nrk8s-integrations-cfg
+#       tolerations:
+#         - effect: NoSchedule
+#           operator: Exists
+#         - effect: NoExecute
+#           operator: Exists
 ---
 # Source: nri-bundle/charts/newrelic-infrastructure/templates/kubelet/integrations-configmap.yaml
 apiVersion: v1
