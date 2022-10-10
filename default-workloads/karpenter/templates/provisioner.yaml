@@ -13,7 +13,7 @@ spec:
     - key: "node.kubernetes.io/instance-type"
       operator: In
       #values: ["t3.xlarge", "t3.2xlarge", "t3a.large", "t3a.xlarge", "t3a.2xlarge"]
-      values: ["c5.large", "c5.xlarge", "c5.2xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "t3.xlarge", "t3.2xlarge", "t3a.large", "t3a.xlarge", "t3a.2xlarge]
+      values: ["c5.large", "c5.xlarge", "c5.2xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "t3.xlarge", "t3.2xlarge", "t3a.large", "t3a.xlarge", "t3a.2xlarge"]
     - key: "topology.kubernetes.io/zone"
       operator: In
       values: ["us-east-1a", "us-east-1b", "us-east-1c"]
