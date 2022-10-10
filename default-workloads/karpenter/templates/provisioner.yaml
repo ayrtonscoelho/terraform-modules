@@ -8,12 +8,12 @@ spec:
   requirements:
     - key: karpenter.sh/capacity-type
       operator: In
-      values: ["on-demand", "spot"]
-      #values: ["spot"]
+      #values: ["on-demand", "spot"]
+      values: ["spot"]
     - key: "node.kubernetes.io/instance-type"
       operator: In
-      values: ["t3.xlarge", "t3.2xlarge", "t3a.large", "t3a.xlarge", "t3a.2xlarge"]
-      #values: ["m6g.2xlarge", "c6g.2xlarge"]
+      #values: ["t3.xlarge", "t3.2xlarge", "t3a.large", "t3a.xlarge", "t3a.2xlarge"]
+      values: ["c5.large, c5.xlarge, c5.2xlarge, r5.large, r5.xlarge, r5.2xlarge", t3.xlarge", "t3.2xlarge", "t3a.large", "t3a.xlarge", "t3a.2xlarge]
     - key: "topology.kubernetes.io/zone"
       operator: In
       values: ["us-east-1a", "us-east-1b", "us-east-1c"]
@@ -23,5 +23,5 @@ spec:
       memory: 500Gi
   providerRef:
     name: will-default
-  ttlSecondsAfterEmpty: 900
+  ttlSecondsAfterEmpty: 30
   ttlSecondsUntilExpired: 2592000
